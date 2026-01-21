@@ -1,0 +1,136 @@
+# Playwright SDD Framework Rules
+
+This project uses Spec-Driven Development (SDD) with Playwright and TypeScript.
+See [docs/workflow.md](docs/workflow.md) for the full development process.
+See [docs/tech-stack.md](docs/tech-stack.md) for architecture overview.
+
+## Before Writing ANY Code
+
+1. **Check existing code first:**
+   - Read [docs/maps/page-object-map.md](docs/maps/page-object-map.md) for existing Page Objects
+   - Read [docs/maps/steps-map.md](docs/maps/steps-map.md) for existing Steps classes
+   - Search for similar methods before creating new ones
+
+2. **Use Playwright MCP for browser work:**
+   - Follow [docs/patterns/locators.md](docs/patterns/locators.md) for locator extraction
+   - Navigate with `mcp__playwright__browser_navigate`
+   - Take snapshots with `mcp__playwright__browser_snapshot`
+   - NEVER use `browser_subagent` for test-related work
+
+## Architecture
+
+See [docs/tech-stack.md](docs/tech-stack.md) for full architecture.
+
+```
+Gherkin Spec (ephemeral) → AI → Test/Steps/PageObject → Playwright
+                                    ↓
+                              API Steps → ApiClient (for test data setup)
+```
+
+| Layer | Location | Rules | Docs |
+|-------|----------|-------|------|
+| Test | `tests/specs/*.spec.ts` | Call Steps ONLY | [docs/examples/complete-test-example.md](docs/examples/complete-test-example.md) |
+| Steps | `tests/steps/*Steps.ts` | `@step` on ALL methods | [docs/patterns/step-definition.md](docs/patterns/step-definition.md) |
+| API Steps | `tests/api-steps/*ApiSteps.ts` | `@step` on ALL methods | [docs/patterns/api-utils.md](docs/patterns/api-utils.md) |
+| Page Object | `tests/pages/*Page.ts` | BasePage + `.describe()` | [docs/patterns/page-object.md](docs/patterns/page-object.md) |
+
+## Key Rules
+
+See [docs/coding-standards.md](docs/coding-standards.md) for full coding rules.
+
+### Tests
+- Call Steps methods ONLY (never Page Objects directly)
+- Use named constants (no magic values)
+- Test-specific constants go inside test function
+- Get Steps from fixtures
+- Example: [docs/examples/complete-test-example.md](docs/examples/complete-test-example.md)
+
+### Steps
+- `@step('description')` decorator on ALL methods
+- Accept data as parameters (don't read secrets internally)
+- Call Page Object methods only (never `page.goto()`)
+- Pattern: [docs/patterns/step-definition.md](docs/patterns/step-definition.md)
+- Example: [docs/examples/steps-example.md](docs/examples/steps-example.md)
+
+### Page Objects
+- Inherit from `BasePage`
+- Use `.describe()` on ALL locators
+- `navigate()` method for page URLs (from environment config)
+- Atomic actions only (click/fill/get)
+- Popups get separate `*PopupPage.ts`
+- Pattern: [docs/patterns/page-object.md](docs/patterns/page-object.md)
+- Elements: [docs/patterns/elements.md](docs/patterns/elements.md)
+- Example: [docs/examples/page-object-example.md](docs/examples/page-object-example.md)
+- Special cases (tables, iframes, alerts): [docs/examples/special-cases.md](docs/examples/special-cases.md)
+
+### Test Data
+- Use `getEnvironment()` for URLs
+- Use `testDataGenerator` for random data (import from `utils/TestDataGenerator`)
+- Prefer default parameters over magic numbers (e.g., `randomString()` not `randomString(10)`)
+- See [docs/patterns/test-data-management.md](docs/patterns/test-data-management.md)
+- Example: [docs/examples/test-data-example.md](docs/examples/test-data-example.md)
+
+### Gherkin Input
+- Gherkin is ephemeral AI input, NOT committed to repo
+- See [docs/patterns/feature-input.md](docs/patterns/feature-input.md)
+
+### API Steps
+- Location: `tests/api-steps/*ApiSteps.ts`
+- `@step` decorator on ALL methods
+- Use for test data setup/teardown (faster than UI)
+- Use `ApiClient` for HTTP calls, `ApiHelper` for response interception
+- Import from `tests/fixtures/api.fixture.ts` for mixed API+UI tests
+- See [docs/patterns/api-utils.md](docs/patterns/api-utils.md)
+
+## Anti-Patterns (NEVER DO)
+
+See [docs/coding-standards.md](docs/coding-standards.md) for full list.
+
+- ❌ `page.goto()` in Tests or Steps
+- ❌ Direct Page Object usage in specs
+- ❌ Magic values without constants
+- ❌ Missing `@step` decorator on Steps methods
+- ❌ Missing `.describe()` on locators
+- ❌ Duplicate Page Objects or methods
+- ❌ `page.waitForTimeout()` - use auto-waiting
+- ❌ Steps reading secrets internally
+- ❌ Skipping maps check before coding
+
+## After Creating Code
+
+- Update [docs/maps/page-object-map.md](docs/maps/page-object-map.md) with new Page Objects
+- Update [docs/maps/steps-map.md](docs/maps/steps-map.md) with new Steps classes
+- Run `pnpm validate` to verify compliance
+- See [docs/reporting.md](docs/reporting.md) for test reports
+
+## All Documentation Files
+
+### Maps (Check FIRST)
+- [docs/maps/page-object-map.md](docs/maps/page-object-map.md) - Existing Page Objects
+- [docs/maps/steps-map.md](docs/maps/steps-map.md) - Existing Steps classes
+
+### Patterns
+- [docs/patterns/page-object.md](docs/patterns/page-object.md) - Page Object rules
+- [docs/patterns/step-definition.md](docs/patterns/step-definition.md) - Steps pattern
+- [docs/patterns/api-utils.md](docs/patterns/api-utils.md) - API utilities
+- [docs/patterns/locators.md](docs/patterns/locators.md) - Locator extraction
+- [docs/patterns/elements.md](docs/patterns/elements.md) - Element handling
+- [docs/patterns/test-data-management.md](docs/patterns/test-data-management.md) - Test data
+- [docs/patterns/feature-input.md](docs/patterns/feature-input.md) - Gherkin input
+- [docs/patterns/git-workflow.md](docs/patterns/git-workflow.md) - Git workflow
+
+### Examples
+- [docs/examples/complete-test-example.md](docs/examples/complete-test-example.md) - Full test
+- [docs/examples/page-object-example.md](docs/examples/page-object-example.md) - Page Object
+- [docs/examples/steps-example.md](docs/examples/steps-example.md) - Steps class
+- [docs/examples/locator-extraction-example.md](docs/examples/locator-extraction-example.md) - Locators
+- [docs/examples/special-cases.md](docs/examples/special-cases.md) - Tables, iframes, alerts
+- [docs/examples/test-data-example.md](docs/examples/test-data-example.md) - Test data
+- [docs/examples/reporting-example.md](docs/examples/reporting-example.md) - Reporting
+
+### Standards
+- [docs/coding-standards.md](docs/coding-standards.md) - Coding rules
+- [docs/workflow.md](docs/workflow.md) - Development process
+- [docs/tech-stack.md](docs/tech-stack.md) - Architecture
+- [docs/reporting.md](docs/reporting.md) - Test reporting
+

@@ -1,0 +1,30 @@
+import { Page } from "@playwright/test";
+import { ${ 1: PageName } } from "../pages/${1:PageName}";
+import { step } from "../../utils/Decorators";
+
+/**
+ * ${2:StepsName} - ${3:Steps description}
+ */
+export class $ { 2: StepsName } {
+    readonly page: Page;
+    readonly ${ 4: pageName }: ${ 1: PageName };
+
+    constructor(page: Page) {
+        this.page = page;
+        this.${ 4: pageName } = new ${ 1: PageName } (page);
+    }
+
+    @step("Verify ${5:page} is opened")
+    async verifyPageOpened(): Promise < void> {
+        await this.${ 4: pageName }.verifyPageOpened();
+}
+
+    // Add step methods below - ALL must have @step decorator
+    // Example:
+    // @step('Login with username "{0}"')
+    // async login(username: string, password: string): Promise<void> {
+    //     await this.loginPage.enterUsername(username);
+    //     await this.loginPage.enterPassword(password);
+    //     await this.loginPage.clickLogin();
+    // }
+}

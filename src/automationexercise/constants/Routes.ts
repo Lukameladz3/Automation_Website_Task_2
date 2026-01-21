@@ -1,0 +1,31 @@
+export const Routes = {
+    API: {
+        BRANDS_LIST: '/api/brandsList',
+        CREATE_ACCOUNT: '/api/createAccount',
+        DELETE_ACCOUNT: '/api/deleteAccount',
+        GET_USER_DETAIL_BY_EMAIL: '/api/getUserDetailByEmail',
+        PRODUCTS_LIST: '/api/productsList',
+        SEARCH_PRODUCT: '/api/searchProduct',
+        UPDATE_ACCOUNT: '/api/updateAccount',
+        VERIFY_LOGIN: '/api/verifyLogin',
+    },
+    JSONPLACEHOLDER: {
+        BASE_URL: 'https://jsonplaceholder.typicode.com',
+        POSTS: '/posts',
+        USERS: '/users',
+    },
+    WEB: {
+        ACCOUNT_CREATED: '/account_created',
+        CHECKOUT: '/checkout',
+        CONTACT_US: '/contact_us',
+        HOME: '/',
+        HOME_TITLE: 'Automation Exercise',
+        LOGIN: '/login',
+        PAYMENT: '/payment',
+        PAYMENT_DONE: '/payment_done',
+        PRODUCTS: '/products',
+        SIGNUP: '/signup',
+        TEST_CASES: '/test_cases',
+        VIEW_CART: '/view_cart',
+    },
+} as const;

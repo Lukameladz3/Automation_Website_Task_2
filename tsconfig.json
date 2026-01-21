@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "types": ["node", "@playwright/test"],
+    "baseUrl": ".",
+    "paths": {
+      // Automation Exercise Project
+      "@automationexercise/api/*": ["src/automationexercise/api/*"],
+      "@automationexercise/components/*": [
+        "src/automationexercise/components/*",
+      ],
+      "@automationexercise/constants/*": ["src/automationexercise/constants/*"],
+      "@automationexercise/fixtures/*": ["src/automationexercise/fixtures/*"],
+      "@automationexercise/models/*": ["src/automationexercise/models/*"],
+      "@automationexercise/pages/*": ["src/automationexercise/pages/*"],
+      "@automationexercise/steps/*": ["src/automationexercise/steps/*"],
+      "@automationexercise/utils/*": ["src/automationexercise/utils/*"],
+
+      // JSONPlaceholder Project
+      "@jsonplaceholder/api/*": ["src/jsonplaceholder/api/*"],
+      "@jsonplaceholder/constants/*": ["src/jsonplaceholder/constants/*"],
+      "@jsonplaceholder/fixtures/*": ["src/jsonplaceholder/fixtures/*"],
+      "@jsonplaceholder/models/*": ["src/jsonplaceholder/models/*"],
+      "@jsonplaceholder/steps/*": ["src/jsonplaceholder/steps/*"],
+      "@jsonplaceholder/utils/*": ["src/jsonplaceholder/utils/*"],
+
+      // Legacy aliases for backward compatibility (can be removed after migration)
+      "@api/*": ["src/automationexercise/api/*"],
+      "@components/*": ["src/automationexercise/components/*"],
+      "@constants/*": ["src/automationexercise/constants/*"],
+      "@fixtures/*": ["src/automationexercise/fixtures/*"],
+      "@models/*": ["src/automationexercise/models/*"],
+      "@pages/*": ["src/automationexercise/pages/*"],
+      "@steps/*": ["src/automationexercise/steps/*"],
+      "@utils/*": ["src/automationexercise/utils/*"],
+    },
+  },
+  "include": ["src/**/*", "tests/**/*", "playwright.config.ts"],
+}
