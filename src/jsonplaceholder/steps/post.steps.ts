@@ -25,12 +25,8 @@ export class PostSteps {
   // ==================== API Call Steps - Validated Methods ====================
 
   @step("Create new post")
-  async createPost(
-    title: string,
-    body: string,
-    userId: number,
-  ): Promise<CreatePostResponse> {
-    return await this.service.createPost({ title, body, userId });
+  async createPost(request: CreatePostRequest): Promise<CreatePostResponse> {
+    return await this.service.createPost(request);
   }
 
   @step("Create post with partial validation")

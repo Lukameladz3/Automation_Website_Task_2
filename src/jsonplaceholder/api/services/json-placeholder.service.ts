@@ -215,19 +215,6 @@ export class JsonPlaceholderService extends ApiClient {
 
   // ==================== DELETE Methods ====================
 
-  /**
-   * Delete a post
-   * @param id - Post ID to delete
-   * @param schema - Validation schema (default: DeletePostResponseSchema). Pass null for raw response
-   * @returns Validated empty object or raw APIResponse
-   *
-   * @example
-   * // Standard validation
-   * const result = await deletePost(1);
-   *
-   * // No validation (for error testing)
-   * const response = await deletePost(1, null);
-   */
   async deletePost<T>(id: number, schema: z.ZodSchema<T>): Promise<T>;
   async deletePost(id: number, schema: null): Promise<APIResponse>;
   async deletePost(id: number): Promise<Record<string, never>>;
