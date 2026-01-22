@@ -1,0 +1,34 @@
+import { Page, Locator } from "@playwright/test";
+import { BasePage } from "./BasePage";
+import { getEnvironment } from "../../utils/Config";
+
+/**
+ * ${1:PageName} - ${2:Page description}
+ * URL: ${3:https://example.com/page}
+ */
+export class $ { 1: PageName } extends BasePage {
+    // Declare locators as private readonly
+    private readonly ${ 4: exampleElement }: Locator;
+
+    constructor(page: Page) {
+        // Initialize with page container locator
+        super(page, page.locator("${5:#container}"), "${1:PageName}");
+
+        // Initialize elements with .describe() for debugging
+        this.${ 4: exampleElement } = page.locator("${6:#element}").describe("${7:Element description}");
+    }
+
+    /**
+     * Navigate to this page
+     */
+    async navigate(): Promise < void> {
+        await this.page.goto(getEnvironment().${ 8: wikipedia.mainPageUrl });
+    }
+
+    // Add atomic action methods below
+    // Example:
+    // async clickSubmit(): Promise<void> {
+    //     await this.elementToBeVisible(this.submitButton);
+    //     await this.submitButton.click();
+    // }
+}

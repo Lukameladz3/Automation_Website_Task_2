@@ -1,0 +1,868 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\playwright.config.ts",
+    "rootDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "dot",
+        null
+      ],
+      [
+        "github",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-reports/results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "test-reports/junit-results.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "automationexercise-setup",
+        "name": "automationexercise-setup",
+        "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/global\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "automationexercise-api",
+        "name": "automationexercise-api",
+        "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\/automationexercise\\/api\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "automationexercise-web",
+        "name": "automationexercise-web",
+        "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\/automationexercise\\/web\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "jsonplaceholder-api",
+        "name": "jsonplaceholder-api",
+        "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\/jsonplaceholder\\/api\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "global.setup.ts",
+      "file": "global.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "authenticate workers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "automationexercise-setup",
+              "projectName": "automationexercise-setup",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "e4eb4d1272d956fb120f-e3f567e67d6cdb1f7a81",
+          "file": "global.setup.ts",
+          "line": 13,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\post-lifecycle.spec.ts",
+      "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - CRUD Operations Demo",
+          "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Create, Read, Update, Delete operations on existing post",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6e29b9a44ee4837bbc0d-d4a03b54c8a128308582",
+              "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
+              "line": 7,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\posts-create.spec.ts",
+      "file": "jsonplaceholder/api/posts-create.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - POST Create Post",
+          "file": "jsonplaceholder/api/posts-create.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC 3.1: Create Post - Status 201, echo check, id=101",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "421be7d03a50d5c3573c-2ba2ec73c04eae3b9df7",
+              "file": "jsonplaceholder/api/posts-create.spec.ts",
+              "line": 9,
+              "column": 3
+            },
+            {
+              "title": "TC 3.2: Empty Payload - Test API strictness",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "421be7d03a50d5c3573c-cb704fb061ec3972cbbd",
+              "file": "jsonplaceholder/api/posts-create.spec.ts",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "TC 3.3: Field Echo Check - Extra field (admin: true) echoed back",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "421be7d03a50d5c3573c-5c5c0ecffdce94a7e8c2",
+              "file": "jsonplaceholder/api/posts-create.spec.ts",
+              "line": 42,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\posts-get.spec.ts",
+      "file": "jsonplaceholder/api/posts-get.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - GET Posts",
+          "file": "jsonplaceholder/api/posts-get.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC 1.1: Get All Posts - Status 200, JSON content-type, response time < 800ms",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-ed36accf120c3f7555b1",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "TC 1.2: Sort Order - Verify ascending ID order",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-9302860e74a4d9cff867",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 24,
+              "column": 3
+            },
+            {
+              "title": "TC 1.3: Data Types - Zod schema validates id, userId are numbers; title, body are strings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-ab232148f524c5d86939",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 32,
+              "column": 3
+            },
+            {
+              "title": "TC 1.4: Filter Check - GET /posts?userId=1 returns 10 items with userId=1",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-25adab65493ba48d031a",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 40,
+              "column": 3
+            },
+            {
+              "title": "TC 2.1: Get Post 99 - Verify userId=10, id=99, non-empty title/body",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-e5dae196bbe649636bf1",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 55,
+              "column": 3
+            },
+            {
+              "title": "TC 2.2: Negative - Not Found - GET /posts/150 returns 404 with empty object",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-5e73739f52bcb648c088",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 70,
+              "column": 3
+            },
+            {
+              "title": "TC 2.3: Negative - Invalid ID - GET /posts/abc returns 404 or 400",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-f0e5ace7a647e1a4e76a",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 82,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\posts-negative.spec.ts",
+      "file": "jsonplaceholder/api/posts-negative.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - Negative Tests",
+          "file": "jsonplaceholder/api/posts-negative.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "POST Create - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 7,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "TC 6.1: Boundary - Handle extremely long title and body",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-3def86038aee11e913b3",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "TC 6.2: Negative - Handle invalid userIds",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-1aa0dbc63eaaed74fa6b",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 49,
+                  "column": 5
+                },
+                {
+                  "title": "TC 6.3: Negative - Handle post with empty strings",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-4fb6837f86b06b08e922",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 78,
+                  "column": 5
+                },
+                {
+                  "title": "TC 6.4: Security - Handle special characters and security payloads",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-c56e40d6e09caefc2ff4",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 95,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "PUT Update - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 129,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "TC 6.5: Negative - Handle updating with invalid post IDs",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-898146b834e9cb03964f",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 130,
+                  "column": 5
+                },
+                {
+                  "title": "TC 6.6: Boundary - Handle partial update with empty payload",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-b1d6517335ddff563544",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 155,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "DELETE - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 171,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "TC 6.7: Negative - Handle deleting non-existent and already deleted posts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-83a1ddc6529cf1c1e616",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 172,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "GET - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 196,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "TC 6.8: Negative - Handle getting posts with invalid IDs",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-ed77453f2b3e0a824c01",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 197,
+                  "column": 5
+                },
+                {
+                  "title": "TC 6.9: Negative - Handle getting posts with invalid query parameter",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-a38c5e12ee12aafdc93d",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 222,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Content-Type and Headers - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 234,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "TC 6.10: Negative - Handle POST with missing or wrong Content-Type",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-6bf941fbe7c9251faabe",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 235,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Boundary Value Testing",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 261,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "TC 6.11: Boundary - Handle boundary values for userId and special whitespace",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-07210a7ca9968f38c06d",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 262,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\put-partial-update.spec.ts",
+      "file": "jsonplaceholder/api/put-partial-update.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - PUT Partial Update",
+          "file": "jsonplaceholder/api/put-partial-update.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should update only provided fields (title) using PUT",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "aeae5ac836863f5521ca-8f0629c8b17a732350fd",
+              "file": "jsonplaceholder/api/put-partial-update.spec.ts",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\users.spec.ts",
+      "file": "jsonplaceholder/api/users.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - GET Users and Data Consistency",
+          "file": "jsonplaceholder/api/users.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC 4.1: Get All Users - Status 200, exactly 10 users",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-c54e03f17ee45032219e",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "TC 4.2: Deep Data User 5 - Verify nested Address, Geo, Company structure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-57590ed7324c292c5a2d",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "TC 4.3: Data Range - Verify geo.lat (-90 to 90), geo.lng (-180 to 180)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-db81b73ffa6d52797d0a",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 58,
+              "column": 3
+            },
+            {
+              "title": "TC 5.1: Cross-Check User 5 - Compare /users/5 with /users list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-ed5e85e019bb12dcfdd0",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "TC 5.2: Relational Check - Verify User 5's posts exist and belong to User 5",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-d7beb1c2585badfde98a",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 96,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-01-22T15:39:38.995Z",
+    "duration": 486.41099999999983,
+    "expected": 0,
+    "skipped": 29,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

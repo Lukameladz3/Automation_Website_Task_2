@@ -1,0 +1,22 @@
+import { test } from "../fixtures/index";
+
+test.describe("${1:Feature Name}", () => {
+    // Constants - no magic values
+    const ${ 2: CONSTANT_NAME } = "${3:value}";
+
+    test("${4:Test description}", async({
+        ${ 5: stepsFixture }
+    }) => {
+    // Test-specific constants inside test
+    const ${ 6: TEST_VALUE } = "${7:test value}";
+
+    // Background: Setup
+    await ${ 5: stepsFixture }.openDirectlyAndVerify();
+
+    // When: Actions
+    // await steps.doSomething();
+
+    // Then: Assertions
+    // await steps.verifySomething();
+});
+});
