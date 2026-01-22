@@ -60,7 +60,7 @@ jobs:
 
   deploy:
     needs: test
-    if: always() && github.ref == 'refs/heads/main'
+    if: always() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/jsonplaceholder-and-automation-website-task')
     runs-on: ubuntu-latest
     steps:
       - name: Download HTML report
