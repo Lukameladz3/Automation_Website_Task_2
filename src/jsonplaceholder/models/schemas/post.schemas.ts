@@ -97,6 +97,15 @@ export type UpdatePostResponsePartial = z.infer<
   typeof UpdatePostResponsePartialSchema
 >;
 
+export const UpdatePostResponseUnionSchema = z.union([
+  UpdatePostResponseSchema,
+  UpdatePostResponsePartialSchema,
+]);
+
+export type UpdatePostResponseUnion = z.infer<
+  typeof UpdatePostResponseUnionSchema
+>;
+
 // ==================== DELETE Operations ====================
 
 export const DeletePostResponseSchema = z.object({}).strict();

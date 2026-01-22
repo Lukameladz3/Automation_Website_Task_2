@@ -3,23 +3,20 @@ import { JsonPlaceholderTestData } from "@jsonplaceholder/constants/json-placeho
 
 test.describe("JSONPlaceholder API - GET Posts", () => {
   test("TC 1.1: Get All Posts - Status 200, JSON content-type, response time < 800ms", async ({
-    postSteps,
     jsonPlaceholderService,
     responseSteps,
   }) => {
     const startTime = performance.now();
-
-    // For status code and content-type checking, we need the raw response
-    const response = await jsonPlaceholderService.getRawPostResponse(1);
-    await responseSteps.verifyJsonContentType(response);
-
-    // Get validated posts
-    const posts = await postSteps.getAllPosts();
+    const response = await jsonPlaceholderService.getAllPosts(null);
     const responseTime = performance.now() - startTime;
 
+    await responseSteps.verifyStatusCode(response, 200);
+    await responseSteps.verifyJsonContentType(response);
     await responseSteps.verifyResponseTime(responseTime);
-    await postSteps.verifyPostsCount(
-      posts,
+
+    // Verify the response body
+    const posts = await response.json();
+    expect(posts.length).toBe(
       JsonPlaceholderTestData.GET_POSTS.TOTAL_POSTS_COUNT,
     );
   });
@@ -73,27 +70,26 @@ test.describe("JSONPlaceholder API - GET Posts", () => {
 
   test("TC 2.2: Negative - Not Found - GET /posts/150 returns 404 with empty object", async ({
     postSteps,
+    jsonPlaceholderService,
     responseSteps,
   }) => {
     const postId = JsonPlaceholderTestData.GET_POSTS.NON_EXISTENT_POST_ID;
 
-    // Use raw method for error testing
-    const response = await postSteps.getRawPostResponse(postId);
+    // Use raw response for error testing
+    const response = await jsonPlaceholderService.getPostById(postId, null);
     await responseSteps.verifyStatusCode(response, 404);
     await responseSteps.verifyEmptyBody(response);
   });
 
   test("TC 2.3: Negative - Invalid ID - GET /posts/abc returns 404 or 400", async ({
     postSteps,
+    jsonPlaceholderService,
     responseSteps,
   }) => {
-    // Use raw method for error testing
-    const response = await postSteps.getPostByStringId(
+    // Use raw response for error testing
+    const response = await jsonPlaceholderService.getPostByStringId(
       JsonPlaceholderTestData.GET_POSTS.INVALID_POST_ID,
     );
-    await responseSteps.verifyStatusCodeIsOneOf(
-      response,
-      JsonPlaceholderTestData.STATUS_CODES.ERROR_CODES,
-    );
+    await responseSteps.verifyStatusCodeIsOneOf(response, [400, 404]);
   });
 });

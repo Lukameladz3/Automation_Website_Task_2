@@ -1,16 +1,11 @@
 import { test, expect } from "@jsonplaceholder/fixtures/index";
 import { RandomDataGenerator } from "@jsonplaceholder/utils/random-data-generator";
 import { JsonPlaceholderTestData } from "@jsonplaceholder/constants/json-placeholder.constants";
-import {
-  buildCreatePostRequest,
-  buildUpdatePostRequest,
-  buildLongPostRequest,
-  buildSpecialCharPostRequest,
-} from "@jsonplaceholder/models/builders";
+import { buildCreatePostRequest } from "@jsonplaceholder/models/builders";
 
 test.describe("JSONPlaceholder API - Negative Tests", () => {
   test.describe("POST Create - Negative Scenarios", () => {
-    test("should handle post with extremely long title and body", async ({
+    test("TC 6.1: Boundary - Handle extremely long title and body", async ({
       postSteps,
       jsonPlaceholderService,
       responseSteps,
@@ -28,16 +23,16 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         );
       const userId = RandomDataGenerator.userId();
 
-      const response = await jsonPlaceholderService.createPostRaw({
-        title: longTitle,
-        body: longBody,
-        userId,
-      });
-
-      await responseSteps.verifyStatusCode(
-        response,
-        JsonPlaceholderTestData.STATUS_CODES.SUCCESS_CREATED,
+      const response = await jsonPlaceholderService.createPost(
+        {
+          title: longTitle,
+          body: longBody,
+          userId,
+        },
+        null,
       );
+
+      await responseSteps.verifyStatusCode(response, 201);
 
       const request = buildCreatePostRequest({
         title: longTitle,
@@ -51,9 +46,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       );
     });
 
-    test("should handle post with invalid userIds (negative, zero, non-existent)", async ({
-      postSteps,
-    }) => {
+    test("TC 6.2: Negative - Handle invalid userIds", async ({ postSteps }) => {
       // Test negative userId
       const negativeRequest = buildCreatePostRequest({
         userId: JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NEGATIVE,
@@ -82,7 +75,9 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       );
     });
 
-    test("should handle post with empty strings", async ({ postSteps }) => {
+    test("TC 6.3: Negative - Handle post with empty strings", async ({
+      postSteps,
+    }) => {
       const emptyString =
         JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.EMPTY;
 
@@ -97,7 +92,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       expect(emptyBodyPost.body).toBe(emptyString);
     });
 
-    test("should handle post with special characters and security payloads", async ({
+    test("TC 6.4: Security - Handle special characters and security payloads", async ({
       postSteps,
     }) => {
       // XSS attempt
@@ -132,7 +127,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
   });
 
   test.describe("PUT Update - Negative Scenarios", () => {
-    test("should handle updating with invalid post IDs", async ({
+    test("TC 6.5: Negative - Handle updating with invalid post IDs", async ({
       jsonPlaceholderService,
       responseSteps,
     }) => {
@@ -141,100 +136,90 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       const userId = RandomDataGenerator.userId();
 
       // Non-existent ID returns 500
-      const nonExistentResponse = await jsonPlaceholderService.updatePostRaw(
+      const nonExistentResponse = await jsonPlaceholderService.updatePost(
         JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.NON_EXISTENT_MEDIUM,
         { title, body, userId },
+        null,
       );
-      await responseSteps.verifyStatusCode(
-        nonExistentResponse,
-        JsonPlaceholderTestData.STATUS_CODES.ERROR_SERVER,
-      );
+      await responseSteps.verifyStatusCode(nonExistentResponse, 500);
 
       // Negative ID returns 500
-      const negativeResponse = await jsonPlaceholderService.updatePostRaw(
+      const negativeResponse = await jsonPlaceholderService.updatePost(
         JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.NEGATIVE,
         { title, body, userId },
+        null,
       );
-      await responseSteps.verifyStatusCode(
-        negativeResponse,
-        JsonPlaceholderTestData.STATUS_CODES.ERROR_SERVER,
-      );
+      await responseSteps.verifyStatusCode(negativeResponse, 500);
     });
 
-    test("should handle partial update with empty payload", async ({
+    test("TC 6.6: Boundary - Handle partial update with empty payload", async ({
       jsonPlaceholderService,
       responseSteps,
     }) => {
       const postId = JsonPlaceholderTestData.POST.EXISTING_POST_ID;
 
-      const response = await jsonPlaceholderService.updatePostRaw(postId, {});
-
-      await responseSteps.verifyStatusCode(
-        response,
-        JsonPlaceholderTestData.STATUS_CODES.SUCCESS_OK,
+      const response = await jsonPlaceholderService.updatePost(
+        postId,
+        {},
+        null,
       );
+
+      await responseSteps.verifyStatusCode(response, 200);
     });
   });
 
   test.describe("DELETE - Negative Scenarios", () => {
-    test("should handle deleting non-existent and already deleted posts", async ({
+    test("TC 6.7: Negative - Handle deleting non-existent and already deleted posts", async ({
       jsonPlaceholderService,
       responseSteps,
     }) => {
       const nonExistentId =
         JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.NON_EXISTENT_MEDIUM;
 
-      const deleteResponse =
-        await jsonPlaceholderService.deletePostRaw(nonExistentId);
-      await responseSteps.verifyStatusCodeIsOneOf(
-        deleteResponse,
-        JsonPlaceholderTestData.STATUS_CODES.SUCCESS_DELETE_CODES,
+      const deleteResponse = await jsonPlaceholderService.deletePost(
+        nonExistentId,
+        null,
       );
+      await responseSteps.verifyStatusCodeIsOneOf(deleteResponse, [200, 204]);
 
-      const secondDeleteResponse =
-        await jsonPlaceholderService.deletePostRaw(nonExistentId);
+      const secondDeleteResponse = await jsonPlaceholderService.deletePost(
+        nonExistentId,
+        null,
+      );
       await responseSteps.verifyStatusCodeIsOneOf(
         secondDeleteResponse,
-        JsonPlaceholderTestData.STATUS_CODES.SUCCESS_DELETE_CODES,
+        [200, 204],
       );
     });
   });
 
   test.describe("GET - Negative Scenarios", () => {
-    test("should handle getting posts with invalid IDs", async ({
-      postSteps,
+    test("TC 6.8: Negative - Handle getting posts with invalid IDs", async ({
+      jsonPlaceholderService,
       responseSteps,
     }) => {
       // Very large ID returns 404
-      const largeIdResponse = await postSteps.getRawPostResponse(
+      const largeIdResponse = await jsonPlaceholderService.getPostById(
         JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.NON_EXISTENT_LARGE,
+        null,
       );
-      await responseSteps.verifyStatusCode(
-        largeIdResponse,
-        JsonPlaceholderTestData.STATUS_CODES.ERROR_NOT_FOUND,
-      );
+      await responseSteps.verifyStatusCode(largeIdResponse, 404);
       await responseSteps.verifyEmptyBody(largeIdResponse);
 
       // Zero ID returns 404
-      const zeroIdResponse = await postSteps.getRawPostResponse(
+      const zeroIdResponse = await jsonPlaceholderService.getPostById(
         JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.ZERO,
+        null,
       );
-      await responseSteps.verifyStatusCode(
-        zeroIdResponse,
-        JsonPlaceholderTestData.STATUS_CODES.ERROR_NOT_FOUND,
-      );
+      await responseSteps.verifyStatusCode(zeroIdResponse, 404);
 
-      // String ID returns 404
-      const stringIdResponse = await postSteps.getPostByStringId(
+      const stringIdResponse = await jsonPlaceholderService.getPostByStringId(
         JsonPlaceholderTestData.GET_POSTS.INVALID_POST_ID,
       );
-      await responseSteps.verifyStatusCodeIsOneOf(
-        stringIdResponse,
-        JsonPlaceholderTestData.STATUS_CODES.ERROR_CODES,
-      );
+      await responseSteps.verifyStatusCodeIsOneOf(stringIdResponse, [400, 404]);
     });
 
-    test("should handle getting posts with invalid query parameter", async ({
+    test("TC 6.9: Negative - Handle getting posts with invalid query parameter", async ({
       jsonPlaceholderService,
     }) => {
       // Invalid userId query returns empty array
@@ -247,7 +232,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
   });
 
   test.describe("Content-Type and Headers - Negative Scenarios", () => {
-    test("should handle POST with missing or wrong Content-Type", async ({
+    test("TC 6.10: Negative - Handle POST with missing or wrong Content-Type", async ({
       jsonPlaceholderService,
       responseSteps,
     }) => {
@@ -265,17 +250,16 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       );
 
       // With wrong Content-Type
-      const wrongHeaderResponse =
-        await jsonPlaceholderService.createPostRaw(payload);
-      await responseSteps.verifyStatusCode(
-        wrongHeaderResponse,
-        JsonPlaceholderTestData.STATUS_CODES.SUCCESS_CREATED,
+      const wrongHeaderResponse = await jsonPlaceholderService.createPost(
+        payload,
+        null,
       );
+      await responseSteps.verifyStatusCode(wrongHeaderResponse, 201);
     });
   });
 
   test.describe("Boundary Value Testing", () => {
-    test("should handle boundary values for userId and special whitespace", async ({
+    test("TC 6.11: Boundary - Handle boundary values for userId and special whitespace", async ({
       postSteps,
     }) => {
       // Maximum 32-bit integer userId

@@ -14,6 +14,7 @@ import {
   UpdatePostResponseSchema,
   UpdatePostResponsePartial,
   UpdatePostResponsePartialSchema,
+  UpdatePostResponseUnionSchema,
   DeletePostResponseSchema,
   Post,
   PostSchema,
@@ -70,17 +71,43 @@ export class JsonPlaceholderService extends ApiClient {
 
   // ==================== GET Methods ====================
 
-  async getAllPosts(): Promise<Post[]> {
+  async getAllPosts(schema: z.ZodSchema<Post[]>): Promise<Post[]>;
+  async getAllPosts(schema: null): Promise<APIResponse>;
+  async getAllPosts(): Promise<Post[]>;
+  async getAllPosts(
+    schema?: z.ZodSchema<Post[]> | null,
+  ): Promise<Post[] | APIResponse> {
     const response = await this.get(`${this.baseUrl}${Routes.POSTS}`);
-    return this.validateResponse(response, PostArraySchema) as Promise<Post[]>;
+
+    if (schema === undefined) {
+      return this.validateResponse(response, PostArraySchema);
+    }
+
+    if (schema === null) {
+      return this.validateResponse(response, null);
+    }
+
+    return this.validateResponse(response, schema);
   }
 
-  async getPostById(id: number, schema?: z.ZodSchema<Post>): Promise<Post> {
+  async getPostById(id: number, schema: z.ZodSchema<Post>): Promise<Post>;
+  async getPostById(id: number, schema: null): Promise<APIResponse>;
+  async getPostById(id: number): Promise<Post>;
+  async getPostById(
+    id: number,
+    schema?: z.ZodSchema<Post> | null,
+  ): Promise<Post | APIResponse> {
     const response = await this.get(`${this.baseUrl}${Routes.POSTS}/${id}`);
-    return this.validateResponse(
-      response,
-      schema || PostSchema,
-    ) as Promise<Post>;
+
+    if (schema === undefined) {
+      return this.validateResponse(response, PostSchema);
+    }
+
+    if (schema === null) {
+      return this.validateResponse(response, null);
+    }
+
+    return this.validateResponse(response, schema);
   }
 
   async getPostByStringId(id: string): Promise<APIResponse> {
@@ -92,10 +119,6 @@ export class JsonPlaceholderService extends ApiClient {
       params: { userId: userId.toString() },
     });
     return this.validateResponse(response, PostArraySchema) as Promise<Post[]>;
-  }
-
-  async getRawPostResponse(id: number): Promise<APIResponse> {
-    return this.get(`${this.baseUrl}${Routes.POSTS}/${id}`);
   }
 
   // ==================== POST Methods ====================
@@ -154,10 +177,6 @@ export class JsonPlaceholderService extends ApiClient {
     return this.createPost(payload, CreatePostResponsePartialSchema);
   }
 
-  async createPostRaw(payload: unknown): Promise<APIResponse> {
-    return this.createPost(payload, null);
-  }
-
   // ==================== PUT Methods ====================
 
   /**
@@ -206,20 +225,10 @@ export class JsonPlaceholderService extends ApiClient {
     }
 
     if (schema === undefined) {
-      // Auto-detect: Try full schema first, fallback to partial
-      const body = await response.json();
-      try {
-        return UpdatePostResponseSchema.parse(body);
-      } catch {
-        return UpdatePostResponsePartialSchema.parse(body);
-      }
+      return this.validateResponse(response, UpdatePostResponseUnionSchema);
     }
 
     return this.validateResponse(response, schema);
-  }
-
-  async updatePostRaw(id: number, payload: unknown): Promise<APIResponse> {
-    return this.updatePost(id, payload, null);
   }
 
   // ==================== DELETE Methods ====================
@@ -242,10 +251,6 @@ export class JsonPlaceholderService extends ApiClient {
     }
 
     return this.validateResponse(response, schema);
-  }
-
-  async deletePostRaw(id: number): Promise<APIResponse> {
-    return this.deletePost(id, null);
   }
 
   // ==================== User Methods ====================

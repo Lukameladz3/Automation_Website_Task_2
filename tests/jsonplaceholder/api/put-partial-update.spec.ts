@@ -14,10 +14,11 @@ test.describe("JSONPlaceholder API - PUT Partial Update", () => {
       title: newTitle,
     };
 
-    // Use raw method to check status code
-    const response = await jsonPlaceholderService.updatePostRaw(
+    // Use raw response to check status code
+    const response = await jsonPlaceholderService.updatePost(
       postId,
       partialPayload,
+      null,
     );
     await responseSteps.verifyStatusCode(response, 200);
 

@@ -47,14 +47,6 @@ export const JsonPlaceholderTestData = {
       LNG_MAX: 180,
     },
   },
-  STATUS_CODES: {
-    SUCCESS_DELETE_CODES: [200, 204],
-    ERROR_CODES: [400, 404],
-    SUCCESS_CREATED: 201,
-    SUCCESS_OK: 200,
-    ERROR_NOT_FOUND: 404,
-    ERROR_SERVER: 500,
-  },
   NEGATIVE_TESTS: {
     TITLE_LENGTHS: {
       EXTREMELY_LONG: 1000,

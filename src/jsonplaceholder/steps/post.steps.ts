@@ -1,5 +1,4 @@
 import { expect } from "@playwright/test";
-import type { APIResponse } from "@playwright/test";
 import { JsonPlaceholderService } from "../api/services/json-placeholder.service";
 import type {
   Post,
@@ -73,33 +72,6 @@ export class PostSteps {
   @step("Delete post")
   async deletePost(postId: number): Promise<Record<string, never>> {
     return await this.service.deletePost(postId);
-  }
-
-  // ==================== Raw API Methods for Error Testing ====================
-
-  @step("Get post by string ID (for negative testing)")
-  async getPostByStringId(postId: string): Promise<APIResponse> {
-    return await this.service.getPostByStringId(postId);
-  }
-
-  @step("Get raw post response")
-  async getRawPostResponse(postId: number): Promise<APIResponse> {
-    return await this.service.getRawPostResponse(postId);
-  }
-
-  @step("Create post raw (for negative testing)")
-  async createPostRaw(payload: unknown): Promise<APIResponse> {
-    return await this.service.createPostRaw(payload);
-  }
-
-  @step("Update post raw (for negative testing)")
-  async updatePostRaw(postId: number, payload: unknown): Promise<APIResponse> {
-    return await this.service.updatePostRaw(postId, payload);
-  }
-
-  @step("Delete post raw (for negative testing)")
-  async deletePostRaw(postId: number): Promise<APIResponse> {
-    return await this.service.deletePostRaw(postId);
   }
 
   // ==================== Verification Steps ====================

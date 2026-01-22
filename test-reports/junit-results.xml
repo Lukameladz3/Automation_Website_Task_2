@@ -1,10 +1,70 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="3.530774">
-<testsuite name="jsonplaceholder\api\posts-create.spec.ts" timestamp="2026-01-22T11:27:00.738Z" hostname="jsonplaceholder-api" tests="3" failures="0" skipped="0" time="2.411" errors="0">
-<testcase name="JSONPlaceholder API - POST Create Post › TC 3.1: Create Post - Status 201, echo check, id=101" classname="jsonplaceholder\api\posts-create.spec.ts" time="0.785">
+<testsuites id="" name="" tests="28" failures="0" skipped="0" errors="0" time="5.720719999999999">
+<testsuite name="jsonplaceholder\api\post-lifecycle.spec.ts" timestamp="2026-01-22T11:45:43.412Z" hostname="jsonplaceholder-api" tests="1" failures="0" skipped="0" time="1.513" errors="0">
+<testcase name="JSONPlaceholder API - CRUD Operations Demo › Create, Read, Update, Delete operations on existing post" classname="jsonplaceholder\api\post-lifecycle.spec.ts" time="1.513">
 </testcase>
-<testcase name="JSONPlaceholder API - POST Create Post › TC 3.2: Empty Payload - Test API strictness" classname="jsonplaceholder\api\posts-create.spec.ts" time="0.794">
+</testsuite>
+<testsuite name="jsonplaceholder\api\posts-create.spec.ts" timestamp="2026-01-22T11:45:43.412Z" hostname="jsonplaceholder-api" tests="3" failures="0" skipped="0" time="1.725" errors="0">
+<testcase name="JSONPlaceholder API - POST Create Post › TC 3.1: Create Post - Status 201, echo check, id=101" classname="jsonplaceholder\api\posts-create.spec.ts" time="0.579">
 </testcase>
-<testcase name="JSONPlaceholder API - POST Create Post › TC 3.3: Field Echo Check - Extra field (admin: true) echoed back" classname="jsonplaceholder\api\posts-create.spec.ts" time="0.832">
+<testcase name="JSONPlaceholder API - POST Create Post › TC 3.2: Empty Payload - Test API strictness" classname="jsonplaceholder\api\posts-create.spec.ts" time="0.548">
+</testcase>
+<testcase name="JSONPlaceholder API - POST Create Post › TC 3.3: Field Echo Check - Extra field (admin: true) echoed back" classname="jsonplaceholder\api\posts-create.spec.ts" time="0.598">
+</testcase>
+</testsuite>
+<testsuite name="jsonplaceholder\api\posts-get.spec.ts" timestamp="2026-01-22T11:45:43.412Z" hostname="jsonplaceholder-api" tests="7" failures="0" skipped="0" time="0.593" errors="0">
+<testcase name="JSONPlaceholder API - GET Posts › TC 1.1: Get All Posts - Status 200, JSON content-type, response time &lt; 800ms" classname="jsonplaceholder\api\posts-get.spec.ts" time="0.14">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Posts › TC 1.2: Sort Order - Verify ascending ID order" classname="jsonplaceholder\api\posts-get.spec.ts" time="0.082">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Posts › TC 1.3: Data Types - Zod schema validates id, userId are numbers; title, body are strings" classname="jsonplaceholder\api\posts-get.spec.ts" time="0.077">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Posts › TC 1.4: Filter Check - GET /posts?userId=1 returns 10 items with userId=1" classname="jsonplaceholder\api\posts-get.spec.ts" time="0.073">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Posts › TC 2.1: Get Post 99 - Verify userId=10, id=99, non-empty title/body" classname="jsonplaceholder\api\posts-get.spec.ts" time="0.082">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Posts › TC 2.2: Negative - Not Found - GET /posts/150 returns 404 with empty object" classname="jsonplaceholder\api\posts-get.spec.ts" time="0.065">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Posts › TC 2.3: Negative - Invalid ID - GET /posts/abc returns 404 or 400" classname="jsonplaceholder\api\posts-get.spec.ts" time="0.074">
+</testcase>
+</testsuite>
+<testsuite name="jsonplaceholder\api\posts-negative.spec.ts" timestamp="2026-01-22T11:45:43.412Z" hostname="jsonplaceholder-api" tests="11" failures="0" skipped="0" time="4.863" errors="0">
+<testcase name="JSONPlaceholder API - Negative Tests › POST Create - Negative Scenarios › should handle post with extremely long title and body" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.424">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › POST Create - Negative Scenarios › should handle post with invalid userIds (negative, zero, non-existent)" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.551">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › POST Create - Negative Scenarios › should handle post with empty strings" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.369">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › POST Create - Negative Scenarios › should handle post with special characters and security payloads" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.56">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › PUT Update - Negative Scenarios › should handle updating with invalid post IDs" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.921">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › PUT Update - Negative Scenarios › should handle partial update with empty payload" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.184">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › DELETE - Negative Scenarios › should handle deleting non-existent and already deleted posts" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.378">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › GET - Negative Scenarios › should handle getting posts with invalid IDs" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.192">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › GET - Negative Scenarios › should handle getting posts with invalid query parameter" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.063">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › Content-Type and Headers - Negative Scenarios › should handle POST with missing or wrong Content-Type" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.684">
+</testcase>
+<testcase name="JSONPlaceholder API - Negative Tests › Boundary Value Testing › should handle boundary values for userId and special whitespace" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0.537">
+</testcase>
+</testsuite>
+<testsuite name="jsonplaceholder\api\put-partial-update.spec.ts" timestamp="2026-01-22T11:45:43.412Z" hostname="jsonplaceholder-api" tests="1" failures="0" skipped="0" time="0.415" errors="0">
+<testcase name="JSONPlaceholder API - PUT Partial Update › should update only provided fields (title) using PUT" classname="jsonplaceholder\api\put-partial-update.spec.ts" time="0.415">
+</testcase>
+</testsuite>
+<testsuite name="jsonplaceholder\api\users.spec.ts" timestamp="2026-01-22T11:45:43.412Z" hostname="jsonplaceholder-api" tests="5" failures="0" skipped="0" time="0.533" errors="0">
+<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 4.1: Get All Users - Status 200, exactly 10 users" classname="jsonplaceholder\api\users.spec.ts" time="0.077">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 4.2: Deep Data User 5 - Verify nested Address, Geo, Company structure" classname="jsonplaceholder\api\users.spec.ts" time="0.088">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 4.3: Data Range - Verify geo.lat (-90 to 90), geo.lng (-180 to 180)" classname="jsonplaceholder\api\users.spec.ts" time="0.093">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 5.1: Cross-Check User 5 - Compare /users/5 with /users list" classname="jsonplaceholder\api\users.spec.ts" time="0.134">
+</testcase>
+<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 5.2: Relational Check - Verify User 5&apos;s posts exist and belong to User 5" classname="jsonplaceholder\api\users.spec.ts" time="0.141">
 </testcase>
 </testsuite>
 </testsuites>

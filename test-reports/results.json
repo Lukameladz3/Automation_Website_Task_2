@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 3
+      "actualWorkers": 4
     },
     "preserveOutput": "always",
     "reporter": [
@@ -57,7 +57,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 3
+          "actualWorkers": 4
         },
         "id": "automationexercise-setup",
         "name": "automationexercise-setup",
@@ -73,7 +73,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 3
+          "actualWorkers": 4
         },
         "id": "automationexercise-api",
         "name": "automationexercise-api",
@@ -89,7 +89,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 3
+          "actualWorkers": 4
         },
         "id": "automationexercise-web",
         "name": "automationexercise-web",
@@ -105,7 +105,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 3
+          "actualWorkers": 4
         },
         "id": "jsonplaceholder-api",
         "name": "jsonplaceholder-api",
@@ -126,6 +126,107 @@
     "webServer": null
   },
   "suites": [
+    {
+      "title": "jsonplaceholder\\api\\post-lifecycle.spec.ts",
+      "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - CRUD Operations Demo",
+          "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Create, Read, Update, Delete operations on existing post",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1513,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify response status code",
+                          "duration": 6
+                        },
+                        {
+                          "title": "Create new post",
+                          "duration": 188
+                        },
+                        {
+                          "title": "Verify post matches expected data",
+                          "duration": 3
+                        },
+                        {
+                          "title": "Verify created post ID is 101",
+                          "duration": 1
+                        },
+                        {
+                          "title": "Get post by ID",
+                          "duration": 64
+                        },
+                        {
+                          "title": "Verify post matches expected data",
+                          "duration": 1
+                        },
+                        {
+                          "title": "Verify post has content",
+                          "duration": 2
+                        },
+                        {
+                          "title": "Verify response status code",
+                          "duration": 2
+                        },
+                        {
+                          "title": "Update post",
+                          "duration": 190
+                        },
+                        {
+                          "title": "Delete post raw (for negative testing)",
+                          "duration": 181
+                        },
+                        {
+                          "title": "Verify response status is one of allowed codes",
+                          "duration": 5
+                        },
+                        {
+                          "title": "Get post by ID",
+                          "duration": 57
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:45.328Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6e29b9a44ee4837bbc0d-d4a03b54c8a128308582",
+              "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
+              "line": 12,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
     {
       "title": "jsonplaceholder\\api\\posts-create.spec.ts",
       "file": "jsonplaceholder/api/posts-create.spec.ts",
@@ -152,10 +253,10 @@
                   "projectName": "jsonplaceholder-api",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 785,
+                      "duration": 579,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -163,11 +264,11 @@
                       "steps": [
                         {
                           "title": "Verify response status code",
-                          "duration": 9
+                          "duration": 4
                         },
                         {
                           "title": "Create new post",
-                          "duration": 180
+                          "duration": 187
                         },
                         {
                           "title": "Verify post matches expected data",
@@ -175,10 +276,10 @@
                         },
                         {
                           "title": "Verify created post ID is 101",
-                          "duration": 2
+                          "duration": 1
                         }
                       ],
-                      "startTime": "2026-01-22T11:27:02.542Z",
+                      "startTime": "2026-01-22T11:45:45.385Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -204,10 +305,10 @@
                   "projectName": "jsonplaceholder-api",
                   "results": [
                     {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 794,
+                      "duration": 548,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -215,18 +316,18 @@
                       "steps": [
                         {
                           "title": "Verify response status code",
-                          "duration": 6
+                          "duration": 7
                         },
                         {
                           "title": "Create post with partial validation",
-                          "duration": 181
+                          "duration": 182
                         },
                         {
                           "title": "Verify created post ID is 101",
-                          "duration": 2
+                          "duration": 1
                         }
                       ],
-                      "startTime": "2026-01-22T11:27:02.541Z",
+                      "startTime": "2026-01-22T11:45:45.440Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -252,10 +353,10 @@
                   "projectName": "jsonplaceholder-api",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 832,
+                      "duration": 598,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -263,11 +364,11 @@
                       "steps": [
                         {
                           "title": "Verify response status code",
-                          "duration": 6
+                          "duration": 9
                         },
                         {
                           "title": "Create post with passthrough (security testing)",
-                          "duration": 188
+                          "duration": 193
                         },
                         {
                           "title": "Verify passthrough field value",
@@ -279,10 +380,10 @@
                         },
                         {
                           "title": "Verify created post ID is 101",
-                          "duration": 3
+                          "duration": 7
                         }
                       ],
-                      "startTime": "2026-01-22T11:27:02.517Z",
+                      "startTime": "2026-01-22T11:45:45.360Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -298,13 +399,1240 @@
           ]
         }
       ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\posts-get.spec.ts",
+      "file": "jsonplaceholder/api/posts-get.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - GET Posts",
+          "file": "jsonplaceholder/api/posts-get.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC 1.1: Get All Posts - Status 200, JSON content-type, response time < 800ms",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 140,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify JSON content type",
+                          "duration": 1
+                        },
+                        {
+                          "title": "Get all posts",
+                          "duration": 63
+                        },
+                        {
+                          "title": "Verify response time within limit",
+                          "duration": 2
+                        },
+                        {
+                          "title": "Verify posts count",
+                          "duration": 1
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:46.095Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-ed36accf120c3f7555b1",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "TC 1.2: Sort Order - Verify ascending ID order",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 82,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all posts",
+                          "duration": 65
+                        },
+                        {
+                          "title": "Verify posts are sorted by ID",
+                          "duration": 3
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:46.109Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-9302860e74a4d9cff867",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 27,
+              "column": 3
+            },
+            {
+              "title": "TC 1.3: Data Types - Zod schema validates id, userId are numbers; title, body are strings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 77,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all posts",
+                          "duration": 63
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:46.108Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-ab232148f524c5d86939",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 36,
+              "column": 3
+            },
+            {
+              "title": "TC 1.4: Filter Check - GET /posts?userId=1 returns 10 items with userId=1",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 73,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get posts by user ID",
+                          "duration": 59
+                        },
+                        {
+                          "title": "Verify posts count",
+                          "duration": 1
+                        },
+                        {
+                          "title": "Verify all posts belong to user",
+                          "duration": 1
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:46.212Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-25adab65493ba48d031a",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 44,
+              "column": 3
+            },
+            {
+              "title": "TC 2.1: Get Post 99 - Verify userId=10, id=99, non-empty title/body",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 82,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get post by ID",
+                          "duration": 62
+                        },
+                        {
+                          "title": "Verify post matches expected data",
+                          "duration": 4
+                        },
+                        {
+                          "title": "Verify post has content",
+                          "duration": 4
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:46.221Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-e5dae196bbe649636bf1",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 59,
+              "column": 3
+            },
+            {
+              "title": "TC 2.2: Negative - Not Found - GET /posts/150 returns 404 with empty object",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 65,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get raw post response",
+                          "duration": 55
+                        },
+                        {
+                          "title": "Verify response status code",
+                          "duration": 1
+                        },
+                        {
+                          "title": "Verify empty response body",
+                          "duration": 3
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:46.264Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-5e73739f52bcb648c088",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "TC 2.3: Negative - Invalid ID - GET /posts/abc returns 404 or 400",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 74,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get post by string ID (for negative testing)",
+                          "duration": 61
+                        },
+                        {
+                          "title": "Verify response status is one of allowed codes",
+                          "duration": 2
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:46.336Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc8f51f75c6528baa485-f0e5ace7a647e1a4e76a",
+              "file": "jsonplaceholder/api/posts-get.spec.ts",
+              "line": 86,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\posts-negative.spec.ts",
+      "file": "jsonplaceholder/api/posts-negative.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - Negative Tests",
+          "file": "jsonplaceholder/api/posts-negative.spec.ts",
+          "line": 11,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "POST Create - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 12,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle post with extremely long title and body",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 424,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Verify response status code",
+                              "duration": 2
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 226
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:46.387Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-27570d594f4a5096d6b8",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 13,
+                  "column": 5
+                },
+                {
+                  "title": "should handle post with invalid userIds (negative, zero, non-existent)",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 551,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 174
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 180
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 185
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:46.399Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-553077a6504845998492",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 54,
+                  "column": 5
+                },
+                {
+                  "title": "should handle post with empty strings",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 369,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 178
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 177
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:46.441Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-3d26bcc33d39fbf9c6b0",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 85,
+                  "column": 5
+                },
+                {
+                  "title": "should handle post with special characters and security payloads",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 560,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 182
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 185
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 184
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:46.886Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-b114c721c931c2d6074b",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 100,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "PUT Update - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 134,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle updating with invalid post IDs",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 921,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Verify response status code",
+                              "duration": 2
+                            },
+                            {
+                              "title": "Verify response status code",
+                              "duration": 2
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:46.895Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-f1f332f13c554ca9fd20",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 135,
+                  "column": 5
+                },
+                {
+                  "title": "should handle partial update with empty payload",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 184,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Verify response status code",
+                              "duration": 2
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:46.922Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-7102f14cb66f6e57cd3d",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 164,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "DELETE - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 179,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle deleting non-existent and already deleted posts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 378,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Verify response status is one of allowed codes",
+                              "duration": 2
+                            },
+                            {
+                              "title": "Verify response status is one of allowed codes",
+                              "duration": 2
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:46.969Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-e7a1e1d63813702f7f15",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 180,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "GET - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 203,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle getting posts with invalid IDs",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 192,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Get raw post response",
+                              "duration": 56
+                            },
+                            {
+                              "title": "Verify response status code",
+                              "duration": 2
+                            },
+                            {
+                              "title": "Verify empty response body",
+                              "duration": 3
+                            },
+                            {
+                              "title": "Get raw post response",
+                              "duration": 61
+                            },
+                            {
+                              "title": "Verify response status code",
+                              "duration": 2
+                            },
+                            {
+                              "title": "Get post by string ID (for negative testing)",
+                              "duration": 53
+                            },
+                            {
+                              "title": "Verify response status is one of allowed codes",
+                              "duration": 1
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:47.134Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-603f6078ca743c7ef85f",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 204,
+                  "column": 5
+                },
+                {
+                  "title": "should handle getting posts with invalid query parameter",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 63,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-01-22T11:45:47.377Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-68895ab1e8cd0a2599fc",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 237,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Content-Type and Headers - Negative Scenarios",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 249,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle POST with missing or wrong Content-Type",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 684,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Verify response status code",
+                              "duration": 1
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:47.385Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-296aef0648f314550d8c",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 250,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Boundary Value Testing",
+              "file": "jsonplaceholder/api/posts-negative.spec.ts",
+              "line": 277,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle boundary values for userId and special whitespace",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "jsonplaceholder-api",
+                      "projectName": "jsonplaceholder-api",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 537,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 176
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 174
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 178
+                            }
+                          ],
+                          "startTime": "2026-01-22T11:45:47.461Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "c76c2ddf59f77223719a-fa7493fc4da2e4ec674a",
+                  "file": "jsonplaceholder/api/posts-negative.spec.ts",
+                  "line": 278,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\put-partial-update.spec.ts",
+      "file": "jsonplaceholder/api/put-partial-update.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - PUT Partial Update",
+          "file": "jsonplaceholder/api/put-partial-update.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should update only provided fields (title) using PUT",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 415,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify response status code",
+                          "duration": 2
+                        },
+                        {
+                          "title": "Update post",
+                          "duration": 209
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:47.480Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aeae5ac836863f5521ca-8f0629c8b17a732350fd",
+              "file": "jsonplaceholder/api/put-partial-update.spec.ts",
+              "line": 6,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "jsonplaceholder\\api\\users.spec.ts",
+      "file": "jsonplaceholder/api/users.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "JSONPlaceholder API - GET Users and Data Consistency",
+          "file": "jsonplaceholder/api/users.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC 4.1: Get All Users - Status 200, exactly 10 users",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 77,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all users",
+                          "duration": 67
+                        },
+                        {
+                          "title": "Verify users count",
+                          "duration": 2
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:47.936Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-c54e03f17ee45032219e",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "TC 4.2: Deep Data User 5 - Verify nested Address, Geo, Company structure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 88,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get user by ID",
+                          "duration": 65
+                        },
+                        {
+                          "title": "Verify user basic info",
+                          "duration": 8
+                        },
+                        {
+                          "title": "Verify user address",
+                          "duration": 5
+                        },
+                        {
+                          "title": "Verify user geo coordinates",
+                          "duration": 1
+                        },
+                        {
+                          "title": "Verify user company",
+                          "duration": 3
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:47.951Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-57590ed7324c292c5a2d",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "TC 4.3: Data Range - Verify geo.lat (-90 to 90), geo.lng (-180 to 180)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 93,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all users",
+                          "duration": 59
+                        },
+                        {
+                          "title": "Verify users have valid geo coordinates",
+                          "duration": 26
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:48.052Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-db81b73ffa6d52797d0a",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 58,
+              "column": 3
+            },
+            {
+              "title": "TC 5.1: Cross-Check User 5 - Compare /users/5 with /users list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 134,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all users",
+                          "duration": 61
+                        },
+                        {
+                          "title": "Get user by ID",
+                          "duration": 64
+                        },
+                        {
+                          "title": "Verify users match",
+                          "duration": 2
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:48.111Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-ed5e85e019bb12dcfdd0",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "TC 5.2: Relational Check - Verify User 5's posts exist and belong to User 5",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "jsonplaceholder-api",
+                  "projectName": "jsonplaceholder-api",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 141,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get user by ID",
+                          "duration": 63
+                        },
+                        {
+                          "title": "Verify user basic info",
+                          "duration": 2
+                        },
+                        {
+                          "title": "Get posts by user ID",
+                          "duration": 61
+                        },
+                        {
+                          "title": "Verify all posts belong to user",
+                          "duration": 3
+                        }
+                      ],
+                      "startTime": "2026-01-22T11:45:48.135Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "31dca8ded8547bb60745-d7beb1c2585badfde98a",
+              "file": "jsonplaceholder/api/users.spec.ts",
+              "line": 96,
+              "column": 3
+            }
+          ]
+        }
+      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-01-22T11:26:59.927Z",
-    "duration": 3530.774,
-    "expected": 3,
+    "startTime": "2026-01-22T11:45:42.618Z",
+    "duration": 5720.719999999999,
+    "expected": 28,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

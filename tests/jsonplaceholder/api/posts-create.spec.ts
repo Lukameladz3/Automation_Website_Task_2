@@ -13,8 +13,8 @@ test.describe("JSONPlaceholder API - POST Create Post", () => {
   }) => {
     const request = buildCreatePostRequest();
 
-    // Use raw method to check status code
-    const response = await jsonPlaceholderService.createPostRaw(request);
+    // Use raw response to check status code
+    const response = await jsonPlaceholderService.createPost(request, null);
     await responseSteps.verifyStatusCode(response, 201);
 
     // Now create with validated method
@@ -30,8 +30,8 @@ test.describe("JSONPlaceholder API - POST Create Post", () => {
   }) => {
     const request = buildEmptyPostRequest();
 
-    // Use raw method to check status code
-    const response = await jsonPlaceholderService.createPostRaw(request);
+    // Use raw response to check status code
+    const response = await jsonPlaceholderService.createPost(request, null);
     await responseSteps.verifyStatusCode(response, 201);
 
     // Use partial validation method
@@ -47,8 +47,7 @@ test.describe("JSONPlaceholder API - POST Create Post", () => {
     const extraFields = JsonPlaceholderTestData.POST.SECURITY_TEST_EXTRA_FIELD;
     const request = { ...buildCreatePostRequest(), ...extraFields };
 
-    // Use raw method to check status code
-    const response = await jsonPlaceholderService.createPostRaw(request);
+    const response = await jsonPlaceholderService.createPost(request, null);
     await responseSteps.verifyStatusCode(response, 201);
 
     // Use passthrough method for validation

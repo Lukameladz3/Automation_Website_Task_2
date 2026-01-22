@@ -19,12 +19,15 @@ test.describe("JSONPlaceholder API - CRUD Operations Demo", () => {
     const updatedTitle = `Updated: ${RandomDataGenerator.postTitle()}`;
     const userId = RandomDataGenerator.userId();
 
-    // CREATE - Use raw method to check status code
-    const createResponse = await jsonPlaceholderService.createPostRaw({
-      title: newTitle,
-      body: newBody,
-      userId,
-    });
+    // CREATE - Use raw response to check status code
+    const createResponse = await jsonPlaceholderService.createPost(
+      {
+        title: newTitle,
+        body: newBody,
+        userId,
+      },
+      null,
+    );
     await responseSteps.verifyStatusCode(createResponse, 201);
 
     // Create with validated method
@@ -47,10 +50,11 @@ test.describe("JSONPlaceholder API - CRUD Operations Demo", () => {
     await postSteps.verifyPost(readPost, { id: existingPostId });
     await postSteps.verifyPostHasContent(readPost);
 
-    // UPDATE - Use raw method to check status code
-    const updateResponse = await jsonPlaceholderService.updatePostRaw(
+    // UPDATE - Use raw response to check status code
+    const updateResponse = await jsonPlaceholderService.updatePost(
       existingPostId,
       { title: updatedTitle, body: newBody, userId },
+      null,
     );
     await responseSteps.verifyStatusCode(updateResponse, 200);
 
@@ -64,8 +68,11 @@ test.describe("JSONPlaceholder API - CRUD Operations Demo", () => {
     expect(updatedPost.title).toBe(updatedTitle);
     expect(updatedPost.id).toBe(existingPostId);
 
-    // DELETE - Use raw method to check status code
-    const deleteResponse = await postSteps.deletePostRaw(existingPostId);
+    // DELETE - Use raw response to check status code
+    const deleteResponse = await jsonPlaceholderService.deletePost(
+      existingPostId,
+      null,
+    );
     await responseSteps.verifyStatusCodeIsOneOf(deleteResponse, [200, 204]);
 
     // Verify post still exists (JSONPlaceholder doesn't actually delete)
