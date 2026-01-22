@@ -43,14 +43,29 @@ export class JsonPlaceholderService extends ApiClient {
   /**
    * Generic method to validate API response with Zod schema
    * @param response - The API response to validate
-   * @param schema - Optional Zod schema for validation. If not provided, returns raw response
-   * @returns Validated data or raw response
+   * @param schema - Zod schema for validation. Pass null to return raw APIResponse
+   * @returns Validated data of type T, or raw APIResponse if schema is null
+   *
+   * @example
+   * // Validated response
+   * const post = await validateResponse(response, PostSchema);
+   *
+   * // Raw response (for error testing)
+   * const rawResponse = await validateResponse(response, null);
    */
   private async validateResponse<T>(
     response: APIResponse,
-    schema?: z.ZodSchema<T>,
+    schema: z.ZodSchema<T>,
+  ): Promise<T>;
+  private async validateResponse(
+    response: APIResponse,
+    schema: null,
+  ): Promise<APIResponse>;
+  private async validateResponse<T>(
+    response: APIResponse,
+    schema: z.ZodSchema<T> | null,
   ): Promise<T | APIResponse> {
-    if (!schema) {
+    if (schema === null) {
       return response;
     }
     const body = await response.json();
@@ -89,67 +104,104 @@ export class JsonPlaceholderService extends ApiClient {
 
   // ==================== POST Methods ====================
 
-  async createPost(
-    payload: CreatePostRequest,
-    schema: z.ZodSchema<CreatePostResponse> = CreatePostResponseSchema,
-  ): Promise<CreatePostResponse> {
+  /**
+   * Create a new post
+   * @param payload - Post data to create
+   * @param schema - Validation schema (default: CreatePostResponseSchema). Pass null for raw response
+   * @returns Validated post data or raw APIResponse
+   *
+   * @example
+   * // Standard validation
+   * const post = await createPost({ title, body, userId });
+   *
+   * // Custom partial schema
+   * const post = await createPost(payload, CreatePostResponsePartialSchema);
+   *
+   * // Passthrough schema (extra fields)
+   * const post = await createPost(payload, CreatePostResponsePassthroughSchema);
+   *
+   * // No validation (for error testing)
+   * const response = await createPost(invalidPayload, null);
+   */
+  async createPost<T>(payload: unknown, schema: z.ZodSchema<T>): Promise<T>;
+  async createPost(payload: unknown, schema: null): Promise<APIResponse>;
+  async createPost(payload: CreatePostRequest): Promise<CreatePostResponse>;
+  async createPost<T>(
+    payload: unknown,
+    schema: z.ZodSchema<T> | null = CreatePostResponseSchema,
+  ): Promise<T | APIResponse> {
     const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
       data: payload,
       headers: { "Content-Type": "application/json" },
     });
-    return this.validateResponse(
-      response,
-      schema,
-    ) as Promise<CreatePostResponse>;
+    return this.validateResponse(response, schema);
   }
 
   async createPostWithPassthrough(
     payload: CreatePostRequest & Record<string, unknown>,
   ): Promise<CreatePostResponsePassthrough> {
-    const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
-      data: payload,
-      headers: { "Content-Type": "application/json" },
-    });
-    return this.validateResponse(
-      response,
-      CreatePostResponsePassthroughSchema,
-    ) as Promise<CreatePostResponsePassthrough>;
+    return this.createPost(payload, CreatePostResponsePassthroughSchema);
   }
 
   async createPostWithPartialValidation(
     payload: Partial<CreatePostRequest>,
   ): Promise<CreatePostResponsePartial> {
-    const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
-      data: payload,
-      headers: { "Content-Type": "application/json" },
-    });
-    return this.validateResponse(
-      response,
-      CreatePostResponsePartialSchema,
-    ) as Promise<CreatePostResponsePartial>;
+    return this.createPost(payload, CreatePostResponsePartialSchema);
   }
 
   async createPostRaw(payload: unknown): Promise<APIResponse> {
-    return this.post(`${this.baseUrl}${Routes.POSTS}`, {
-      data: payload,
-      headers: { "Content-Type": "application/json" },
-    });
+    return this.createPost(payload, null);
   }
 
   // ==================== PUT Methods ====================
 
-  async updatePost<T = UpdatePostResponse>(
+  /**
+   * Update an existing post
+   * @param id - Post ID to update
+   * @param payload - Updated post data
+   * @param schema - Validation schema (default: auto-detect). Pass null for raw response
+   * @returns Validated post data or raw APIResponse
+   *
+   * @example
+   * // Auto-detect validation (tries full, falls back to partial)
+   * const post = await updatePost(1, { title, body, userId });
+   *
+   * // Custom schema
+   * const post = await updatePost(1, payload, UpdatePostResponsePartialSchema);
+   *
+   * // No validation (for error testing)
+   * const response = await updatePost(1, invalidPayload, null);
+   */
+  async updatePost<T>(
+    id: number,
+    payload: unknown,
+    schema: z.ZodSchema<T>,
+  ): Promise<T>;
+  async updatePost(
+    id: number,
+    payload: unknown,
+    schema: null,
+  ): Promise<APIResponse>;
+  async updatePost(
     id: number,
     payload: UpdatePostRequest,
-    schema?: z.ZodSchema<T>,
+  ): Promise<UpdatePostResponse | UpdatePostResponsePartial>;
+  async updatePost<T>(
+    id: number,
+    payload: unknown,
+    schema?: z.ZodSchema<T> | null,
   ): Promise<T | UpdatePostResponse | UpdatePostResponsePartial | APIResponse> {
     const response = await this.put(`${this.baseUrl}${Routes.POSTS}/${id}`, {
       data: payload,
       headers: { "Content-Type": "application/json" },
     });
 
-    if (!schema) {
-      // Try full schema first, fallback to partial
+    if (schema === null) {
+      return response;
+    }
+
+    if (schema === undefined) {
+      // Auto-detect: Try full schema first, fallback to partial
       const body = await response.json();
       try {
         return UpdatePostResponseSchema.parse(body);
@@ -158,31 +210,41 @@ export class JsonPlaceholderService extends ApiClient {
       }
     }
 
-    return this.validateResponse(response, schema) as Promise<T>;
+    return this.validateResponse(response, schema);
   }
 
   async updatePostRaw(id: number, payload: unknown): Promise<APIResponse> {
-    return this.put(`${this.baseUrl}${Routes.POSTS}/${id}`, {
-      data: payload,
-      headers: { "Content-Type": "application/json" },
-    });
+    return this.updatePost(id, payload, null);
   }
 
   // ==================== DELETE Methods ====================
 
-  async deletePost<T = Record<string, never>>(
+  /**
+   * Delete a post
+   * @param id - Post ID to delete
+   * @param schema - Validation schema (default: DeletePostResponseSchema). Pass null for raw response
+   * @returns Validated empty object or raw APIResponse
+   *
+   * @example
+   * // Standard validation
+   * const result = await deletePost(1);
+   *
+   * // No validation (for error testing)
+   * const response = await deletePost(1, null);
+   */
+  async deletePost<T>(id: number, schema: z.ZodSchema<T>): Promise<T>;
+  async deletePost(id: number, schema: null): Promise<APIResponse>;
+  async deletePost(id: number): Promise<Record<string, never>>;
+  async deletePost<T>(
     id: number,
-    schema?: z.ZodSchema<T>,
+    schema: z.ZodSchema<T> | null = DeletePostResponseSchema,
   ): Promise<T | APIResponse> {
     const response = await this.delete(`${this.baseUrl}${Routes.POSTS}/${id}`);
-    return this.validateResponse(
-      response,
-      schema || DeletePostResponseSchema,
-    ) as Promise<T | APIResponse>;
+    return this.validateResponse(response, schema);
   }
 
   async deletePostRaw(id: number): Promise<APIResponse> {
-    return this.delete(`${this.baseUrl}${Routes.POSTS}/${id}`);
+    return this.deletePost(id, null);
   }
 
   // ==================== User Methods ====================
