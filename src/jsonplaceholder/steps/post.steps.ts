@@ -158,10 +158,13 @@ export class PostSteps {
     expect(posts.length).toBe(expectedCount);
   }
 
-  @step("Verify posts are sorted by ID ascending")
-  async verifyPostsSortedById(posts: Post[]): Promise<void> {
+  @step("Verify posts are sorted by ID")
+  async verifyPostsSortedById(
+    posts: Post[],
+    order: "asc" | "desc" = "asc",
+  ): Promise<void> {
     const ids = SortUtils.extractProperty(posts, "id");
-    const sortedIds = SortUtils.sortNumbersAsc(ids);
+    const sortedIds = SortUtils.sortNumbers(ids, order);
     expect(ids).toEqual(sortedIds);
   }
 

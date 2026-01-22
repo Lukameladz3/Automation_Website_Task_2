@@ -12,12 +12,16 @@ The `SortUtils` class provides reusable sorting and sort validation utilities fo
 
 #### Sort Numbers
 ```typescript
-// Ascending order
-const sorted = SortUtils.sortNumbersAsc([5, 2, 8, 1]);
+// Ascending order (default)
+const sorted = SortUtils.sortNumbers([5, 2, 8, 1]);
+// [1, 2, 5, 8]
+
+// Ascending order (explicit)
+const sorted = SortUtils.sortNumbers([5, 2, 8, 1], "asc");
 // [1, 2, 5, 8]
 
 // Descending order
-const sorted = SortUtils.sortNumbersDesc([5, 2, 8, 1]);
+const sorted = SortUtils.sortNumbers([5, 2, 8, 1], "desc");
 // [8, 5, 2, 1]
 ```
 
@@ -138,14 +142,27 @@ const sorted = SortUtils.sortWithComparator(items, (a, b) => {
 
 ### Example 1: Verify API Response Sort Order
 ```typescript
-test("should return posts sorted by ID", async ({ postSteps }) => {
+test("should return posts sorted by ID ascending", async ({ postSteps }) => {
   const posts = await postSteps.getAllPostsValidated();
   
   // Extract IDs
   const ids = SortUtils.extractProperty(posts, "id");
   
-  // Get expected sorted order
-  const sortedIds = SortUtils.sortNumbersAsc(ids);
+  // Get expected sorted order (ascending is default)
+  const sortedIds = SortUtils.sortNumbers(ids);
+  
+  // Verify
+  expect(ids).toEqual(sortedIds);
+});
+
+test("should return posts sorted by ID descending", async ({ postSteps }) => {
+  const posts = await postSteps.getAllPostsValidated();
+  
+  // Extract IDs
+  const ids = SortUtils.extractProperty(posts, "id");
+  
+  // Get expected sorted order (descending)
+  const sortedIds = SortUtils.sortNumbers(ids, "desc");
   
   // Verify
   expect(ids).toEqual(sortedIds);
@@ -166,12 +183,17 @@ test("should return posts sorted by ID", async ({ postSteps }) => {
 ### Example 3: Using in Step Functions
 ```typescript
 // In post.steps.ts
-@step("Verify posts are sorted by ID ascending")
-async verifyPostsSortedById(posts: Post[]): Promise<void> {
+@step("Verify posts are sorted by ID")
+async verifyPostsSortedById(posts: Post[], order: "asc" | "desc" = "asc"): Promise<void> {
   const ids = SortUtils.extractProperty(posts, "id");
-  const sortedIds = SortUtils.sortNumbersAsc(ids);
+  const sortedIds = SortUtils.sortNumbers(ids, order);
   expect(ids).toEqual(sortedIds);
 }
+
+// Usage in tests:
+await postSteps.verifyPostsSortedById(posts); // ascending (default)
+await postSteps.verifyPostsSortedById(posts, "asc"); // ascending (explicit)
+await postSteps.verifyPostsSortedById(posts, "desc"); // descending
 ```
 
 ## Benefits
@@ -195,15 +217,27 @@ async verifyPostsSortedById(posts: Post[]): Promise<void> {
 
 ### Before (Inline Sorting)
 ```typescript
+// Ascending
 const ids = posts.map(post => post.id);
 const sortedIds = [...ids].sort((a, b) => a - b);
+expect(ids).toEqual(sortedIds);
+
+// Descending
+const ids = posts.map(post => post.id);
+const sortedIds = [...ids].sort((a, b) => b - a);
 expect(ids).toEqual(sortedIds);
 ```
 
 ### After (Using SortUtils)
 ```typescript
+// Ascending (default)
 const ids = SortUtils.extractProperty(posts, 'id');
-const sortedIds = SortUtils.sortNumbersAsc(ids);
+const sortedIds = SortUtils.sortNumbers(ids);
+expect(ids).toEqual(sortedIds);
+
+// Descending
+const ids = SortUtils.extractProperty(posts, 'id');
+const sortedIds = SortUtils.sortNumbers(ids, "desc");
 expect(ids).toEqual(sortedIds);
 ```
 
