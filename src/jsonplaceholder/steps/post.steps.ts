@@ -1,16 +1,15 @@
 import { expect } from "@playwright/test";
 import type { APIResponse } from "@playwright/test";
 import { JsonPlaceholderService } from "../api/services/json-placeholder.service";
-import type { Post } from "../models/schemas/get.schemas";
 import type {
+  Post,
   CreatePostResponse,
   CreatePostResponsePassthrough,
   CreatePostResponsePartial,
-} from "../models/schemas/post.schemas";
-import type {
   UpdatePostResponse,
   UpdatePostResponsePartial,
-} from "../models/schemas/put.schemas";
+  CreatePostRequest,
+} from "../models/schemas/post.schemas";
 import { JsonPlaceholderTestData } from "../constants/json-placeholder.constants";
 import { step } from "../utils/step-decorator";
 import { SortUtils } from "../utils/sort.utils";
