@@ -9,25 +9,21 @@ import {
   CreatePostResponsePassthroughSchema,
   CreatePostResponsePartial,
   CreatePostResponsePartialSchema,
-} from "../../models/schemas/post.schemas";
-import {
   UpdatePostRequest,
   UpdatePostResponse,
   UpdatePostResponseSchema,
   UpdatePostResponsePartial,
   UpdatePostResponsePartialSchema,
-} from "../../models/schemas/put.schemas";
-import {
+  DeletePostResponseSchema,
   Post,
   PostSchema,
   PostArraySchema,
-} from "../../models/schemas/get.schemas";
-import { DeletePostResponseSchema } from "../../models/schemas/delete.schemas";
+} from "../../models/schemas/post.schemas";
 import {
   User,
   UserSchema,
   UserArraySchema,
-} from "../../models/schemas/common.schemas";
+} from "../../models/schemas/user.schemas";
 import { ApiClient } from "../api-client";
 
 export class JsonPlaceholderService extends ApiClient {

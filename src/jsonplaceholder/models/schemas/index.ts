@@ -1,9 +1,13 @@
-export * from "./common.schemas";
+/**
+ * Schema exports - organized by entity/resource
+ */
 
-export * from "./get.schemas";
+// Base/Common schemas
+export * from "./base.schemas";
 
+// Entity schemas
 export * from "./post.schemas";
+export * from "./user.schemas";
 
-export * from "./put.schemas";
-
-export * from "./delete.schemas";
+// Error schemas
+export * from "./error.schemas";

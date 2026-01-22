@@ -1,5 +1,32 @@
 import { z } from "zod";
 
+/**
+ * All Post-related schemas (GET, POST, PUT, DELETE operations)
+ */
+
+// ==================== Base Post Schema ====================
+
+export const PostSchema = z
+  .object({
+    body: z.string(),
+    id: z.number(),
+    title: z.string(),
+    userId: z.number(),
+  })
+  .strict();
+
+export type Post = z.infer<typeof PostSchema>;
+
+export const PostArraySchema = z.array(PostSchema);
+
+// ==================== GET Operations ====================
+
+export const GetPostResponseSchema = PostSchema;
+export const GetPostsResponseSchema = PostArraySchema;
+export const GetPostsByUserIdResponseSchema = PostArraySchema;
+
+// ==================== POST (Create) Operations ====================
+
 export const CreatePostRequestSchema = z
   .object({
     body: z.string(),
@@ -46,3 +73,32 @@ export const CreatePostResponsePartialSchema = z
 export type CreatePostResponsePartial = z.infer<
   typeof CreatePostResponsePartialSchema
 >;
+
+// ==================== PUT (Update) Operations ====================
+
+export const UpdatePostRequestSchema = z
+  .object({
+    body: z.string().optional(),
+    id: z.number().optional(),
+    title: z.string().optional(),
+    userId: z.number().optional(),
+  })
+  .strict();
+
+export type UpdatePostRequest = z.infer<typeof UpdatePostRequestSchema>;
+
+export const UpdatePostResponseSchema = PostSchema;
+
+export type UpdatePostResponse = z.infer<typeof UpdatePostResponseSchema>;
+
+export const UpdatePostResponsePartialSchema = PostSchema.partial().loose();
+
+export type UpdatePostResponsePartial = z.infer<
+  typeof UpdatePostResponsePartialSchema
+>;
+
+// ==================== DELETE Operations ====================
+
+export const DeletePostResponseSchema = z.object({}).strict();
+
+export type DeletePostResponse = z.infer<typeof DeletePostResponseSchema>;

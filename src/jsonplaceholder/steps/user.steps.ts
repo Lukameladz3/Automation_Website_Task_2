@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { JsonPlaceholderService } from "../api/services/json-placeholder.service";
-import type { User } from "../models/schemas/common.schemas";
+import type { User } from "../models/schemas/user.schemas";
 import { step } from "../utils/step-decorator";
 
 /**
