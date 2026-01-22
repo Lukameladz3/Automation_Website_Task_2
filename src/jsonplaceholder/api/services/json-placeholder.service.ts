@@ -1,4 +1,5 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
+import { z } from "zod";
 import { Routes } from "../../constants/routes";
 import {
   CreatePostRequest,
@@ -37,22 +38,41 @@ export class JsonPlaceholderService extends ApiClient {
     this.baseUrl = Routes.BASE_URL;
   }
 
-  // ==================== GET Methods with Zod Validation ====================
+  // ==================== Generic Validation Helper ====================
+
+  /**
+   * Generic method to validate API response with Zod schema
+   * @param response - The API response to validate
+   * @param schema - Optional Zod schema for validation. If not provided, returns raw response
+   * @returns Validated data or raw response
+   */
+  private async validateResponse<T>(
+    response: APIResponse,
+    schema?: z.ZodSchema<T>,
+  ): Promise<T | APIResponse> {
+    if (!schema) {
+      return response;
+    }
+    const body = await response.json();
+    return schema.parse(body);
+  }
+
+  // ==================== GET Methods ====================
 
   async getAllPosts(): Promise<Post[]> {
     const response = await this.get(`${this.baseUrl}${Routes.POSTS}`);
-    const body = await response.json();
-    return PostArraySchema.parse(body);
+    return this.validateResponse(response, PostArraySchema) as Promise<Post[]>;
   }
 
-  async getPostById(id: number): Promise<Post> {
+  async getPostById(id: number, schema?: z.ZodSchema<Post>): Promise<Post> {
     const response = await this.get(`${this.baseUrl}${Routes.POSTS}/${id}`);
-    const body = await response.json();
-    return PostSchema.parse(body);
+    return this.validateResponse(
+      response,
+      schema || PostSchema,
+    ) as Promise<Post>;
   }
 
   async getPostByStringId(id: string): Promise<APIResponse> {
-    // Returns raw response for error testing
     return this.get(`${this.baseUrl}${Routes.POSTS}/${id}`);
   }
 
@@ -60,19 +80,27 @@ export class JsonPlaceholderService extends ApiClient {
     const response = await this.get(`${this.baseUrl}${Routes.POSTS}`, {
       params: { userId: userId.toString() },
     });
-    const body = await response.json();
-    return PostArraySchema.parse(body);
+    return this.validateResponse(response, PostArraySchema) as Promise<Post[]>;
   }
 
-  // ==================== POST Methods with Zod Validation ====================
+  async getRawPostResponse(id: number): Promise<APIResponse> {
+    return this.get(`${this.baseUrl}${Routes.POSTS}/${id}`);
+  }
 
-  async createPost(payload: CreatePostRequest): Promise<CreatePostResponse> {
+  // ==================== POST Methods ====================
+
+  async createPost(
+    payload: CreatePostRequest,
+    schema: z.ZodSchema<CreatePostResponse> = CreatePostResponseSchema,
+  ): Promise<CreatePostResponse> {
     const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
       data: payload,
       headers: { "Content-Type": "application/json" },
     });
-    const body = await response.json();
-    return CreatePostResponseSchema.parse(body);
+    return this.validateResponse(
+      response,
+      schema,
+    ) as Promise<CreatePostResponse>;
   }
 
   async createPostWithPassthrough(
@@ -82,8 +110,10 @@ export class JsonPlaceholderService extends ApiClient {
       data: payload,
       headers: { "Content-Type": "application/json" },
     });
-    const body = await response.json();
-    return CreatePostResponsePassthroughSchema.parse(body);
+    return this.validateResponse(
+      response,
+      CreatePostResponsePassthroughSchema,
+    ) as Promise<CreatePostResponsePassthrough>;
   }
 
   async createPostWithPartialValidation(
@@ -93,85 +123,10 @@ export class JsonPlaceholderService extends ApiClient {
       data: payload,
       headers: { "Content-Type": "application/json" },
     });
-    const body = await response.json();
-    return CreatePostResponsePartialSchema.parse(body);
-  }
-
-  // ==================== PUT Methods with Zod Validation ====================
-
-  async updatePost(
-    id: number,
-    payload: UpdatePostRequest,
-  ): Promise<UpdatePostResponse | UpdatePostResponsePartial> {
-    const response = await this.put(`${this.baseUrl}${Routes.POSTS}/${id}`, {
-      data: payload,
-      headers: { "Content-Type": "application/json" },
-    });
-    const body = await response.json();
-
-    // Try full schema first, fallback to partial
-    try {
-      return UpdatePostResponseSchema.parse(body);
-    } catch {
-      return UpdatePostResponsePartialSchema.parse(body);
-    }
-  }
-
-  // ==================== DELETE Methods with Zod Validation ====================
-
-  async deletePost(id: number): Promise<Record<string, never>> {
-    const response = await this.delete(`${this.baseUrl}${Routes.POSTS}/${id}`);
-    const body = await response.json();
-    return DeletePostResponseSchema.parse(body);
-  }
-
-  // ==================== User Methods with Zod Validation ====================
-
-  async getAllUsers(): Promise<User[]> {
-    const response = await this.get(`${this.baseUrl}${Routes.USERS}`);
-    const body = await response.json();
-    return UserArraySchema.parse(body);
-  }
-
-  async getUserById(id: number): Promise<User> {
-    const response = await this.get(`${this.baseUrl}${Routes.USERS}/${id}`);
-    const body = await response.json();
-    return UserSchema.parse(body);
-  }
-
-  // ==================== Special Test Methods ====================
-
-  async getPostsWithInvalidQuery(): Promise<Post[]> {
-    const response = await this.get(`${this.baseUrl}${Routes.POSTS}`, {
-      params: { userId: "abc" },
-    });
-    const body = await response.json();
-    return PostArraySchema.parse(body);
-  }
-
-  async createPostWithoutContentType(
-    payload: CreatePostRequest,
-  ): Promise<CreatePostResponse> {
-    const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
-      data: payload,
-    });
-    const body = await response.json();
-    return CreatePostResponseSchema.parse(body);
-  }
-
-  async createPostWithWrongContentType(
-    payload: CreatePostRequest,
-  ): Promise<APIResponse> {
-    return this.post(`${this.baseUrl}${Routes.POSTS}`, {
-      data: payload,
-      headers: { "Content-Type": "text/plain" },
-    });
-  }
-
-  // ==================== Raw Response Methods for Error Testing ====================
-
-  async getRawPostResponse(id: number): Promise<APIResponse> {
-    return this.get(`${this.baseUrl}${Routes.POSTS}/${id}`);
+    return this.validateResponse(
+      response,
+      CreatePostResponsePartialSchema,
+    ) as Promise<CreatePostResponsePartial>;
   }
 
   async createPostRaw(payload: unknown): Promise<APIResponse> {
@@ -181,6 +136,31 @@ export class JsonPlaceholderService extends ApiClient {
     });
   }
 
+  // ==================== PUT Methods ====================
+
+  async updatePost<T = UpdatePostResponse>(
+    id: number,
+    payload: UpdatePostRequest,
+    schema?: z.ZodSchema<T>,
+  ): Promise<T | UpdatePostResponse | UpdatePostResponsePartial | APIResponse> {
+    const response = await this.put(`${this.baseUrl}${Routes.POSTS}/${id}`, {
+      data: payload,
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!schema) {
+      // Try full schema first, fallback to partial
+      const body = await response.json();
+      try {
+        return UpdatePostResponseSchema.parse(body);
+      } catch {
+        return UpdatePostResponsePartialSchema.parse(body);
+      }
+    }
+
+    return this.validateResponse(response, schema) as Promise<T>;
+  }
+
   async updatePostRaw(id: number, payload: unknown): Promise<APIResponse> {
     return this.put(`${this.baseUrl}${Routes.POSTS}/${id}`, {
       data: payload,
@@ -188,7 +168,62 @@ export class JsonPlaceholderService extends ApiClient {
     });
   }
 
+  // ==================== DELETE Methods ====================
+
+  async deletePost<T = Record<string, never>>(
+    id: number,
+    schema?: z.ZodSchema<T>,
+  ): Promise<T | APIResponse> {
+    const response = await this.delete(`${this.baseUrl}${Routes.POSTS}/${id}`);
+    return this.validateResponse(
+      response,
+      schema || DeletePostResponseSchema,
+    ) as Promise<T | APIResponse>;
+  }
+
   async deletePostRaw(id: number): Promise<APIResponse> {
     return this.delete(`${this.baseUrl}${Routes.POSTS}/${id}`);
+  }
+
+  // ==================== User Methods ====================
+
+  async getAllUsers(): Promise<User[]> {
+    const response = await this.get(`${this.baseUrl}${Routes.USERS}`);
+    return this.validateResponse(response, UserArraySchema) as Promise<User[]>;
+  }
+
+  async getUserById(id: number): Promise<User> {
+    const response = await this.get(`${this.baseUrl}${Routes.USERS}/${id}`);
+    return this.validateResponse(response, UserSchema) as Promise<User>;
+  }
+
+  // ==================== Special Test Methods ====================
+
+  async getPostsWithInvalidQuery(): Promise<Post[]> {
+    const response = await this.get(`${this.baseUrl}${Routes.POSTS}`, {
+      params: { userId: "abc" },
+    });
+    return this.validateResponse(response, PostArraySchema) as Promise<Post[]>;
+  }
+
+  async createPostWithoutContentType(
+    payload: CreatePostRequest,
+  ): Promise<CreatePostResponse> {
+    const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
+      data: payload,
+    });
+    return this.validateResponse(
+      response,
+      CreatePostResponseSchema,
+    ) as Promise<CreatePostResponse>;
+  }
+
+  async createPostWithWrongContentType(
+    payload: CreatePostRequest,
+  ): Promise<APIResponse> {
+    return this.post(`${this.baseUrl}${Routes.POSTS}`, {
+      data: payload,
+      headers: { "Content-Type": "text/plain" },
+    });
   }
 }
