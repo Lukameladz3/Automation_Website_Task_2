@@ -24,7 +24,6 @@ test.describe("JSONPlaceholder API - GET Posts", () => {
   test("TC 1.2: Sort Order - Verify ascending ID order", async ({
     postSteps,
   }) => {
-    // const all_post=``
     // Service returns validated data directly
     const posts = await postSteps.getAllPosts();
     await postSteps.verifyPostsSortedById(posts);
@@ -69,7 +68,6 @@ test.describe("JSONPlaceholder API - GET Posts", () => {
   });
 
   test("TC 2.2: Negative - Not Found - GET /posts/150 returns 404 with empty object", async ({
-    postSteps,
     jsonPlaceholderService,
     responseSteps,
   }) => {

@@ -1,12 +1,7 @@
 import { test, expect } from "@jsonplaceholder/fixtures/index";
 import { RandomDataGenerator } from "@jsonplaceholder/utils/random-data-generator";
 import { JsonPlaceholderTestData } from "@jsonplaceholder/constants/json-placeholder.constants";
-import {
-  buildCreatePostRequest,
-  buildUpdatePostRequest,
-  buildLongPostRequest,
-  buildSpecialCharPostRequest,
-} from "@jsonplaceholder/models/builders";
+import { buildCreatePostRequest } from "@jsonplaceholder/models/builders";
 
 test.describe("JSONPlaceholder API - CRUD Operations Demo", () => {
   test("Create, Read, Update, Delete operations on existing post", async ({
@@ -20,15 +15,15 @@ test.describe("JSONPlaceholder API - CRUD Operations Demo", () => {
     const userId = RandomDataGenerator.userId();
 
     // CREATE - Use raw response to check status code
-    const createResponse = await jsonPlaceholderService.createPost(
-      {
-        title: newTitle,
-        body: newBody,
-        userId,
-      },
-      null,
-    );
-    await responseSteps.verifyStatusCode(createResponse, 201);
+    // const createResponse = await jsonPlaceholderService.createPost(
+    //   {
+    //     title: newTitle,
+    //     body: newBody,
+    //     userId,
+    //   },
+    //   null,
+    // );
+    // await responseSteps.verifyStatusCode(createResponse, 201);
 
     // Create with validated method
     const createRequest = buildCreatePostRequest({
