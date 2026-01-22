@@ -1,4 +1,5 @@
 import { expect } from "@playwright/test";
+import type { APIResponse } from "@playwright/test";
 import { JsonPlaceholderService } from "../api/services/json-placeholder.service";
 import type {
   Post,
@@ -8,6 +9,10 @@ import type {
   UpdatePostResponse,
   UpdatePostResponsePartial,
   CreatePostRequest,
+} from "../models/schemas/post.schemas";
+import {
+  CreatePostResponsePartialSchema,
+  CreatePostResponsePassthroughSchema,
 } from "../models/schemas/post.schemas";
 import { JsonPlaceholderTestData } from "../constants/json-placeholder.constants";
 import { step } from "../utils/step-decorator";
@@ -31,7 +36,10 @@ export class PostSteps {
   async createPostWithPartialValidation(
     payload: Partial<{ title: string; body: string; userId: number }>,
   ): Promise<CreatePostResponsePartial> {
-    return await this.service.createPostWithPartialValidation(payload);
+    return await this.service.createPost(
+      payload,
+      CreatePostResponsePartialSchema,
+    );
   }
 
   @step("Create post with passthrough (security testing)")
@@ -41,7 +49,10 @@ export class PostSteps {
       unknown
     >,
   ): Promise<CreatePostResponsePassthrough> {
-    return await this.service.createPostWithPassthrough(payload);
+    return await this.service.createPost(
+      payload,
+      CreatePostResponsePassthroughSchema,
+    );
   }
 
   @step("Get post by ID")

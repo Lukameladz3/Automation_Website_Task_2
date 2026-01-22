@@ -165,18 +165,6 @@ export class JsonPlaceholderService extends ApiClient {
     return this.validateResponse(response, schema);
   }
 
-  async createPostWithPassthrough(
-    payload: CreatePostRequest & Record<string, unknown>,
-  ): Promise<CreatePostResponsePassthrough> {
-    return this.createPost(payload, CreatePostResponsePassthroughSchema);
-  }
-
-  async createPostWithPartialValidation(
-    payload: Partial<CreatePostRequest>,
-  ): Promise<CreatePostResponsePartial> {
-    return this.createPost(payload, CreatePostResponsePartialSchema);
-  }
-
   // ==================== PUT Methods ====================
 
   /**
