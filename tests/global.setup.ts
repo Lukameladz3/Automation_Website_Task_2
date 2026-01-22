@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import config from "../playwright.config";
 
 import { UserService } from "@api/Services/UserService";
-import { expect, test as setup } from "@fixtures/index";
+import { expect, isolatedTest as setup } from "@fixtures/index";
 import { DataFactory } from "@utils/DataFactory";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -39,7 +39,7 @@ setup(
       // Login via UI to establish session
       await homePage.goto();
       await homePage.clickSignupLogin();
-      await homePage.page.waitForLoadState('domcontentloaded'); // Wait for navigation to complete
+      await homePage.page.waitForLoadState("domcontentloaded"); // Wait for navigation to complete
       await loginPage.login(user.email, user.password);
       await expect(
         homePage.loggedInText,

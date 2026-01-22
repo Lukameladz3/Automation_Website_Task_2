@@ -1,6 +1,10 @@
 # Playwright TypeScript Automation Framework
 
+![Playwright Tests](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/actions/workflows/playwright.yml/badge.svg)
+
 Feature-first Spec-Driven web UI test automation framework using Playwright and TypeScript for reliable, maintainable test automation.
+
+📊 **[View Live Test Reports](https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/)** - Automatically updated after each main branch run
 
 ## Quick Start
 

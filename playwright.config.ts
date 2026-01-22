@@ -34,6 +34,7 @@ export default defineConfig({
     {
       name: "automationexercise-setup",
       testMatch: /global\.setup\.ts/,
+      retries: 0, // No retries for setup - creates worker-specific files
     },
     {
       name: "automationexercise-api",
