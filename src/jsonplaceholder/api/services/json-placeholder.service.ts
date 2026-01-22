@@ -124,12 +124,21 @@ export class JsonPlaceholderService extends ApiClient {
   async createPost(payload: CreatePostRequest): Promise<CreatePostResponse>;
   async createPost<T>(
     payload: unknown,
-    schema: z.ZodSchema<T> | null = CreatePostResponseSchema,
-  ): Promise<T | APIResponse> {
+    schema?: z.ZodSchema<T> | null,
+  ): Promise<T | CreatePostResponse | APIResponse> {
     const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
       data: payload,
       headers: { "Content-Type": "application/json" },
     });
+
+    if (schema === undefined) {
+      return this.validateResponse(response, CreatePostResponseSchema);
+    }
+
+    if (schema === null) {
+      return this.validateResponse(response, null);
+    }
+
     return this.validateResponse(response, schema);
   }
 
@@ -220,9 +229,18 @@ export class JsonPlaceholderService extends ApiClient {
   async deletePost(id: number): Promise<Record<string, never>>;
   async deletePost<T>(
     id: number,
-    schema: z.ZodSchema<T> | null = DeletePostResponseSchema,
-  ): Promise<T | APIResponse> {
+    schema?: z.ZodSchema<T> | null,
+  ): Promise<T | Record<string, never> | APIResponse> {
     const response = await this.delete(`${this.baseUrl}${Routes.POSTS}/${id}`);
+
+    if (schema === undefined) {
+      return this.validateResponse(response, DeletePostResponseSchema);
+    }
+
+    if (schema === null) {
+      return this.validateResponse(response, null);
+    }
+
     return this.validateResponse(response, schema);
   }
 
