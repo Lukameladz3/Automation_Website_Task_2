@@ -1,6 +1,12 @@
 import { test, expect } from "@jsonplaceholder/fixtures/index";
 import { RandomDataGenerator } from "@jsonplaceholder/utils/random-data-generator";
 import { JsonPlaceholderTestData } from "@jsonplaceholder/constants/json-placeholder.constants";
+import {
+  buildCreatePostRequest,
+  buildUpdatePostRequest,
+  buildLongPostRequest,
+  buildSpecialCharPostRequest,
+} from "@jsonplaceholder/models/builders";
 
 test.describe("JSONPlaceholder API - Negative Tests", () => {
   test.describe("POST Create - Negative Scenarios", () => {
@@ -33,7 +39,12 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         JsonPlaceholderTestData.STATUS_CODES.SUCCESS_CREATED,
       );
 
-      const post = await postSteps.createPost(longTitle, longBody, userId);
+      const request = buildCreatePostRequest({
+        title: longTitle,
+        body: longBody,
+        userId,
+      });
+      const post = await postSteps.createPost(request);
       expect(post.title.length).toBe(titleLength);
       expect(post.body.length).toBeGreaterThan(
         JsonPlaceholderTestData.NEGATIVE_TESTS.BODY_LENGTHS.MINIMUM_EXPECTED,
@@ -43,34 +54,29 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
     test("should handle post with invalid userIds (negative, zero, non-existent)", async ({
       postSteps,
     }) => {
-      const title = RandomDataGenerator.postTitle();
-      const body = RandomDataGenerator.postBody();
-
       // Test negative userId
-      const negativeUserPost = await postSteps.createPost(
-        title,
-        body,
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NEGATIVE,
-      );
+      const negativeRequest = buildCreatePostRequest({
+        userId: JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NEGATIVE,
+      });
+      const negativeUserPost = await postSteps.createPost(negativeRequest);
       expect(negativeUserPost.userId).toBe(
         JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NEGATIVE,
       );
 
       // Test zero userId
-      const zeroUserPost = await postSteps.createPost(
-        title,
-        body,
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.ZERO,
-      );
+      const zeroRequest = buildCreatePostRequest({
+        userId: JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.ZERO,
+      });
+      const zeroUserPost = await postSteps.createPost(zeroRequest);
       expect(zeroUserPost.userId).toBe(
         JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.ZERO,
       );
 
-      const nonExistentUserPost = await postSteps.createPost(
-        title,
-        body,
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NON_EXISTENT,
-      );
+      const nonExistentRequest = buildCreatePostRequest({
+        userId: JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NON_EXISTENT,
+      });
+      const nonExistentUserPost =
+        await postSteps.createPost(nonExistentRequest);
       expect(nonExistentUserPost.userId).toBe(
         JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NON_EXISTENT,
       );
@@ -81,54 +87,44 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.EMPTY;
 
       // Empty title
-      const emptyTitlePost = await postSteps.createPost(
-        emptyString,
-        RandomDataGenerator.postBody(),
-        RandomDataGenerator.userId(),
-      );
+      const emptyTitleRequest = buildCreatePostRequest({ title: emptyString });
+      const emptyTitlePost = await postSteps.createPost(emptyTitleRequest);
       expect(emptyTitlePost.title).toBe(emptyString);
 
       // Empty body
-      const emptyBodyPost = await postSteps.createPost(
-        RandomDataGenerator.postTitle(),
-        emptyString,
-        RandomDataGenerator.userId(),
-      );
+      const emptyBodyRequest = buildCreatePostRequest({ body: emptyString });
+      const emptyBodyPost = await postSteps.createPost(emptyBodyRequest);
       expect(emptyBodyPost.body).toBe(emptyString);
     });
 
     test("should handle post with special characters and security payloads", async ({
       postSteps,
     }) => {
-      const body = RandomDataGenerator.postBody();
-      const userId = RandomDataGenerator.userId();
-
       // XSS attempt
-      const xssPost = await postSteps.createPost(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.XSS_ATTEMPT,
-        body,
-        userId,
-      );
+      const xssRequest = buildCreatePostRequest({
+        title:
+          JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.XSS_ATTEMPT,
+      });
+      const xssPost = await postSteps.createPost(xssRequest);
       expect(xssPost.title).toBe(
         JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.XSS_ATTEMPT,
       );
 
       // SQL injection attempt
-      const sqlPost = await postSteps.createPost(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.SQL_INJECTION,
-        body,
-        userId,
-      );
+      const sqlRequest = buildCreatePostRequest({
+        title:
+          JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.SQL_INJECTION,
+      });
+      const sqlPost = await postSteps.createPost(sqlRequest);
       expect(sqlPost.title).toBe(
         JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.SQL_INJECTION,
       );
 
       // Unicode characters
-      const unicodePost = await postSteps.createPost(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.UNICODE,
-        body,
-        userId,
-      );
+      const unicodeRequest = buildCreatePostRequest({
+        title: JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.UNICODE,
+      });
+      const unicodePost = await postSteps.createPost(unicodeRequest);
       expect(unicodePost.title).toBe(
         JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.UNICODE,
       );
@@ -171,10 +167,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
     }) => {
       const postId = JsonPlaceholderTestData.POST.EXISTING_POST_ID;
 
-      const response = await jsonPlaceholderService.updatePostRaw(
-        postId,
-        {},
-      );
+      const response = await jsonPlaceholderService.updatePostRaw(postId, {});
 
       await responseSteps.verifyStatusCode(
         response,
@@ -285,36 +278,34 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
     test("should handle boundary values for userId and special whitespace", async ({
       postSteps,
     }) => {
-      const title = RandomDataGenerator.postTitle();
-      const body = RandomDataGenerator.postBody();
-
       // Maximum 32-bit integer userId
-      const maxUserIdPost = await postSteps.createPost(
-        title,
-        body,
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.MAX_32_BIT_INTEGER,
-      );
+      const maxUserIdRequest = buildCreatePostRequest({
+        userId:
+          JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.MAX_32_BIT_INTEGER,
+      });
+      const maxUserIdPost = await postSteps.createPost(maxUserIdRequest);
       expect(maxUserIdPost.userId).toBe(
         JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.MAX_32_BIT_INTEGER,
       );
 
       // Whitespace-only title
-      const whitespacePost = await postSteps.createPost(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.WHITESPACE_ONLY,
-        body,
-        RandomDataGenerator.userId(),
-      );
+      const whitespaceRequest = buildCreatePostRequest({
+        title:
+          JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS
+            .WHITESPACE_ONLY,
+      });
+      const whitespacePost = await postSteps.createPost(whitespaceRequest);
       expect(whitespacePost.title).toBe(
         JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.WHITESPACE_ONLY,
       );
 
       // Title with newlines and tabs
-      const newlineTabPost = await postSteps.createPost(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS
-          .WITH_NEWLINES_TABS,
-        body,
-        RandomDataGenerator.userId(),
-      );
+      const newlineTabRequest = buildCreatePostRequest({
+        title:
+          JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS
+            .WITH_NEWLINES_TABS,
+      });
+      const newlineTabPost = await postSteps.createPost(newlineTabRequest);
       expect(newlineTabPost.title).toContain("\n");
       expect(newlineTabPost.title).toContain("\t");
     });
