@@ -171,7 +171,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 120,
+                      "duration": 135,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -179,28 +179,28 @@
                       "steps": [
                         {
                           "title": "Measure response time",
-                          "duration": 59,
+                          "duration": 80,
                           "steps": [
                             {
                               "title": "API: Get all users",
-                              "duration": 56
+                              "duration": 68
                             }
                           ]
                         },
                         {
                           "title": "Verify response status code",
-                          "duration": 8
+                          "duration": 5
                         },
                         {
                           "title": "Verify response has JSON content type",
-                          "duration": 4
+                          "duration": 2
                         },
                         {
                           "title": "Verify response time is acceptable",
-                          "duration": 5
+                          "duration": 2
                         }
                       ],
-                      "startTime": "2026-01-23T14:58:06.730Z",
+                      "startTime": "2026-01-23T17:56:26.722Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -229,7 +229,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 109,
+                      "duration": 101,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -237,10 +237,10 @@
                       "steps": [
                         {
                           "title": "API: Get all users",
-                          "duration": 68
+                          "duration": 60
                         }
                       ],
-                      "startTime": "2026-01-23T14:58:06.782Z",
+                      "startTime": "2026-01-23T17:56:26.768Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -269,7 +269,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 193,
+                      "duration": 202,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -277,10 +277,10 @@
                       "steps": [
                         {
                           "title": "API: Verify all users have valid data types",
-                          "duration": 141
+                          "duration": 163
                         }
                       ],
-                      "startTime": "2026-01-23T14:58:06.833Z",
+                      "startTime": "2026-01-23T17:56:26.683Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -311,7 +311,7 @@
                       "workerIndex": 3,
                       "parallelIndex": 3,
                       "status": "failed",
-                      "duration": 107,
+                      "duration": 130,
                       "error": {
                         "message": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m",
                         "stack": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts:34:22",
@@ -338,7 +338,7 @@
                       "steps": [
                         {
                           "title": "API: Verify users list has no duplicates",
-                          "duration": 76,
+                          "duration": 87,
                           "error": {
                             "message": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m",
                             "stack": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts:34:22",
@@ -351,7 +351,7 @@
                           }
                         }
                       ],
-                      "startTime": "2026-01-23T14:58:06.745Z",
+                      "startTime": "2026-01-23T17:56:26.694Z",
                       "annotations": [],
                       "attachments": [],
                       "errorLocation": {
@@ -385,7 +385,7 @@
                       "workerIndex": 4,
                       "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 80,
+                      "duration": 82,
                       "errors": [],
                       "stdout": [
                         {
@@ -397,10 +397,10 @@
                       "steps": [
                         {
                           "title": "API: Identify users without age field",
-                          "duration": 56
+                          "duration": 55
                         }
                       ],
-                      "startTime": "2026-01-23T14:58:08.594Z",
+                      "startTime": "2026-01-23T17:56:28.812Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -429,7 +429,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 55,
+                      "duration": 44,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -437,10 +437,10 @@
                       "steps": [
                         {
                           "title": "API: Verify users without age field are valid",
-                          "duration": 45
+                          "duration": 33
                         }
                       ],
-                      "startTime": "2026-01-23T14:58:06.951Z",
+                      "startTime": "2026-01-23T17:56:26.958Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -471,7 +471,7 @@
           "column": 6,
           "specs": [
             {
-              "title": "FAIL: should not return internal errors for user IDs 3 and 5 @bug",
+              "title": "FAIL: should not return internal errors for any valid user ID @bug",
               "ok": false,
               "tags": [
                 "bug"
@@ -485,28 +485,28 @@
                   "projectName": "usersapi",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "failed",
-                      "duration": 34,
+                      "duration": 103,
                       "error": {
-                        "message": "Error: User ID 3 should return valid user data, but returns internal error: Internal error\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"Internal error\"\u001b[39m",
-                        "stack": "Error: User ID 3 should return valid user data, but returns internal error: Internal error\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"Internal error\"\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:53:22",
+                        "message": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m",
+                        "stack": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:43:22",
                         "location": {
                           "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts",
                           "column": 22,
-                          "line": 53
+                          "line": 43
                         },
-                        "snippet": "\u001b[0m \u001b[90m 51 |\u001b[39m   }) \u001b[33m=>\u001b[39m {\n \u001b[90m 52 |\u001b[39m     \u001b[90m// Document the bug: API returns \"Internal error\" for user IDs 3 and 5\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 53 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyInternalServerErrors(\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 54 |\u001b[39m       \u001b[33mUsersApiTestData\u001b[39m\u001b[33m.\u001b[39m\u001b[33mINTERNAL_ERROR_IDS\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 55 |\u001b[39m     )\u001b[33m;\u001b[39m\n \u001b[90m 56 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m"
+                        "snippet": "\u001b[0m \u001b[90m 41 |\u001b[39m     \u001b[90m// Test that no valid user ID returns an internal server error\u001b[39m\n \u001b[90m 42 |\u001b[39m     \u001b[90m// This will fail and report which IDs are problematic (currently IDs 3 and 5)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 43 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoInternalServerErrors()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 44 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 45 |\u001b[39m\n \u001b[90m 46 |\u001b[39m   test(\u001b[32m\"should return same user data on multiple requests\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({\u001b[0m"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts",
                             "column": 22,
-                            "line": 53
+                            "line": 43
                           },
-                          "message": "Error: User ID 3 should return valid user data, but returns internal error: Internal error\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"Internal error\"\u001b[39m\n\n\u001b[0m \u001b[90m 51 |\u001b[39m   }) \u001b[33m=>\u001b[39m {\n \u001b[90m 52 |\u001b[39m     \u001b[90m// Document the bug: API returns \"Internal error\" for user IDs 3 and 5\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 53 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyInternalServerErrors(\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 54 |\u001b[39m       \u001b[33mUsersApiTestData\u001b[39m\u001b[33m.\u001b[39m\u001b[33mINTERNAL_ERROR_IDS\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 55 |\u001b[39m     )\u001b[33m;\u001b[39m\n \u001b[90m 56 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:53:22\u001b[22m"
+                          "message": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m\n\n\u001b[0m \u001b[90m 41 |\u001b[39m     \u001b[90m// Test that no valid user ID returns an internal server error\u001b[39m\n \u001b[90m 42 |\u001b[39m     \u001b[90m// This will fail and report which IDs are problematic (currently IDs 3 and 5)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 43 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoInternalServerErrors()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 44 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 45 |\u001b[39m\n \u001b[90m 46 |\u001b[39m   test(\u001b[32m\"should return same user data on multiple requests\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({\u001b[0m\n\u001b[2m    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:43:22\u001b[22m"
                         }
                       ],
                       "stdout": [],
@@ -514,36 +514,36 @@
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "API: Verify internal server errors for specific user IDs",
-                          "duration": 24,
+                          "title": "API: Verify no internal server errors for any user",
+                          "duration": 91,
                           "error": {
-                            "message": "Error: User ID 3 should return valid user data, but returns internal error: Internal error\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"Internal error\"\u001b[39m",
-                            "stack": "Error: User ID 3 should return valid user data, but returns internal error: Internal error\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"Internal error\"\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:53:22",
+                            "message": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m",
+                            "stack": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:43:22",
                             "location": {
                               "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts",
                               "column": 22,
-                              "line": 53
+                              "line": 43
                             },
-                            "snippet": "\u001b[0m \u001b[90m 51 |\u001b[39m   }) \u001b[33m=>\u001b[39m {\n \u001b[90m 52 |\u001b[39m     \u001b[90m// Document the bug: API returns \"Internal error\" for user IDs 3 and 5\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 53 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyInternalServerErrors(\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 54 |\u001b[39m       \u001b[33mUsersApiTestData\u001b[39m\u001b[33m.\u001b[39m\u001b[33mINTERNAL_ERROR_IDS\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 55 |\u001b[39m     )\u001b[33m;\u001b[39m\n \u001b[90m 56 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m"
+                            "snippet": "\u001b[0m \u001b[90m 41 |\u001b[39m     \u001b[90m// Test that no valid user ID returns an internal server error\u001b[39m\n \u001b[90m 42 |\u001b[39m     \u001b[90m// This will fail and report which IDs are problematic (currently IDs 3 and 5)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 43 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoInternalServerErrors()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 44 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 45 |\u001b[39m\n \u001b[90m 46 |\u001b[39m   test(\u001b[32m\"should return same user data on multiple requests\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({\u001b[0m"
                           }
                         }
                       ],
-                      "startTime": "2026-01-23T14:58:07.170Z",
+                      "startTime": "2026-01-23T17:56:27.209Z",
                       "annotations": [],
                       "attachments": [],
                       "errorLocation": {
                         "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts",
                         "column": 22,
-                        "line": 53
+                        "line": 43
                       }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "085e86fd6745a303ec04-12c64f675ed6cd33fbe3",
+              "id": "085e86fd6745a303ec04-57d7b44fae408a4e57dc",
               "file": "usersapi/api/get-user-by-id.spec.ts",
-              "line": 49,
+              "line": 38,
               "column": 3
             },
             {
@@ -559,10 +559,10 @@
                   "projectName": "usersapi",
                   "results": [
                     {
-                      "workerIndex": 5,
+                      "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 80,
+                      "duration": 45,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
@@ -570,14 +570,14 @@
                       "steps": [
                         {
                           "title": "API: Get user by ID",
-                          "duration": 42
+                          "duration": 18
                         },
                         {
                           "title": "API: Get user by ID",
-                          "duration": 9
+                          "duration": 15
                         }
                       ],
-                      "startTime": "2026-01-23T14:58:08.812Z",
+                      "startTime": "2026-01-23T17:56:27.272Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -587,7 +587,7 @@
               ],
               "id": "085e86fd6745a303ec04-fe50c324d77e36da2fef",
               "file": "usersapi/api/get-user-by-id.spec.ts",
-              "line": 58,
+              "line": 46,
               "column": 3
             }
           ],
@@ -614,7 +614,7 @@
                           "workerIndex": 0,
                           "parallelIndex": 0,
                           "status": "passed",
-                          "duration": 129,
+                          "duration": 124,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
@@ -622,10 +622,10 @@
                           "steps": [
                             {
                               "title": "API: Verify all valid user IDs return proper responses",
-                              "duration": 121
+                              "duration": 117
                             }
                           ],
-                          "startTime": "2026-01-23T14:58:06.981Z",
+                          "startTime": "2026-01-23T17:56:26.990Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -659,25 +659,29 @@
                       "projectName": "usersapi",
                       "results": [
                         {
-                          "workerIndex": 1,
-                          "parallelIndex": 1,
+                          "workerIndex": 2,
+                          "parallelIndex": 2,
                           "status": "passed",
-                          "duration": 32,
+                          "duration": 47,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
                           "retry": 0,
                           "steps": [
                             {
+                              "title": "API: Get a guaranteed non-existent user ID",
+                              "duration": 19
+                            },
+                            {
                               "title": "API: Get user by ID",
-                              "duration": 10
+                              "duration": 12
                             },
                             {
                               "title": "Verify response status code",
                               "duration": 3
                             }
                           ],
-                          "startTime": "2026-01-23T14:58:07.062Z",
+                          "startTime": "2026-01-23T17:56:27.003Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -688,68 +692,6 @@
                   "id": "085e86fd6745a303ec04-1f08edac8d8c784b5816",
                   "file": "usersapi/api/get-user-by-id.spec.ts",
                   "line": 17,
-                  "column": 5
-                },
-                {
-                  "title": "should return error for invalid user IDs",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 60000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "usersapi",
-                      "projectName": "usersapi",
-                      "results": [
-                        {
-                          "workerIndex": 2,
-                          "parallelIndex": 2,
-                          "status": "passed",
-                          "duration": 101,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "steps": [
-                            {
-                              "title": "API: Verify all users for invalid user IDs",
-                              "duration": 84,
-                              "steps": [
-                                {
-                                  "title": "API: Verify user not found error",
-                                  "duration": 15
-                                },
-                                {
-                                  "title": "API: Verify user not found error",
-                                  "duration": 14
-                                },
-                                {
-                                  "title": "API: Verify user not found error",
-                                  "duration": 12
-                                },
-                                {
-                                  "title": "API: Verify user not found error",
-                                  "duration": 21
-                                },
-                                {
-                                  "title": "API: Verify user not found error",
-                                  "duration": 11
-                                }
-                              ]
-                            }
-                          ],
-                          "startTime": "2026-01-23T14:58:07.109Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "085e86fd6745a303ec04-5afcabc1d8688c34aed1",
-                  "file": "usersapi/api/get-user-by-id.spec.ts",
-                  "line": 34,
                   "column": 5
                 },
                 {
@@ -768,7 +710,7 @@
                           "workerIndex": 1,
                           "parallelIndex": 1,
                           "status": "passed",
-                          "duration": 103,
+                          "duration": 80,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
@@ -776,10 +718,10 @@
                           "steps": [
                             {
                               "title": "API: Verify invalid ID formats return errors",
-                              "duration": 86
+                              "duration": 72
                             }
                           ],
-                          "startTime": "2026-01-23T14:58:07.134Z",
+                          "startTime": "2026-01-23T17:56:27.132Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -789,7 +731,725 @@
                   ],
                   "id": "085e86fd6745a303ec04-af6627fa3725fe62eb74",
                   "file": "usersapi/api/get-user-by-id.spec.ts",
-                  "line": 41,
+                  "line": 31,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "usersapi\\api\\negative-scenarios.spec.ts",
+      "file": "usersapi/api/negative-scenarios.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Negative Scenarios - Edge Cases",
+          "file": "usersapi/api/negative-scenarios.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "Security Tests",
+              "file": "usersapi/api/negative-scenarios.spec.ts",
+              "line": 5,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should reject SQL injection attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 14,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 10
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.324Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-2add731219b4abef7b70",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 6,
+                  "column": 5
+                },
+                {
+                  "title": "should reject XSS attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 5,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 89,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 59
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:29.192Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-8580265a440c039e7864",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 12,
+                  "column": 5
+                },
+                {
+                  "title": "should reject path traversal attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 24,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 12
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.383Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-b07389a444758c28324e",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 18,
+                  "column": 5
+                },
+                {
+                  "title": "should reject null byte injection",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "failed",
+                          "duration": 20,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:25:24",
+                            "location": {
+                              "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                              "column": 24,
+                              "line": 25
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 23 |\u001b[39m\n \u001b[90m 24 |\u001b[39m     test(\u001b[32m\"should reject null byte injection\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifySecurityPayloadRejected(\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[33mUsersApiTestData\u001b[39m\u001b[33m.\u001b[39m\u001b[33mSECURITY_TEST_PAYLOADS\u001b[39m\u001b[33m.\u001b[39m\u001b[33mNULL_BYTE\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 27 |\u001b[39m       )\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                                "column": 24,
+                                "line": 25
+                              },
+                              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m\n\n\u001b[0m \u001b[90m 23 |\u001b[39m\n \u001b[90m 24 |\u001b[39m     test(\u001b[32m\"should reject null byte injection\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifySecurityPayloadRejected(\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[33mUsersApiTestData\u001b[39m\u001b[33m.\u001b[39m\u001b[33mSECURITY_TEST_PAYLOADS\u001b[39m\u001b[33m.\u001b[39m\u001b[33mNULL_BYTE\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 27 |\u001b[39m       )\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:25:24\u001b[22m"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 13,
+                              "error": {
+                                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m",
+                                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:25:24",
+                                "location": {
+                                  "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                                  "column": 24,
+                                  "line": 25
+                                },
+                                "snippet": "\u001b[0m \u001b[90m 23 |\u001b[39m\n \u001b[90m 24 |\u001b[39m     test(\u001b[32m\"should reject null byte injection\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifySecurityPayloadRejected(\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[33mUsersApiTestData\u001b[39m\u001b[33m.\u001b[39m\u001b[33mSECURITY_TEST_PAYLOADS\u001b[39m\u001b[33m.\u001b[39m\u001b[33mNULL_BYTE\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 27 |\u001b[39m       )\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m"
+                              }
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.379Z",
+                          "annotations": [],
+                          "attachments": [],
+                          "errorLocation": {
+                            "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                            "column": 24,
+                            "line": 25
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-fb16997efddfba8e21e9",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 24,
+                  "column": 5
+                },
+                {
+                  "title": "should reject unicode overflow attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 74,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 46
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:29.319Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-c7b91aaad0eaac19756a",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 30,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Edge Case IDs",
+              "file": "usersapi/api/negative-scenarios.spec.ts",
+              "line": 37,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle extremely large ID numbers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 22,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify edge case ID is handled properly",
+                              "duration": 15
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.453Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-f5d94625e80dbf433bc1",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 38,
+                  "column": 5
+                },
+                {
+                  "title": "should handle float ID values",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 15,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify edge case ID is handled properly",
+                              "duration": 10
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.508Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-44873c3f5ebec18d4186",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 44,
+                  "column": 5
+                },
+                {
+                  "title": "should handle large negative ID values",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 18,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify edge case ID is handled properly",
+                              "duration": 11
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.566Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-5a72da7024d3beac6509",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 50,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Response Structure Validation",
+              "file": "usersapi/api/negative-scenarios.spec.ts",
+              "line": 57,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should return array for get all users endpoint",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 17,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify response has array format for get all users",
+                              "duration": 10
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.611Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-405464593362ec324640",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 58,
+                  "column": 5
+                },
+                {
+                  "title": "should return object not array for get user by ID",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 17,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify user by ID returns object not array",
+                              "duration": 10
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.669Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-b288ad8de5c73b908daf",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 64,
+                  "column": 5
+                },
+                {
+                  "title": "should not return malformed data structure",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 20,
+                          "error": {
+                            "message": "Error: expect: Property 'toBeTypeOf' not found.",
+                            "stack": "Error: expect: Property 'toBeTypeOf' not found.\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:75:24",
+                            "location": {
+                              "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                              "column": 24,
+                              "line": 75
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 73 |\u001b[39m       usersSteps\u001b[33m,\u001b[39m\n \u001b[90m 74 |\u001b[39m     }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 75 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyValidArrayStructure()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 76 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 78 |\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                                "column": 24,
+                                "line": 75
+                              },
+                              "message": "Error: expect: Property 'toBeTypeOf' not found.\n\n\u001b[0m \u001b[90m 73 |\u001b[39m       usersSteps\u001b[33m,\u001b[39m\n \u001b[90m 74 |\u001b[39m     }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 75 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyValidArrayStructure()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 76 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 78 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:75:24\u001b[22m"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify response is valid array structure",
+                              "duration": 11,
+                              "error": {
+                                "message": "Error: expect: Property 'toBeTypeOf' not found.",
+                                "stack": "Error: expect: Property 'toBeTypeOf' not found.\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:75:24",
+                                "location": {
+                                  "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                                  "column": 24,
+                                  "line": 75
+                                },
+                                "snippet": "\u001b[0m \u001b[90m 73 |\u001b[39m       usersSteps\u001b[33m,\u001b[39m\n \u001b[90m 74 |\u001b[39m     }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 75 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyValidArrayStructure()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 76 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 78 |\u001b[39m\u001b[0m"
+                              }
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:27.788Z",
+                          "annotations": [],
+                          "attachments": [],
+                          "errorLocation": {
+                            "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                            "column": 24,
+                            "line": 75
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-33bcf8573cf566b2bb3e",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 72,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Data Integrity",
+              "file": "usersapi/api/negative-scenarios.spec.ts",
+              "line": 79,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should have all user IDs as positive integers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 77,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify all user IDs are positive integers",
+                              "duration": 55
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:29.516Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-b8b650c02b2f741270fd",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 80,
+                  "column": 5
+                },
+                {
+                  "title": "should have all names as valid strings with content",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 98,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify all names are valid strings with content",
+                              "duration": 74
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:28.967Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-4ff5b5402f6bf56e2cd7",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 86,
+                  "column": 5
+                },
+                {
+                  "title": "should not have null or undefined values for required fields",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 74,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify no null or undefined values in required fields",
+                              "duration": 52
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:29.094Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-00ebd23bf9fc43acd4f5",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 92,
+                  "column": 5
+                },
+                {
+                  "title": "should not have empty strings for name field",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 25,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify no empty name fields",
+                              "duration": 18
+                            }
+                          ],
+                          "startTime": "2026-01-23T17:56:29.192Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-1493dab146a82734ae4d",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 98,
                   "column": 5
                 }
               ]
@@ -801,11 +1461,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-01-23T14:58:04.300Z",
-    "duration": 4650.1320000000005,
-    "expected": 10,
+    "startTime": "2026-01-23T17:56:24.356Z",
+    "duration": 5288.8730000000005,
+    "expected": 22,
     "skipped": 0,
-    "unexpected": 2,
+    "unexpected": 4,
     "flaky": 0
   }
 }

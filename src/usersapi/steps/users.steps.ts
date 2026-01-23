@@ -137,7 +137,7 @@ export class UsersSteps {
       const response = await this.usersApiService.getUserById(userId, null);
       const responseTime = Date.now() - startTime;
 
-      expect(response.status()).toBe(UsersApiTestData.STATUS_CODES.OK);
+      expect(response.status()).toBe(200);
       expect(response.headers()["content-type"]).toBe(
         UsersApiTestData.CONTENT_TYPES.JSON,
       );
@@ -243,18 +243,166 @@ export class UsersSteps {
     expect(user.name).toBeTruthy();
   }
 
-  @step("API: Verify internal server errors for specific user IDs")
-  async verifyInternalServerErrors(userIds: readonly number[]): Promise<void> {
-    for (const userId of userIds) {
-      const response = await this.usersApiService.getUserById(userId, null);
+  @step("API: Get a guaranteed non-existent user ID")
+  async getNonExistentUserId(): Promise<number> {
+    const users = await this.usersApiService.getAllUsers();
+    const maxId = Math.max(...users.map((user) => user.id));
+    return maxId + 1;
+  }
+
+  @step("API: Verify response is valid array structure")
+  async verifyValidArrayStructure(): Promise<void> {
+    const users = await this.usersApiService.getAllUsers();
+
+    expect(Array.isArray(users)).toBeTruthy();
+
+    for (let index = 0; index < users.length; index++) {
+      const user = users[index];
+      expect(user, `User at index ${index} should be an object`).toBeTypeOf(
+        "object",
+      );
+      expect(user, `User at index ${index} should not be null`).not.toBeNull();
+      expect(
+        user,
+        `User at index ${index} should not be undefined`,
+      ).not.toBeUndefined();
+    }
+  }
+
+  @step("API: Verify no null or undefined values in required fields")
+  async verifyNoNullOrUndefinedFields(): Promise<void> {
+    const users = await this.usersApiService.getAllUsers();
+
+    for (let index = 0; index < users.length; index++) {
+      const user = users[index];
+      expect(
+        user.id,
+        `User at index ${index} has null/undefined id`,
+      ).not.toBeNull();
+      expect(
+        user.id,
+        `User at index ${index} has null/undefined id`,
+      ).not.toBeUndefined();
+      expect(
+        user.name,
+        `User at index ${index} has null/undefined name`,
+      ).not.toBeNull();
+      expect(
+        user.name,
+        `User at index ${index} has null/undefined name`,
+      ).not.toBeUndefined();
+    }
+  }
+
+  @step("API: Verify no empty name fields")
+  async verifyNoEmptyNames(): Promise<void> {
+    const users = await this.usersApiService.getAllUsers();
+
+    for (let index = 0; index < users.length; index++) {
+      const user = users[index];
+      expect(
+        user.name.trim(),
+        `User at index ${index} has empty name`,
+      ).not.toBe("");
+    }
+  }
+
+  @step("API: Verify security payload is rejected")
+  async verifySecurityPayloadRejected(payload: string): Promise<void> {
+    const response = await this.usersApiService.getUserById(payload, null);
+
+    expect(response.status()).toBeGreaterThanOrEqual(400);
+
+    const body = await response.json();
+    expect(body).toHaveProperty("message");
+  }
+
+  @step("API: Verify edge case ID is handled properly")
+  async verifyEdgeCaseIdHandled(edgeCaseId: number | string): Promise<void> {
+    const response = await this.usersApiService.getUserById(edgeCaseId, null);
+
+    expect(response.status()).toBeGreaterThanOrEqual(400);
+
+    const body = await response.json();
+    expect(body).toHaveProperty("message");
+  }
+
+  @step("API: Verify all user IDs are positive integers")
+  async verifyAllIdsArePositiveIntegers(): Promise<void> {
+    const users = await this.usersApiService.getAllUsers();
+
+    for (let index = 0; index < users.length; index++) {
+      const user = users[index];
+      expect(
+        user.id,
+        `User at index ${index} has non-positive id: ${user.id}`,
+      ).toBeGreaterThan(0);
+      expect(
+        Number.isInteger(user.id),
+        `User at index ${index} has non-integer id: ${user.id}`,
+      ).toBeTruthy();
+    }
+  }
+
+  @step("API: Verify all names are valid strings with content")
+  async verifyAllNamesAreValidStrings(): Promise<void> {
+    const users = await this.usersApiService.getAllUsers();
+
+    for (let index = 0; index < users.length; index++) {
+      const user = users[index];
+      expect(
+        typeof user.name,
+        `User at index ${index} name is not a string`,
+      ).toBe("string");
+      expect(
+        user.name.length,
+        `User at index ${index} name is empty`,
+      ).toBeGreaterThan(0);
+      expect(
+        user.name.trim().length,
+        `User at index ${index} name contains only whitespace`,
+      ).toBeGreaterThan(0);
+    }
+  }
+
+  @step("API: Verify response has array format for get all users")
+  async verifyGetAllUsersReturnsArray(): Promise<void> {
+    const response = await this.usersApiService.getAllUsers(null);
+    const body = await response.json();
+
+    expect(Array.isArray(body), "Response should be an array").toBeTruthy();
+  }
+
+  @step("API: Verify user by ID returns object not array")
+  async verifyGetUserByIdReturnsObject(userId: number): Promise<void> {
+    const response = await this.usersApiService.getUserById(userId, null);
+    const body = await response.json();
+
+    expect(typeof body, "Response should be an object").toBe("object");
+    expect(Array.isArray(body), "Response should not be an array").toBeFalsy();
+  }
+
+  @step("API: Verify no internal server errors for any user")
+  async verifyNoInternalServerErrors(): Promise<void> {
+    // First, get all users to know what valid IDs exist
+    const users = await this.usersApiService.getAllUsers();
+    const failedUsers: Array<{ id: number; error: string }> = [];
+
+    // Test each user ID to ensure none return internal errors
+    for (const user of users) {
+      const response = await this.usersApiService.getUserById(user.id, null);
       const body = await response.json();
 
-      // This test should FAIL because the API incorrectly returns internal errors
-      // We expect valid user data but get an error instead
-      expect(
-        body.message,
-        `User ID ${userId} should return valid user data, but returns internal error: ${body.message}`,
-      ).not.toBe(UsersApiTestData.ERROR_MESSAGES.INTERNAL_ERROR);
+      // If we get an internal error, collect it for reporting
+      if (body.message === UsersApiTestData.ERROR_MESSAGES.INTERNAL_ERROR) {
+        failedUsers.push({ id: user.id, error: body.message });
+      }
     }
+
+    // Assert that NO users returned internal errors
+    expect(
+      failedUsers,
+      `Expected no internal server errors, but found ${failedUsers.length} user(s) returning internal errors: ${failedUsers.map((f) => `ID ${f.id}`).join(", ")}`,
+    ).toHaveLength(0);
   }
 }

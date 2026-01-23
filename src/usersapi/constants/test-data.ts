@@ -4,19 +4,24 @@
 export const UsersApiTestData = {
   VALID_USER_IDS: [1, 2, 7, 8],
   INVALID_USER_IDS: [0, -1, 4, 999, 10000],
-  INTERNAL_ERROR_IDS: [3, 5], // These IDs cause internal server errors
   INVALID_ID_FORMATS: ["abc", "test", "!@#$", "1.5", "null", "undefined"],
 
   // Test user ID for consistency checks
   TEST_USER_ID: 1,
 
-  // Non-existent user ID for 404 testing
-  NON_EXISTENT_USER_ID: 999,
+  // Negative test scenarios
+  SECURITY_TEST_PAYLOADS: {
+    SQL_INJECTION: "1' OR '1'='1",
+    XSS_ATTEMPT: "<script>alert('xss')</script>",
+    PATH_TRAVERSAL: "../../../etc/passwd",
+    NULL_BYTE: "1\0",
+    UNICODE_OVERFLOW: "￾" + "9".repeat(100),
+  },
 
-  // HTTP Status Codes
-  STATUS_CODES: {
-    OK: 200,
-    NOT_FOUND: 404,
+  EDGE_CASE_IDS: {
+    VERY_LARGE: 999999999999,
+    FLOAT: 1.5,
+    NEGATIVE_LARGE: -999999,
   },
 
   EXPECTED_RESPONSE_TIME: {

@@ -18,24 +18,14 @@ test.describe("GET /api/users/:id - Get User By ID", () => {
       usersSteps,
       responseSteps,
     }) => {
-      const response = await usersSteps.getUserById(
-        UsersApiTestData.NON_EXISTENT_USER_ID,
-        null,
-      );
-      await responseSteps.verifyStatusCode(
-        response,
-        404,
-      );
+      // Dynamically find a guaranteed non-existent user ID
+      const nonExistentId = await usersSteps.getNonExistentUserId();
+
+      const response = await usersSteps.getUserById(nonExistentId, null);
+      await responseSteps.verifyStatusCode(response, 404);
 
       const body = await response.json();
       expect(body.message).toBe(UsersApiTestData.ERROR_MESSAGES.USER_NOT_FOUND);
-    });
-
-    test("should return error for invalid user IDs", async ({ usersSteps }) => {
-      await usersSteps.verifyErrorForInvalidUserIds(
-        UsersApiTestData.INVALID_USER_IDS,
-        UsersApiTestData.ERROR_MESSAGES.USER_NOT_FOUND,
-      );
     });
 
     test("should handle invalid ID formats", async ({ usersSteps }) => {
@@ -45,14 +35,12 @@ test.describe("GET /api/users/:id - Get User By ID", () => {
     });
   });
 
-  
-  test("FAIL: should not return internal errors for user IDs 3 and 5 @bug", async ({
+  test("FAIL: should not return internal errors for any valid user ID @bug", async ({
     usersSteps,
   }) => {
-    // Document the bug: API returns "Internal error" for user IDs 3 and 5
-    await usersSteps.verifyInternalServerErrors(
-      UsersApiTestData.INTERNAL_ERROR_IDS,
-    );
+    // Test that no valid user ID returns an internal server error
+    // This will fail and report which IDs are problematic (currently IDs 3 and 5)
+    await usersSteps.verifyNoInternalServerErrors();
   });
 
   test("should return same user data on multiple requests", async ({

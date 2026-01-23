@@ -1,12 +1,12 @@
-<testsuites id="" name="" tests="12" failures="2" skipped="0" errors="0" time="4.650132">
-<testsuite name="usersapi\api\get-all-users.spec.ts" timestamp="2026-01-23T14:58:04.676Z" hostname="usersapi" tests="6" failures="1" skipped="0" time="0.664" errors="0">
-<testcase name="GET /api/users - Get All Users › should return 200 status with valid response time" classname="usersapi\api\get-all-users.spec.ts" time="0.12">
+<testsuites id="" name="" tests="26" failures="4" skipped="0" errors="0" time="5.288873000000001">
+<testsuite name="usersapi\api\get-all-users.spec.ts" timestamp="2026-01-23T17:56:25.234Z" hostname="usersapi" tests="6" failures="1" skipped="0" time="0.694" errors="0">
+<testcase name="GET /api/users - Get All Users › should return 200 status with valid response time" classname="usersapi\api\get-all-users.spec.ts" time="0.135">
 </testcase>
-<testcase name="GET /api/users - Get All Users › should return all users with valid schema" classname="usersapi\api\get-all-users.spec.ts" time="0.109">
+<testcase name="GET /api/users - Get All Users › should return all users with valid schema" classname="usersapi\api\get-all-users.spec.ts" time="0.101">
 </testcase>
-<testcase name="GET /api/users - Get All Users › should have valid data types for all fields" classname="usersapi\api\get-all-users.spec.ts" time="0.193">
+<testcase name="GET /api/users - Get All Users › should have valid data types for all fields" classname="usersapi\api\get-all-users.spec.ts" time="0.202">
 </testcase>
-<testcase name="GET /api/users - Get All Users › FAIL: all user IDs should be unique @bug" classname="usersapi\api\get-all-users.spec.ts" time="0.107">
+<testcase name="GET /api/users - Get All Users › FAIL: all user IDs should be unique @bug" classname="usersapi\api\get-all-users.spec.ts" time="0.13">
 <failure message="get-all-users.spec.ts:32:3 FAIL: all user IDs should be unique @bug" type="FAILURE">
 <![CDATA[  [usersapi] › usersapi\api\get-all-users.spec.ts:32:3 › GET /api/users - Get All Users › FAIL: all user IDs should be unique @bug › API: Verify users list has no duplicates 
 
@@ -28,7 +28,7 @@
 ]]>
 </failure>
 </testcase>
-<testcase name="GET /api/users - Get All Users › should identify users without age field" classname="usersapi\api\get-all-users.spec.ts" time="0.08">
+<testcase name="GET /api/users - Get All Users › should identify users without age field" classname="usersapi\api\get-all-users.spec.ts" time="0.082">
 <system-out>
 <![CDATA[Users missing age field: [
   { id: [33m3[39m, name: [32m'Michael'[39m },
@@ -38,40 +38,105 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="GET /api/users - Get All Users › should successfully return users without age field without errors" classname="usersapi\api\get-all-users.spec.ts" time="0.055">
+<testcase name="GET /api/users - Get All Users › should successfully return users without age field without errors" classname="usersapi\api\get-all-users.spec.ts" time="0.044">
 </testcase>
 </testsuite>
-<testsuite name="usersapi\api\get-user-by-id.spec.ts" timestamp="2026-01-23T14:58:04.676Z" hostname="usersapi" tests="6" failures="1" skipped="0" time="0.479" errors="0">
-<testcase name="GET /api/users/:id - Get User By ID › Valid User IDs › should return valid response for all valid IDs" classname="usersapi\api\get-user-by-id.spec.ts" time="0.129">
+<testsuite name="usersapi\api\get-user-by-id.spec.ts" timestamp="2026-01-23T17:56:25.234Z" hostname="usersapi" tests="5" failures="1" skipped="0" time="0.399" errors="0">
+<testcase name="GET /api/users/:id - Get User By ID › Valid User IDs › should return valid response for all valid IDs" classname="usersapi\api\get-user-by-id.spec.ts" time="0.124">
 </testcase>
-<testcase name="GET /api/users/:id - Get User By ID › Invalid User IDs › should return 404 for non-existent user" classname="usersapi\api\get-user-by-id.spec.ts" time="0.032">
+<testcase name="GET /api/users/:id - Get User By ID › Invalid User IDs › should return 404 for non-existent user" classname="usersapi\api\get-user-by-id.spec.ts" time="0.047">
 </testcase>
-<testcase name="GET /api/users/:id - Get User By ID › Invalid User IDs › should return error for invalid user IDs" classname="usersapi\api\get-user-by-id.spec.ts" time="0.101">
+<testcase name="GET /api/users/:id - Get User By ID › Invalid User IDs › should handle invalid ID formats" classname="usersapi\api\get-user-by-id.spec.ts" time="0.08">
 </testcase>
-<testcase name="GET /api/users/:id - Get User By ID › Invalid User IDs › should handle invalid ID formats" classname="usersapi\api\get-user-by-id.spec.ts" time="0.103">
-</testcase>
-<testcase name="GET /api/users/:id - Get User By ID › FAIL: should not return internal errors for user IDs 3 and 5 @bug" classname="usersapi\api\get-user-by-id.spec.ts" time="0.034">
-<failure message="get-user-by-id.spec.ts:49:3 FAIL: should not return internal errors for user IDs 3 and 5 @bug" type="FAILURE">
-<![CDATA[  [usersapi] › usersapi\api\get-user-by-id.spec.ts:49:3 › GET /api/users/:id - Get User By ID › FAIL: should not return internal errors for user IDs 3 and 5 @bug › API: Verify internal server errors for specific user IDs 
+<testcase name="GET /api/users/:id - Get User By ID › FAIL: should not return internal errors for any valid user ID @bug" classname="usersapi\api\get-user-by-id.spec.ts" time="0.103">
+<failure message="get-user-by-id.spec.ts:38:3 FAIL: should not return internal errors for any valid user ID @bug" type="FAILURE">
+<![CDATA[  [usersapi] › usersapi\api\get-user-by-id.spec.ts:38:3 › GET /api/users/:id - Get User By ID › FAIL: should not return internal errors for any valid user ID @bug › API: Verify no internal server errors for any user 
 
-    Error: User ID 3 should return valid user data, but returns internal error: Internal error
+    Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5
 
-    expect(received).not.toBe(expected) // Object.is equality
+    expect(received).toHaveLength(expected)
 
-    Expected: not "Internal error"
+    Expected length: 0
+    Received length: 3
+    Received array:  [{"error": "Internal error", "id": 3}, {"error": "Internal error", "id": 5}, {"error": "Internal error", "id": 5}]
 
-      51 |   }) => {
-      52 |     // Document the bug: API returns "Internal error" for user IDs 3 and 5
-    > 53 |     await usersSteps.verifyInternalServerErrors(
+      41 |     // Test that no valid user ID returns an internal server error
+      42 |     // This will fail and report which IDs are problematic (currently IDs 3 and 5)
+    > 43 |     await usersSteps.verifyNoInternalServerErrors();
          |                      ^
-      54 |       UsersApiTestData.INTERNAL_ERROR_IDS,
-      55 |     );
-      56 |   });
-        at C:\Users\l.meladze\Desktop\Automation_Website_Task_2\tests\usersapi\api\get-user-by-id.spec.ts:53:22
+      44 |   });
+      45 |
+      46 |   test("should return same user data on multiple requests", async ({
+        at C:\Users\l.meladze\Desktop\Automation_Website_Task_2\tests\usersapi\api\get-user-by-id.spec.ts:43:22
 ]]>
 </failure>
 </testcase>
-<testcase name="GET /api/users/:id - Get User By ID › should return same user data on multiple requests" classname="usersapi\api\get-user-by-id.spec.ts" time="0.08">
+<testcase name="GET /api/users/:id - Get User By ID › should return same user data on multiple requests" classname="usersapi\api\get-user-by-id.spec.ts" time="0.045">
+</testcase>
+</testsuite>
+<testsuite name="usersapi\api\negative-scenarios.spec.ts" timestamp="2026-01-23T17:56:25.234Z" hostname="usersapi" tests="15" failures="2" skipped="0" time="0.604" errors="0">
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject SQL injection attempts" classname="usersapi\api\negative-scenarios.spec.ts" time="0.014">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject XSS attempts" classname="usersapi\api\negative-scenarios.spec.ts" time="0.089">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject path traversal attempts" classname="usersapi\api\negative-scenarios.spec.ts" time="0.024">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject null byte injection" classname="usersapi\api\negative-scenarios.spec.ts" time="0.02">
+<failure message="negative-scenarios.spec.ts:24:5 should reject null byte injection" type="FAILURE">
+<![CDATA[  [usersapi] › usersapi\api\negative-scenarios.spec.ts:24:5 › Negative Scenarios - Edge Cases › Security Tests › should reject null byte injection › API: Verify security payload is rejected 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 400
+    Received:    200
+
+      23 |
+      24 |     test("should reject null byte injection", async ({ usersSteps }) => {
+    > 25 |       await usersSteps.verifySecurityPayloadRejected(
+         |                        ^
+      26 |         UsersApiTestData.SECURITY_TEST_PAYLOADS.NULL_BYTE,
+      27 |       );
+      28 |     });
+        at C:\Users\l.meladze\Desktop\Automation_Website_Task_2\tests\usersapi\api\negative-scenarios.spec.ts:25:24
+]]>
+</failure>
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject unicode overflow attempts" classname="usersapi\api\negative-scenarios.spec.ts" time="0.074">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Edge Case IDs › should handle extremely large ID numbers" classname="usersapi\api\negative-scenarios.spec.ts" time="0.022">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Edge Case IDs › should handle float ID values" classname="usersapi\api\negative-scenarios.spec.ts" time="0.015">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Edge Case IDs › should handle large negative ID values" classname="usersapi\api\negative-scenarios.spec.ts" time="0.018">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Response Structure Validation › should return array for get all users endpoint" classname="usersapi\api\negative-scenarios.spec.ts" time="0.017">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Response Structure Validation › should return object not array for get user by ID" classname="usersapi\api\negative-scenarios.spec.ts" time="0.017">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Response Structure Validation › should not return malformed data structure" classname="usersapi\api\negative-scenarios.spec.ts" time="0.02">
+<failure message="negative-scenarios.spec.ts:72:5 should not return malformed data structure" type="FAILURE">
+<![CDATA[  [usersapi] › usersapi\api\negative-scenarios.spec.ts:72:5 › Negative Scenarios - Edge Cases › Response Structure Validation › should not return malformed data structure › API: Verify response is valid array structure 
+
+    Error: expect: Property 'toBeTypeOf' not found.
+
+      73 |       usersSteps,
+      74 |     }) => {
+    > 75 |       await usersSteps.verifyValidArrayStructure();
+         |                        ^
+      76 |     });
+      77 |   });
+      78 |
+        at C:\Users\l.meladze\Desktop\Automation_Website_Task_2\tests\usersapi\api\negative-scenarios.spec.ts:75:24
+]]>
+</failure>
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Data Integrity › should have all user IDs as positive integers" classname="usersapi\api\negative-scenarios.spec.ts" time="0.077">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Data Integrity › should have all names as valid strings with content" classname="usersapi\api\negative-scenarios.spec.ts" time="0.098">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Data Integrity › should not have null or undefined values for required fields" classname="usersapi\api\negative-scenarios.spec.ts" time="0.074">
+</testcase>
+<testcase name="Negative Scenarios - Edge Cases › Data Integrity › should not have empty strings for name field" classname="usersapi\api\negative-scenarios.spec.ts" time="0.025">
 </testcase>
 </testsuite>
 </testsuites>
