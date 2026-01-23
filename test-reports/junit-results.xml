@@ -1,132 +1,142 @@
-<testsuites id="" name="" tests="29" failures="0" skipped="29" errors="0" time="0.4864109999999998">
-<testsuite name="global.setup.ts" timestamp="2026-01-22T15:39:39.480Z" hostname="automationexercise-setup" tests="1" failures="0" skipped="1" time="0" errors="0">
-<testcase name="authenticate workers" classname="global.setup.ts" time="0">
-<skipped>
-</skipped>
+<testsuites id="" name="" tests="26" failures="4" skipped="0" errors="0" time="5.288873000000001">
+<testsuite name="usersapi\api\get-all-users.spec.ts" timestamp="2026-01-23T17:56:25.234Z" hostname="usersapi" tests="6" failures="1" skipped="0" time="0.694" errors="0">
+<testcase name="GET /api/users - Get All Users › should return 200 status with valid response time" classname="usersapi\api\get-all-users.spec.ts" time="0.135">
+</testcase>
+<testcase name="GET /api/users - Get All Users › should return all users with valid schema" classname="usersapi\api\get-all-users.spec.ts" time="0.101">
+</testcase>
+<testcase name="GET /api/users - Get All Users › should have valid data types for all fields" classname="usersapi\api\get-all-users.spec.ts" time="0.202">
+</testcase>
+<testcase name="GET /api/users - Get All Users › FAIL: all user IDs should be unique @bug" classname="usersapi\api\get-all-users.spec.ts" time="0.13">
+<failure message="get-all-users.spec.ts:32:3 FAIL: all user IDs should be unique @bug" type="FAILURE">
+<![CDATA[  [usersapi] › usersapi\api\get-all-users.spec.ts:32:3 › GET /api/users - Get All Users › FAIL: all user IDs should be unique @bug › API: Verify users list has no duplicates 
+
+    Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 7
+    Received: 8
+
+      32 |   test("FAIL: all user IDs should be unique @bug", async ({ usersSteps }) => {
+      33 |     // This test will FAIL because there are duplicate user IDs in the response
+    > 34 |     await usersSteps.verifyNoDuplicateIds();
+         |                      ^
+      35 |   });
+      36 |
+      37 |   test("should identify users without age field", async ({ usersSteps }) => {
+        at C:\Users\l.meladze\Desktop\Automation_Website_Task_2\tests\usersapi\api\get-all-users.spec.ts:34:22
+]]>
+</failure>
+</testcase>
+<testcase name="GET /api/users - Get All Users › should identify users without age field" classname="usersapi\api\get-all-users.spec.ts" time="0.082">
+<system-out>
+<![CDATA[Users missing age field: [
+  { id: [33m3[39m, name: [32m'Michael'[39m },
+  { id: [33m5[39m, name: [32m'Jack'[39m },
+  { id: [33m5[39m, name: [32m'Timmy'[39m }
+]
+]]>
+</system-out>
+</testcase>
+<testcase name="GET /api/users - Get All Users › should successfully return users without age field without errors" classname="usersapi\api\get-all-users.spec.ts" time="0.044">
 </testcase>
 </testsuite>
-<testsuite name="jsonplaceholder\api\post-lifecycle.spec.ts" timestamp="2026-01-22T15:39:39.480Z" hostname="jsonplaceholder-api" tests="1" failures="0" skipped="1" time="0" errors="0">
-<testcase name="JSONPlaceholder API - CRUD Operations Demo › Create, Read, Update, Delete operations on existing post" classname="jsonplaceholder\api\post-lifecycle.spec.ts" time="0">
-<skipped>
-</skipped>
+<testsuite name="usersapi\api\get-user-by-id.spec.ts" timestamp="2026-01-23T17:56:25.234Z" hostname="usersapi" tests="5" failures="1" skipped="0" time="0.399" errors="0">
+<testcase name="GET /api/users/:id - Get User By ID › Valid User IDs › should return valid response for all valid IDs" classname="usersapi\api\get-user-by-id.spec.ts" time="0.124">
+</testcase>
+<testcase name="GET /api/users/:id - Get User By ID › Invalid User IDs › should return 404 for non-existent user" classname="usersapi\api\get-user-by-id.spec.ts" time="0.047">
+</testcase>
+<testcase name="GET /api/users/:id - Get User By ID › Invalid User IDs › should handle invalid ID formats" classname="usersapi\api\get-user-by-id.spec.ts" time="0.08">
+</testcase>
+<testcase name="GET /api/users/:id - Get User By ID › FAIL: should not return internal errors for any valid user ID @bug" classname="usersapi\api\get-user-by-id.spec.ts" time="0.103">
+<failure message="get-user-by-id.spec.ts:38:3 FAIL: should not return internal errors for any valid user ID @bug" type="FAILURE">
+<![CDATA[  [usersapi] › usersapi\api\get-user-by-id.spec.ts:38:3 › GET /api/users/:id - Get User By ID › FAIL: should not return internal errors for any valid user ID @bug › API: Verify no internal server errors for any user 
+
+    Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 0
+    Received length: 3
+    Received array:  [{"error": "Internal error", "id": 3}, {"error": "Internal error", "id": 5}, {"error": "Internal error", "id": 5}]
+
+      41 |     // Test that no valid user ID returns an internal server error
+      42 |     // This will fail and report which IDs are problematic (currently IDs 3 and 5)
+    > 43 |     await usersSteps.verifyNoInternalServerErrors();
+         |                      ^
+      44 |   });
+      45 |
+      46 |   test("should return same user data on multiple requests", async ({
+        at C:\Users\l.meladze\Desktop\Automation_Website_Task_2\tests\usersapi\api\get-user-by-id.spec.ts:43:22
+]]>
+</failure>
+</testcase>
+<testcase name="GET /api/users/:id - Get User By ID › should return same user data on multiple requests" classname="usersapi\api\get-user-by-id.spec.ts" time="0.045">
 </testcase>
 </testsuite>
-<testsuite name="jsonplaceholder\api\posts-create.spec.ts" timestamp="2026-01-22T15:39:39.480Z" hostname="jsonplaceholder-api" tests="3" failures="0" skipped="3" time="0" errors="0">
-<testcase name="JSONPlaceholder API - POST Create Post › TC 3.1: Create Post - Status 201, echo check, id=101" classname="jsonplaceholder\api\posts-create.spec.ts" time="0">
-<skipped>
-</skipped>
+<testsuite name="usersapi\api\negative-scenarios.spec.ts" timestamp="2026-01-23T17:56:25.234Z" hostname="usersapi" tests="15" failures="2" skipped="0" time="0.604" errors="0">
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject SQL injection attempts" classname="usersapi\api\negative-scenarios.spec.ts" time="0.014">
 </testcase>
-<testcase name="JSONPlaceholder API - POST Create Post › TC 3.2: Empty Payload - Test API strictness" classname="jsonplaceholder\api\posts-create.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject XSS attempts" classname="usersapi\api\negative-scenarios.spec.ts" time="0.089">
 </testcase>
-<testcase name="JSONPlaceholder API - POST Create Post › TC 3.3: Field Echo Check - Extra field (admin: true) echoed back" classname="jsonplaceholder\api\posts-create.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject path traversal attempts" classname="usersapi\api\negative-scenarios.spec.ts" time="0.024">
 </testcase>
-</testsuite>
-<testsuite name="jsonplaceholder\api\posts-get.spec.ts" timestamp="2026-01-22T15:39:39.480Z" hostname="jsonplaceholder-api" tests="7" failures="0" skipped="7" time="0" errors="0">
-<testcase name="JSONPlaceholder API - GET Posts › TC 1.1: Get All Posts - Status 200, JSON content-type, response time &lt; 800ms" classname="jsonplaceholder\api\posts-get.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject null byte injection" classname="usersapi\api\negative-scenarios.spec.ts" time="0.02">
+<failure message="negative-scenarios.spec.ts:24:5 should reject null byte injection" type="FAILURE">
+<![CDATA[  [usersapi] › usersapi\api\negative-scenarios.spec.ts:24:5 › Negative Scenarios - Edge Cases › Security Tests › should reject null byte injection › API: Verify security payload is rejected 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 400
+    Received:    200
+
+      23 |
+      24 |     test("should reject null byte injection", async ({ usersSteps }) => {
+    > 25 |       await usersSteps.verifySecurityPayloadRejected(
+         |                        ^
+      26 |         UsersApiTestData.SECURITY_TEST_PAYLOADS.NULL_BYTE,
+      27 |       );
+      28 |     });
+        at C:\Users\l.meladze\Desktop\Automation_Website_Task_2\tests\usersapi\api\negative-scenarios.spec.ts:25:24
+]]>
+</failure>
 </testcase>
-<testcase name="JSONPlaceholder API - GET Posts › TC 1.2: Sort Order - Verify ascending ID order" classname="jsonplaceholder\api\posts-get.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Security Tests › should reject unicode overflow attempts" classname="usersapi\api\negative-scenarios.spec.ts" time="0.074">
 </testcase>
-<testcase name="JSONPlaceholder API - GET Posts › TC 1.3: Data Types - Zod schema validates id, userId are numbers; title, body are strings" classname="jsonplaceholder\api\posts-get.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Edge Case IDs › should handle extremely large ID numbers" classname="usersapi\api\negative-scenarios.spec.ts" time="0.022">
 </testcase>
-<testcase name="JSONPlaceholder API - GET Posts › TC 1.4: Filter Check - GET /posts?userId=1 returns 10 items with userId=1" classname="jsonplaceholder\api\posts-get.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Edge Case IDs › should handle float ID values" classname="usersapi\api\negative-scenarios.spec.ts" time="0.015">
 </testcase>
-<testcase name="JSONPlaceholder API - GET Posts › TC 2.1: Get Post 99 - Verify userId=10, id=99, non-empty title/body" classname="jsonplaceholder\api\posts-get.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Edge Case IDs › should handle large negative ID values" classname="usersapi\api\negative-scenarios.spec.ts" time="0.018">
 </testcase>
-<testcase name="JSONPlaceholder API - GET Posts › TC 2.2: Negative - Not Found - GET /posts/150 returns 404 with empty object" classname="jsonplaceholder\api\posts-get.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Response Structure Validation › should return array for get all users endpoint" classname="usersapi\api\negative-scenarios.spec.ts" time="0.017">
 </testcase>
-<testcase name="JSONPlaceholder API - GET Posts › TC 2.3: Negative - Invalid ID - GET /posts/abc returns 404 or 400" classname="jsonplaceholder\api\posts-get.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Response Structure Validation › should return object not array for get user by ID" classname="usersapi\api\negative-scenarios.spec.ts" time="0.017">
 </testcase>
-</testsuite>
-<testsuite name="jsonplaceholder\api\posts-negative.spec.ts" timestamp="2026-01-22T15:39:39.480Z" hostname="jsonplaceholder-api" tests="11" failures="0" skipped="11" time="0" errors="0">
-<testcase name="JSONPlaceholder API - Negative Tests › POST Create - Negative Scenarios › TC 6.1: Boundary - Handle extremely long title and body" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Response Structure Validation › should not return malformed data structure" classname="usersapi\api\negative-scenarios.spec.ts" time="0.02">
+<failure message="negative-scenarios.spec.ts:72:5 should not return malformed data structure" type="FAILURE">
+<![CDATA[  [usersapi] › usersapi\api\negative-scenarios.spec.ts:72:5 › Negative Scenarios - Edge Cases › Response Structure Validation › should not return malformed data structure › API: Verify response is valid array structure 
+
+    Error: expect: Property 'toBeTypeOf' not found.
+
+      73 |       usersSteps,
+      74 |     }) => {
+    > 75 |       await usersSteps.verifyValidArrayStructure();
+         |                        ^
+      76 |     });
+      77 |   });
+      78 |
+        at C:\Users\l.meladze\Desktop\Automation_Website_Task_2\tests\usersapi\api\negative-scenarios.spec.ts:75:24
+]]>
+</failure>
 </testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › POST Create - Negative Scenarios › TC 6.2: Negative - Handle invalid userIds" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Data Integrity › should have all user IDs as positive integers" classname="usersapi\api\negative-scenarios.spec.ts" time="0.077">
 </testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › POST Create - Negative Scenarios › TC 6.3: Negative - Handle post with empty strings" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Data Integrity › should have all names as valid strings with content" classname="usersapi\api\negative-scenarios.spec.ts" time="0.098">
 </testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › POST Create - Negative Scenarios › TC 6.4: Security - Handle special characters and security payloads" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Data Integrity › should not have null or undefined values for required fields" classname="usersapi\api\negative-scenarios.spec.ts" time="0.074">
 </testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › PUT Update - Negative Scenarios › TC 6.5: Negative - Handle updating with invalid post IDs" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › PUT Update - Negative Scenarios › TC 6.6: Boundary - Handle partial update with empty payload" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › DELETE - Negative Scenarios › TC 6.7: Negative - Handle deleting non-existent and already deleted posts" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › GET - Negative Scenarios › TC 6.8: Negative - Handle getting posts with invalid IDs" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › GET - Negative Scenarios › TC 6.9: Negative - Handle getting posts with invalid query parameter" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › Content-Type and Headers - Negative Scenarios › TC 6.10: Negative - Handle POST with missing or wrong Content-Type" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - Negative Tests › Boundary Value Testing › TC 6.11: Boundary - Handle boundary values for userId and special whitespace" classname="jsonplaceholder\api\posts-negative.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="jsonplaceholder\api\put-partial-update.spec.ts" timestamp="2026-01-22T15:39:39.480Z" hostname="jsonplaceholder-api" tests="1" failures="0" skipped="1" time="0" errors="0">
-<testcase name="JSONPlaceholder API - PUT Partial Update › should update only provided fields (title) using PUT" classname="jsonplaceholder\api\put-partial-update.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-</testsuite>
-<testsuite name="jsonplaceholder\api\users.spec.ts" timestamp="2026-01-22T15:39:39.480Z" hostname="jsonplaceholder-api" tests="5" failures="0" skipped="5" time="0" errors="0">
-<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 4.1: Get All Users - Status 200, exactly 10 users" classname="jsonplaceholder\api\users.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 4.2: Deep Data User 5 - Verify nested Address, Geo, Company structure" classname="jsonplaceholder\api\users.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 4.3: Data Range - Verify geo.lat (-90 to 90), geo.lng (-180 to 180)" classname="jsonplaceholder\api\users.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 5.1: Cross-Check User 5 - Compare /users/5 with /users list" classname="jsonplaceholder\api\users.spec.ts" time="0">
-<skipped>
-</skipped>
-</testcase>
-<testcase name="JSONPlaceholder API - GET Users and Data Consistency › TC 5.2: Relational Check - Verify User 5&apos;s posts exist and belong to User 5" classname="jsonplaceholder\api\users.spec.ts" time="0">
-<skipped>
-</skipped>
+<testcase name="Negative Scenarios - Edge Cases › Data Integrity › should not have empty strings for name field" classname="usersapi\api\negative-scenarios.spec.ts" time="0.025">
 </testcase>
 </testsuite>
 </testsuites>
