@@ -61,6 +61,15 @@ export default defineConfig({
         baseURL: "https://jsonplaceholder.typicode.com",
       },
     },
+
+    // ==================== Users API Project ====================
+    {
+      name: "usersapi",
+      testMatch: /.*\/usersapi\/api\/.*\.spec\.ts/,
+      use: {
+        baseURL: process.env.USERS_API_BASE_URL || "http://localhost:3100",
+      },
+    },
   ],
 
   reporter: [

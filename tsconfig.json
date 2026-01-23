@@ -31,6 +31,14 @@
       "@jsonplaceholder/steps/*": ["src/jsonplaceholder/steps/*"],
       "@jsonplaceholder/utils/*": ["src/jsonplaceholder/utils/*"],
 
+      // Users API Project
+      "@usersapi/api/*": ["src/usersapi/api/*"],
+      "@usersapi/constants/*": ["src/usersapi/constants/*"],
+      "@usersapi/fixtures/*": ["src/usersapi/fixtures/*"],
+      "@usersapi/models/*": ["src/usersapi/models/*"],
+      "@usersapi/steps/*": ["src/usersapi/steps/*"],
+      "@usersapi/utils/*": ["src/usersapi/utils/*"],
+
       // Legacy aliases for backward compatibility (can be removed after migration)
       "@api/*": ["src/automationexercise/api/*"],
       "@components/*": ["src/automationexercise/components/*"],
