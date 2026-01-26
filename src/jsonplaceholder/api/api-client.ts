@@ -3,14 +3,14 @@ import { APIRequestContext, APIResponse } from "@playwright/test";
 export class ApiClient {
   constructor(protected readonly request: APIRequestContext) {}
 
-  private static readonly DEFAULT_TIMEOUT_MS = 30_000;
+  private static readonly DEFAULT_TIMEOUT_MS = 30_000; // Pascal case only for env vars or global constants, this can be env or config
 
   protected async get(
     url: string,
     options?: Parameters<APIRequestContext["get"]>[1]
   ): Promise<APIResponse> {
     return this.request.get(url, {
-      timeout: ApiClient.DEFAULT_TIMEOUT_MS,
+      timeout: ApiClient.DEFAULT_TIMEOUT_MS, // Can be this instead of static
       ...options,
     });
   }

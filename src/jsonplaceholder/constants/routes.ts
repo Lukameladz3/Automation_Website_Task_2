@@ -1,4 +1,4 @@
-export const Routes = {
+export const Routes = { // Paths or endpoints
   BASE_URL:
     process.env.JSONPLACEHOLDER_BASE_URL ||
     "https://jsonplaceholder.typicode.com",
