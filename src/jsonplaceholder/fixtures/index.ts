@@ -5,7 +5,7 @@ import { PostSteps } from "../steps/post.steps";
 import { UserSteps } from "../steps/user.steps";
 import { ResponseSteps } from "../steps/response.steps";
 
-export type JsonPlaceholderFixtures = {
+export type JsonPlaceholderFixtures = { // No need to export this
   jsonPlaceholderService: JsonPlaceholderService;
   postSteps: PostSteps;
   userSteps: UserSteps;
@@ -27,4 +27,4 @@ export const test = base.extend<JsonPlaceholderFixtures>({
   },
 });
 
-export { expect };
+export { expect }; // What is this?

@@ -1,6 +1,6 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
 import { z } from "zod";
-import { Routes } from "../../constants/routes";
+import { Routes } from "../../constants/routes"; // Paths from tsconfig are not used
 import {
   CreatePostRequest,
   CreatePostResponse,
@@ -19,7 +19,7 @@ import {
   Post,
   PostSchema,
   PostArraySchema,
-} from "../../models/schemas/post.schemas";
+} from "../../models/schemas/post.schemas"; // A lot of unused imports, can use import * as schemas
 import {
   User,
   UserSchema,
@@ -67,12 +67,12 @@ export class JsonPlaceholderService extends ApiClient {
     }
     const body = await response.json();
     return schema.parse(body);
-  }
+  } // Should be a separate function/class
 
   // ==================== GET Methods ====================
 
   async getAllPosts(schema: z.ZodSchema<Post[]>): Promise<Post[]>;
-  async getAllPosts(schema: null): Promise<APIResponse>;
+  async getAllPosts(schema: null): Promise<APIResponse>; // Why null?
   async getAllPosts(): Promise<Post[]>;
   async getAllPosts(
     schema?: z.ZodSchema<Post[]> | null,
@@ -85,7 +85,7 @@ export class JsonPlaceholderService extends ApiClient {
 
     if (schema === null) {
       return this.validateResponse(response, null);
-    }
+    } // Can skip this and just return the response
 
     return this.validateResponse(response, schema);
   }
@@ -257,7 +257,7 @@ export class JsonPlaceholderService extends ApiClient {
 
   async getPostsWithInvalidQuery(): Promise<Post[]> {
     const response = await this.get(`${this.baseUrl}${Routes.POSTS}`, {
-      params: { userId: "abc" },
+      params: { userId: "abc" }, // Can pass params in test or make this a step
     });
     return this.validateResponse(response, PostArraySchema) as Promise<Post[]>;
   }

@@ -87,7 +87,7 @@ export function buildMinimalPostRequest(): CreatePostRequest {
  * const request = buildEmptyPostRequest();
  * // {}
  */
-export function buildEmptyPostRequest(): Partial<CreatePostRequest> {
+export function buildEmptyPostRequest(): Partial<CreatePostRequest> { // Does it make sense?
   return {};
 }
 

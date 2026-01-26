@@ -6,7 +6,7 @@ import { z } from "zod";
 
 // ==================== Error Response ====================
 
-export const ErrorResponseSchema = z.object({
+export const ErrorResponseSchema = z.object({ // No need to export what is used only in this file
   error: z.string(),
   message: z.string(),
   statusCode: z.number(),

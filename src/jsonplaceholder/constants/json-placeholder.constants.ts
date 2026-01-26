@@ -1,4 +1,4 @@
-export const JsonPlaceholderTestData = {
+export const JsonPlaceholderTestData = { // Test data or contants?
   POST: {
     USER_ID: 1,
     EXPECTED_CREATED_POST_ID: 101,

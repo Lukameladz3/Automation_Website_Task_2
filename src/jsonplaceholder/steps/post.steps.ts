@@ -90,7 +90,7 @@ export class PostSteps {
   @step("Verify post matches expected data")
   async verifyPost(
     post: Post | CreatePostResponse | CreatePostResponsePassthrough,
-    expected: { id?: number; userId?: number; title?: string; body?: string },
+    expected: { id?: number; userId?: number; title?: string; body?: string }, // What if no arguments provided?
   ): Promise<void> {
     if (expected.id !== undefined) {
       expect(post.id, "Post ID mismatch").toBe(expected.id);
