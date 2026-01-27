@@ -1,5 +1,5 @@
-import { test, expect } from "@jsonplaceholder/fixtures/index";
-import { JsonPlaceholderTestData } from "@jsonplaceholder/constants/json-placeholder.constants";
+﻿import { test, expect } from "@jsonplaceholder/fixtures/index";
+import { UserTestData } from "@test-data/jsonplaceholder";
 
 test.describe("JSONPlaceholder API - GET Users and Data Consistency", () => {
   test("TC 4.1: Get All Users - Status 200, exactly 10 users", async ({
@@ -7,21 +7,16 @@ test.describe("JSONPlaceholder API - GET Users and Data Consistency", () => {
   }) => {
     // Service now returns validated data directly
     const users = await userSteps.getAllUsers();
-    await userSteps.verifyUsersCount(
-      users,
-      JsonPlaceholderTestData.USERS.TOTAL_USERS_COUNT,
-    );
+    expect(users.length).toBe(UserTestData.TOTAL_USERS_COUNT);
   });
 
   test("TC 4.2: Deep Data User 5 - Verify nested Address, Geo, Company structure", async ({
     userSteps,
   }) => {
-    const userData = JsonPlaceholderTestData.USERS.USER_5;
+    const userData = UserTestData.USER_5;
 
     // Service now returns validated data directly
-    const user = await userSteps.getUser(
-      JsonPlaceholderTestData.USERS.TEST_USER_ID,
-    );
+    const user = await userSteps.getUser(UserTestData.TEST_USER_ID);
 
     // Verify basic info
     await userSteps.verifyUserBasicInfo(user, {
@@ -61,7 +56,7 @@ test.describe("JSONPlaceholder API - GET Users and Data Consistency", () => {
     // Service now returns validated data directly
     const users = await userSteps.getAllUsers();
 
-    const geoRanges = JsonPlaceholderTestData.USERS.GEO_RANGES;
+    const geoRanges = UserTestData.GEO_RANGES;
     await userSteps.verifyUsersGeoCoordinates(
       users,
       geoRanges.LAT_MIN,
@@ -74,7 +69,7 @@ test.describe("JSONPlaceholder API - GET Users and Data Consistency", () => {
   test("TC 5.1: Cross-Check User 5 - Compare /users/5 with /users list", async ({
     userSteps,
   }) => {
-    const testUserId = JsonPlaceholderTestData.USERS.TEST_USER_ID;
+    const testUserId = UserTestData.TEST_USER_ID;
 
     // Get all users - returns validated data
     const allUsers = await userSteps.getAllUsers();
@@ -97,7 +92,7 @@ test.describe("JSONPlaceholder API - GET Users and Data Consistency", () => {
     userSteps,
     postSteps,
   }) => {
-    const testUserId = JsonPlaceholderTestData.USERS.TEST_USER_ID;
+    const testUserId = UserTestData.TEST_USER_ID;
 
     // Confirm user exists - returns validated data
     const user = await userSteps.getUser(testUserId);

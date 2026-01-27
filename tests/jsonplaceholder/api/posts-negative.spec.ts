@@ -1,38 +1,35 @@
-import { test, expect } from "@jsonplaceholder/fixtures/index";
+﻿import { test, expect } from "@jsonplaceholder/fixtures/index";
+import { type APIResponse } from "@playwright/test";
 import { RandomDataGenerator } from "@jsonplaceholder/utils/random-data-generator";
-import { JsonPlaceholderTestData } from "@jsonplaceholder/constants/json-placeholder.constants";
+import { PostTestData, NegativeTestData } from "@test-data/jsonplaceholder";
 import { buildCreatePostRequest } from "@jsonplaceholder/models/builders";
+import * as PostTypes from "@jsonplaceholder/models/schemas/post.schemas";
 
 test.describe("JSONPlaceholder API - Negative Tests", () => {
   test.describe("POST Create - Negative Scenarios", () => {
     test("TC 6.1: Boundary - Handle extremely long title and body", async ({
       postSteps,
       jsonPlaceholderService,
-      responseSteps,
     }) => {
-      const titleLength =
-        JsonPlaceholderTestData.NEGATIVE_TESTS.TITLE_LENGTHS.EXTREMELY_LONG;
+      const titleLength = NegativeTestData.TITLE_LENGTHS.EXTREMELY_LONG;
       const longTitle =
-        JsonPlaceholderTestData.NEGATIVE_TESTS.REPEAT_STRINGS.TITLE_CHAR.repeat(
-          titleLength,
-        );
-      const longBody =
-        JsonPlaceholderTestData.NEGATIVE_TESTS.REPEAT_STRINGS.BODY_TEXT.repeat(
-          JsonPlaceholderTestData.NEGATIVE_TESTS.REPEAT_STRINGS
-            .BODY_REPEAT_COUNT,
-        );
+        NegativeTestData.REPEAT_STRINGS.TITLE_CHAR.repeat(titleLength);
+      const longBody = NegativeTestData.REPEAT_STRINGS.BODY_TEXT.repeat(
+        NegativeTestData.REPEAT_STRINGS.BODY_REPEAT_COUNT,
+      );
       const userId = RandomDataGenerator.userId();
 
-      const response = await jsonPlaceholderService.createPost(
+      const result = await jsonPlaceholderService.createPost(
         {
           title: longTitle,
           body: longBody,
           userId,
         },
-        null,
+        { schema: null },
       );
+      const response = result as APIResponse;
 
-      await responseSteps.verifyStatusCode(response, 201);
+      expect(response.status()).toBe(201);
 
       const request = buildCreatePostRequest({
         title: longTitle,
@@ -42,44 +39,39 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       const post = await postSteps.createPost(request);
       expect(post.title.length).toBe(titleLength);
       expect(post.body.length).toBeGreaterThan(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.BODY_LENGTHS.MINIMUM_EXPECTED,
+        NegativeTestData.BODY_LENGTHS.MINIMUM_EXPECTED,
       );
     });
 
     test("TC 6.2: Negative - Handle invalid userIds", async ({ postSteps }) => {
       // Test negative userId
       const negativeRequest = buildCreatePostRequest({
-        userId: JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NEGATIVE,
+        userId: NegativeTestData.USER_IDS.NEGATIVE,
       });
       const negativeUserPost = await postSteps.createPost(negativeRequest);
-      expect(negativeUserPost.userId).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NEGATIVE,
-      );
+      expect(negativeUserPost.userId).toBe(NegativeTestData.USER_IDS.NEGATIVE);
 
       // Test zero userId
       const zeroRequest = buildCreatePostRequest({
-        userId: JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.ZERO,
+        userId: NegativeTestData.USER_IDS.ZERO,
       });
       const zeroUserPost = await postSteps.createPost(zeroRequest);
-      expect(zeroUserPost.userId).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.ZERO,
-      );
+      expect(zeroUserPost.userId).toBe(NegativeTestData.USER_IDS.ZERO);
 
       const nonExistentRequest = buildCreatePostRequest({
-        userId: JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NON_EXISTENT,
+        userId: NegativeTestData.USER_IDS.NON_EXISTENT,
       });
       const nonExistentUserPost =
         await postSteps.createPost(nonExistentRequest);
       expect(nonExistentUserPost.userId).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.NON_EXISTENT,
+        NegativeTestData.USER_IDS.NON_EXISTENT,
       );
     });
 
     test("TC 6.3: Negative - Handle post with empty strings", async ({
       postSteps,
     }) => {
-      const emptyString =
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.EMPTY;
+      const emptyString = NegativeTestData.SPECIAL_STRINGS.EMPTY;
 
       // Empty title
       const emptyTitleRequest = buildCreatePostRequest({ title: emptyString });
@@ -97,74 +89,69 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
     }) => {
       // XSS attempt
       const xssRequest = buildCreatePostRequest({
-        title:
-          JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.XSS_ATTEMPT,
+        title: NegativeTestData.SPECIAL_STRINGS.XSS_ATTEMPT,
       });
       const xssPost = await postSteps.createPost(xssRequest);
-      expect(xssPost.title).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.XSS_ATTEMPT,
-      );
+      expect(xssPost.title).toBe(NegativeTestData.SPECIAL_STRINGS.XSS_ATTEMPT);
 
       // SQL injection attempt
       const sqlRequest = buildCreatePostRequest({
-        title:
-          JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.SQL_INJECTION,
+        title: NegativeTestData.SPECIAL_STRINGS.SQL_INJECTION,
       });
       const sqlPost = await postSteps.createPost(sqlRequest);
       expect(sqlPost.title).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.SQL_INJECTION,
+        NegativeTestData.SPECIAL_STRINGS.SQL_INJECTION,
       );
 
       // Unicode characters
       const unicodeRequest = buildCreatePostRequest({
-        title: JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.UNICODE,
+        title: NegativeTestData.SPECIAL_STRINGS.UNICODE,
       });
       const unicodePost = await postSteps.createPost(unicodeRequest);
-      expect(unicodePost.title).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.UNICODE,
-      );
+      expect(unicodePost.title).toBe(NegativeTestData.SPECIAL_STRINGS.UNICODE);
     });
   });
 
   test.describe("PUT Update - Negative Scenarios", () => {
     test("TC 6.5: Negative - Handle updating with invalid post IDs", async ({
       jsonPlaceholderService,
-      responseSteps,
     }) => {
       const title = RandomDataGenerator.postTitle();
       const body = RandomDataGenerator.postBody();
       const userId = RandomDataGenerator.userId();
 
       // Non-existent ID returns 500
-      const nonExistentResponse = await jsonPlaceholderService.updatePost(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.NON_EXISTENT_MEDIUM,
+      const nonExistentResult = await jsonPlaceholderService.updatePost(
+        NegativeTestData.POST_IDS.NON_EXISTENT_MEDIUM,
         { title, body, userId },
-        null,
+        { schema: null },
       );
-      await responseSteps.verifyStatusCode(nonExistentResponse, 500);
+      const nonExistentResponse = nonExistentResult as APIResponse;
+      expect(nonExistentResponse.status()).toBe(500);
 
       // Negative ID returns 500
-      const negativeResponse = await jsonPlaceholderService.updatePost(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.NEGATIVE,
+      const negativeResult = await jsonPlaceholderService.updatePost(
+        NegativeTestData.POST_IDS.NEGATIVE,
         { title, body, userId },
-        null,
+        { schema: null },
       );
-      await responseSteps.verifyStatusCode(negativeResponse, 500);
+      const negativeResponse = negativeResult as APIResponse;
+      expect(negativeResponse.status()).toBe(500);
     });
 
     test("TC 6.6: Boundary - Handle partial update with empty payload", async ({
       jsonPlaceholderService,
-      responseSteps,
     }) => {
-      const postId = JsonPlaceholderTestData.POST.EXISTING_POST_ID;
+      const postId = PostTestData.EXISTING_POST_ID;
 
-      const response = await jsonPlaceholderService.updatePost(
+      const result = await jsonPlaceholderService.updatePost(
         postId,
         {},
-        null,
+        { schema: null },
       );
+      const response = result as APIResponse;
 
-      await responseSteps.verifyStatusCode(response, 200);
+      expect(response.status()).toBe(200);
     });
   });
 
@@ -173,19 +160,20 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       jsonPlaceholderService,
       responseSteps,
     }) => {
-      const nonExistentId =
-        JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.NON_EXISTENT_MEDIUM;
+      const nonExistentId = NegativeTestData.POST_IDS.NON_EXISTENT_MEDIUM;
 
-      const deleteResponse = await jsonPlaceholderService.deletePost(
+      const deleteResult = await jsonPlaceholderService.deletePost(
         nonExistentId,
-        null,
+        { schema: null },
       );
+      const deleteResponse = deleteResult as APIResponse;
       await responseSteps.verifyStatusCodeIsOneOf(deleteResponse, [200, 204]);
 
-      const secondDeleteResponse = await jsonPlaceholderService.deletePost(
+      const secondDeleteResult = await jsonPlaceholderService.deletePost(
         nonExistentId,
-        null,
+        { schema: null },
       );
+      const secondDeleteResponse = secondDeleteResult as APIResponse;
       await responseSteps.verifyStatusCodeIsOneOf(
         secondDeleteResponse,
         [200, 204],
@@ -199,22 +187,25 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       responseSteps,
     }) => {
       // Very large ID returns 404
-      const largeIdResponse = await jsonPlaceholderService.getPostById(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.NON_EXISTENT_LARGE,
-        null,
+      const largeIdResult = await jsonPlaceholderService.getPostById(
+        NegativeTestData.POST_IDS.NON_EXISTENT_LARGE,
+        { schema: null },
       );
-      await responseSteps.verifyStatusCode(largeIdResponse, 404);
-      await responseSteps.verifyEmptyBody(largeIdResponse);
+      const largeIdResponse = largeIdResult as APIResponse;
+      expect(largeIdResponse.status()).toBe(404);
+      const body = await largeIdResponse.json();
+      expect(Object.keys(body).length).toBe(0);
 
       // Zero ID returns 404
-      const zeroIdResponse = await jsonPlaceholderService.getPostById(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.POST_IDS.ZERO,
-        null,
+      const zeroIdResult = await jsonPlaceholderService.getPostById(
+        NegativeTestData.POST_IDS.ZERO,
+        { schema: null },
       );
-      await responseSteps.verifyStatusCode(zeroIdResponse, 404);
+      const zeroIdResponse = zeroIdResult as APIResponse;
+      expect(zeroIdResponse.status()).toBe(404);
 
       const stringIdResponse = await jsonPlaceholderService.getPostByStringId(
-        JsonPlaceholderTestData.GET_POSTS.INVALID_POST_ID,
+        PostTestData.GET_POSTS.INVALID_POST_ID,
       );
       await responseSteps.verifyStatusCodeIsOneOf(stringIdResponse, [400, 404]);
     });
@@ -223,18 +214,17 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       jsonPlaceholderService,
     }) => {
       // Invalid userId query returns empty array
-      const posts = await jsonPlaceholderService.getPostsWithInvalidQuery();
+      const posts = (await jsonPlaceholderService.getAllPosts({
+        params: { userId: "abc" },
+      })) as PostTypes.Post[];
       expect(Array.isArray(posts)).toBe(true);
-      expect(posts.length).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.ZERO,
-      );
+      expect(posts.length).toBe(NegativeTestData.USER_IDS.ZERO);
     });
   });
 
   test.describe("Content-Type and Headers - Negative Scenarios", () => {
     test("TC 6.10: Negative - Handle POST with missing or wrong Content-Type", async ({
       jsonPlaceholderService,
-      responseSteps,
     }) => {
       const payload = {
         title: RandomDataGenerator.postTitle(),
@@ -243,18 +233,19 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       };
 
       // Without Content-Type header
-      const postWithoutHeader =
-        await jsonPlaceholderService.createPostWithoutContentType(payload);
-      expect(postWithoutHeader.id).toBe(
-        JsonPlaceholderTestData.POST.EXPECTED_CREATED_POST_ID,
-      );
+      const postWithoutHeader = (await jsonPlaceholderService.createPost(
+        payload,
+        { headers: {} },
+      )) as PostTypes.CreatePostResponse;
+      expect(postWithoutHeader.id).toBe(PostTestData.EXPECTED_CREATED_POST_ID);
 
       // With wrong Content-Type
-      const wrongHeaderResponse = await jsonPlaceholderService.createPost(
+      const wrongHeaderResult = await jsonPlaceholderService.createPost(
         payload,
-        null,
+        { headers: { "Content-Type": "text/plain" }, schema: null },
       );
-      await responseSteps.verifyStatusCode(wrongHeaderResponse, 201);
+      const wrongHeaderResponse = wrongHeaderResult as APIResponse;
+      expect(wrongHeaderResponse.status()).toBe(201);
     });
   });
 
@@ -264,30 +255,25 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
     }) => {
       // Maximum 32-bit integer userId
       const maxUserIdRequest = buildCreatePostRequest({
-        userId:
-          JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.MAX_32_BIT_INTEGER,
+        userId: NegativeTestData.USER_IDS.MAX_32_BIT_INTEGER,
       });
       const maxUserIdPost = await postSteps.createPost(maxUserIdRequest);
       expect(maxUserIdPost.userId).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.USER_IDS.MAX_32_BIT_INTEGER,
+        NegativeTestData.USER_IDS.MAX_32_BIT_INTEGER,
       );
 
       // Whitespace-only title
       const whitespaceRequest = buildCreatePostRequest({
-        title:
-          JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS
-            .WHITESPACE_ONLY,
+        title: NegativeTestData.SPECIAL_STRINGS.WHITESPACE_ONLY,
       });
       const whitespacePost = await postSteps.createPost(whitespaceRequest);
       expect(whitespacePost.title).toBe(
-        JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS.WHITESPACE_ONLY,
+        NegativeTestData.SPECIAL_STRINGS.WHITESPACE_ONLY,
       );
 
       // Title with newlines and tabs
       const newlineTabRequest = buildCreatePostRequest({
-        title:
-          JsonPlaceholderTestData.NEGATIVE_TESTS.SPECIAL_STRINGS
-            .WITH_NEWLINES_TABS,
+        title: NegativeTestData.SPECIAL_STRINGS.WITH_NEWLINES_TABS,
       });
       const newlineTabPost = await postSteps.createPost(newlineTabRequest);
       expect(newlineTabPost.title).toContain("\n");

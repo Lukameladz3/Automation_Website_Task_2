@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { JsonPlaceholderService } from "../api/services/json-placeholder.service";
-import type { User } from "../models/schemas/user.schemas";
+import * as UserTypes from "../models/schemas/user.schemas";
 import { step } from "../utils/step-decorator";
 
 /**
@@ -13,25 +13,20 @@ export class UserSteps {
   // ==================== API Call Steps - Validated Methods ====================
 
   @step("Get all users")
-  async getAllUsers(): Promise<User[]> {
+  async getAllUsers(): Promise<UserTypes.User[]> {
     return await this.service.getAllUsers();
   }
 
   @step("Get user by ID")
-  async getUser(userId: number): Promise<User> {
+  async getUser(userId: number): Promise<UserTypes.User> {
     return await this.service.getUserById(userId);
   }
 
   // ==================== Verification Steps ====================
 
-  @step("Verify users count")
-  async verifyUsersCount(users: User[], expectedCount: number): Promise<void> {
-    expect(users.length).toBe(expectedCount);
-  }
-
   @step("Verify user basic info")
   async verifyUserBasicInfo(
-    user: User,
+    user: UserTypes.User,
     expected: {
       id?: number;
       name?: string;
@@ -41,6 +36,14 @@ export class UserSteps {
       website?: string;
     },
   ): Promise<void> {
+    const hasExpectedValues = Object.values(expected).some(
+      (value) => value !== undefined,
+    );
+    expect(
+      hasExpectedValues,
+      "At least one expected value must be provided for verification",
+    ).toBe(true);
+
     if (expected.id !== undefined) {
       expect(user.id, "User ID mismatch").toBe(expected.id);
     }
@@ -63,7 +66,7 @@ export class UserSteps {
 
   @step("Verify user address")
   async verifyUserAddress(
-    user: User,
+    user: UserTypes.User,
     expected: {
       street?: string;
       suite?: string;
@@ -71,6 +74,14 @@ export class UserSteps {
       zipcode?: string;
     },
   ): Promise<void> {
+    const hasExpectedValues = Object.values(expected).some(
+      (value) => value !== undefined,
+    );
+    expect(
+      hasExpectedValues,
+      "At least one expected value must be provided for verification",
+    ).toBe(true);
+
     if (expected.street !== undefined) {
       expect(user.address.street, "Street mismatch").toBe(expected.street);
     }
@@ -87,9 +98,17 @@ export class UserSteps {
 
   @step("Verify user geo coordinates")
   async verifyUserGeo(
-    user: User,
+    user: UserTypes.User,
     expected: { lat?: string; lng?: string },
   ): Promise<void> {
+    const hasExpectedValues = Object.values(expected).some(
+      (value) => value !== undefined,
+    );
+    expect(
+      hasExpectedValues,
+      "At least one expected value must be provided for verification",
+    ).toBe(true);
+
     if (expected.lat !== undefined) {
       expect(user.address.geo.lat, "Latitude mismatch").toBe(expected.lat);
     }
@@ -100,9 +119,17 @@ export class UserSteps {
 
   @step("Verify user company")
   async verifyUserCompany(
-    user: User,
+    user: UserTypes.User,
     expected: { name?: string; catchPhrase?: string; bs?: string },
   ): Promise<void> {
+    const hasExpectedValues = Object.values(expected).some(
+      (value) => value !== undefined,
+    );
+    expect(
+      hasExpectedValues,
+      "At least one expected value must be provided for verification",
+    ).toBe(true);
+
     if (expected.name !== undefined) {
       expect(user.company.name, "Company name mismatch").toBe(expected.name);
     }
@@ -118,7 +145,7 @@ export class UserSteps {
 
   @step("Verify users have valid geo coordinates")
   async verifyUsersGeoCoordinates(
-    users: User[],
+    users: UserTypes.User[],
     latMin: number,
     latMax: number,
     lngMin: number,
@@ -141,7 +168,10 @@ export class UserSteps {
   }
 
   @step("Verify users match")
-  async verifyUsersMatch(user1: User, user2: User): Promise<void> {
+  async verifyUsersMatch(
+    user1: UserTypes.User,
+    user2: UserTypes.User,
+  ): Promise<void> {
     expect(user1).toEqual(user2);
   }
 }

@@ -10,7 +10,9 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {},
+    "metadata": {
+      "actualWorkers": 4
+    },
     "preserveOutput": "always",
     "reporter": [
       [
@@ -54,7 +56,9 @@
         "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 4
+        },
         "id": "automationexercise-setup",
         "name": "automationexercise-setup",
         "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
@@ -68,7 +72,9 @@
         "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 4
+        },
         "id": "automationexercise-api",
         "name": "automationexercise-api",
         "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
@@ -82,7 +88,9 @@
         "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 4
+        },
         "id": "automationexercise-web",
         "name": "automationexercise-web",
         "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
@@ -96,13 +104,31 @@
         "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 4
+        },
         "id": "jsonplaceholder-api",
         "name": "jsonplaceholder-api",
         "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
         "testIgnore": [],
         "testMatch": [
           "/.*\\/jsonplaceholder\\/api\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "usersapi",
+        "name": "usersapi",
+        "testDir": "C:/Users/l.meladze/Desktop/Automation_Website_Task_2/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\/usersapi\\/api\\/.*\\.spec\\.ts/"
         ],
         "timeout": 60000
       }
@@ -117,34 +143,6 @@
   },
   "suites": [
     {
-      "title": "global.setup.ts",
-      "file": "global.setup.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "authenticate workers",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "automationexercise-setup",
-              "projectName": "automationexercise-setup",
-              "results": [],
-              "status": "skipped"
-            }
-          ],
-          "id": "e4eb4d1272d956fb120f-e3f567e67d6cdb1f7a81",
-          "file": "global.setup.ts",
-          "line": 13,
-          "column": 1
-        }
-      ]
-    },
-    {
       "title": "jsonplaceholder\\api\\post-lifecycle.spec.ts",
       "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
       "column": 0,
@@ -154,7 +152,7 @@
         {
           "title": "JSONPlaceholder API - CRUD Operations Demo",
           "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
-          "line": 6,
+          "line": 7,
           "column": 6,
           "specs": [
             {
@@ -168,13 +166,61 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1398,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Create new post",
+                          "duration": 439
+                        },
+                        {
+                          "title": "Verify post matches expected data",
+                          "duration": 8
+                        },
+                        {
+                          "title": "Get post by ID",
+                          "duration": 64
+                        },
+                        {
+                          "title": "Verify post matches expected data",
+                          "duration": 2
+                        },
+                        {
+                          "title": "Verify post has content",
+                          "duration": 2
+                        },
+                        {
+                          "title": "Update post",
+                          "duration": 182
+                        },
+                        {
+                          "title": "Verify response status is one of allowed codes",
+                          "duration": 3
+                        },
+                        {
+                          "title": "Get post by ID",
+                          "duration": 64
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:44.477Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "6e29b9a44ee4837bbc0d-d4a03b54c8a128308582",
               "file": "jsonplaceholder/api/post-lifecycle.spec.ts",
-              "line": 7,
+              "line": 8,
               "column": 3
             }
           ]
@@ -191,7 +237,7 @@
         {
           "title": "JSONPlaceholder API - POST Create Post",
           "file": "jsonplaceholder/api/posts-create.spec.ts",
-          "line": 8,
+          "line": 9,
           "column": 6,
           "specs": [
             {
@@ -205,13 +251,37 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 741,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Create new post",
+                          "duration": 302
+                        },
+                        {
+                          "title": "Verify post matches expected data",
+                          "duration": 7
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:44.524Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "421be7d03a50d5c3573c-2ba2ec73c04eae3b9df7",
               "file": "jsonplaceholder/api/posts-create.spec.ts",
-              "line": 9,
+              "line": 10,
               "column": 3
             },
             {
@@ -225,13 +295,33 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 616,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Create post with partial validation",
+                          "duration": 184
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:44.511Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "421be7d03a50d5c3573c-cb704fb061ec3972cbbd",
               "file": "jsonplaceholder/api/posts-create.spec.ts",
-              "line": 26,
+              "line": 29,
               "column": 3
             },
             {
@@ -245,13 +335,37 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 623,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Create post with passthrough (security testing)",
+                          "duration": 184
+                        },
+                        {
+                          "title": "Verify post matches expected data",
+                          "duration": 7
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:44.523Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "421be7d03a50d5c3573c-5c5c0ecffdce94a7e8c2",
               "file": "jsonplaceholder/api/posts-create.spec.ts",
-              "line": 42,
+              "line": 47,
               "column": 3
             }
           ]
@@ -268,7 +382,7 @@
         {
           "title": "JSONPlaceholder API - GET Posts",
           "file": "jsonplaceholder/api/posts-get.spec.ts",
-          "line": 4,
+          "line": 5,
           "column": 6,
           "specs": [
             {
@@ -282,13 +396,27 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 70,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-27T12:51:45.190Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "bc8f51f75c6528baa485-ed36accf120c3f7555b1",
               "file": "jsonplaceholder/api/posts-get.spec.ts",
-              "line": 5,
+              "line": 6,
               "column": 3
             },
             {
@@ -302,13 +430,37 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 80,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all posts",
+                          "duration": 72
+                        },
+                        {
+                          "title": "Verify posts are sorted by ID",
+                          "duration": 2
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:45.205Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "bc8f51f75c6528baa485-9302860e74a4d9cff867",
               "file": "jsonplaceholder/api/posts-get.spec.ts",
-              "line": 24,
+              "line": 26,
               "column": 3
             },
             {
@@ -322,13 +474,33 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 66,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all posts",
+                          "duration": 57
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:45.284Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "bc8f51f75c6528baa485-ab232148f524c5d86939",
               "file": "jsonplaceholder/api/posts-get.spec.ts",
-              "line": 32,
+              "line": 34,
               "column": 3
             },
             {
@@ -342,13 +514,37 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 72,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get posts by user ID",
+                          "duration": 63
+                        },
+                        {
+                          "title": "Verify all posts belong to user",
+                          "duration": 2
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:45.315Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "bc8f51f75c6528baa485-25adab65493ba48d031a",
               "file": "jsonplaceholder/api/posts-get.spec.ts",
-              "line": 40,
+              "line": 42,
               "column": 3
             },
             {
@@ -362,13 +558,41 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 82,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get post by ID",
+                          "duration": 71
+                        },
+                        {
+                          "title": "Verify post matches expected data",
+                          "duration": 3
+                        },
+                        {
+                          "title": "Verify post has content",
+                          "duration": 2
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:45.330Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "bc8f51f75c6528baa485-e5dae196bbe649636bf1",
               "file": "jsonplaceholder/api/posts-get.spec.ts",
-              "line": 55,
+              "line": 54,
               "column": 3
             },
             {
@@ -382,13 +606,27 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 64,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-27T12:51:45.386Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "bc8f51f75c6528baa485-5e73739f52bcb648c088",
               "file": "jsonplaceholder/api/posts-get.spec.ts",
-              "line": 70,
+              "line": 69,
               "column": 3
             },
             {
@@ -402,13 +640,33 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 62,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify response status is one of allowed codes",
+                          "duration": 2
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:45.411Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "bc8f51f75c6528baa485-f0e5ace7a647e1a4e76a",
               "file": "jsonplaceholder/api/posts-get.spec.ts",
-              "line": 82,
+              "line": 84,
               "column": 3
             }
           ]
@@ -425,14 +683,14 @@
         {
           "title": "JSONPlaceholder API - Negative Tests",
           "file": "jsonplaceholder/api/posts-negative.spec.ts",
-          "line": 6,
+          "line": 8,
           "column": 6,
           "specs": [],
           "suites": [
             {
               "title": "POST Create - Negative Scenarios",
               "file": "jsonplaceholder/api/posts-negative.spec.ts",
-              "line": 7,
+              "line": 9,
               "column": 8,
               "specs": [
                 {
@@ -446,13 +704,33 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 466,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 229
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:45.459Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-3def86038aee11e913b3",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 8,
+                  "line": 10,
                   "column": 5
                 },
                 {
@@ -466,13 +744,41 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 592,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 187
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 174
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 221
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:45.489Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-1aa0dbc63eaaed74fa6b",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 49,
+                  "line": 46,
                   "column": 5
                 },
                 {
@@ -486,13 +792,37 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 365,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 179
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 174
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:45.521Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-4fb6837f86b06b08e922",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 78,
+                  "line": 71,
                   "column": 5
                 },
                 {
@@ -506,13 +836,41 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 530,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 174
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 175
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 173
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:45.906Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-c56e40d6e09caefc2ff4",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 95,
+                  "line": 87,
                   "column": 5
                 }
               ]
@@ -520,7 +878,7 @@
             {
               "title": "PUT Update - Negative Scenarios",
               "file": "jsonplaceholder/api/posts-negative.spec.ts",
-              "line": 129,
+              "line": 115,
               "column": 8,
               "specs": [
                 {
@@ -534,13 +892,27 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 840,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-01-27T12:51:45.929Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-898146b834e9cb03964f",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 130,
+                  "line": 116,
                   "column": 5
                 },
                 {
@@ -554,13 +926,27 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 186,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-01-27T12:51:45.948Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-b1d6517335ddff563544",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 155,
+                  "line": 142,
                   "column": 5
                 }
               ]
@@ -568,7 +954,7 @@
             {
               "title": "DELETE - Negative Scenarios",
               "file": "jsonplaceholder/api/posts-negative.spec.ts",
-              "line": 171,
+              "line": 158,
               "column": 8,
               "specs": [
                 {
@@ -582,13 +968,37 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 361,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Verify response status is one of allowed codes",
+                              "duration": 1
+                            },
+                            {
+                              "title": "Verify response status is one of allowed codes",
+                              "duration": 1
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:46.103Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-83a1ddc6529cf1c1e616",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 172,
+                  "line": 159,
                   "column": 5
                 }
               ]
@@ -596,7 +1006,7 @@
             {
               "title": "GET - Negative Scenarios",
               "file": "jsonplaceholder/api/posts-negative.spec.ts",
-              "line": 196,
+              "line": 184,
               "column": 8,
               "specs": [
                 {
@@ -610,13 +1020,33 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 177,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Verify response status is one of allowed codes",
+                              "duration": 3
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:46.150Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-ed77453f2b3e0a824c01",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 197,
+                  "line": 185,
                   "column": 5
                 },
                 {
@@ -630,13 +1060,27 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 65,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-01-27T12:51:46.396Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-a38c5e12ee12aafdc93d",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 222,
+                  "line": 213,
                   "column": 5
                 }
               ]
@@ -644,7 +1088,7 @@
             {
               "title": "Content-Type and Headers - Negative Scenarios",
               "file": "jsonplaceholder/api/posts-negative.spec.ts",
-              "line": 234,
+              "line": 225,
               "column": 8,
               "specs": [
                 {
@@ -658,13 +1102,27 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 362,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-01-27T12:51:46.454Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-6bf941fbe7c9251faabe",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 235,
+                  "line": 226,
                   "column": 5
                 }
               ]
@@ -672,7 +1130,7 @@
             {
               "title": "Boundary Value Testing",
               "file": "jsonplaceholder/api/posts-negative.spec.ts",
-              "line": 261,
+              "line": 252,
               "column": 8,
               "specs": [
                 {
@@ -686,13 +1144,41 @@
                       "expectedStatus": "passed",
                       "projectId": "jsonplaceholder-api",
                       "projectName": "jsonplaceholder-api",
-                      "results": [],
-                      "status": "skipped"
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "passed",
+                          "duration": 548,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "Create new post",
+                              "duration": 177
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 181
+                            },
+                            {
+                              "title": "Create new post",
+                              "duration": 179
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:46.479Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
                     }
                   ],
                   "id": "c76c2ddf59f77223719a-07210a7ca9968f38c06d",
                   "file": "jsonplaceholder/api/posts-negative.spec.ts",
-                  "line": 262,
+                  "line": 253,
                   "column": 5
                 }
               ]
@@ -711,7 +1197,7 @@
         {
           "title": "JSONPlaceholder API - PUT Partial Update",
           "file": "jsonplaceholder/api/put-partial-update.spec.ts",
-          "line": 5,
+          "line": 6,
           "column": 6,
           "specs": [
             {
@@ -725,13 +1211,33 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 367,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Update post",
+                          "duration": 180
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:46.506Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "aeae5ac836863f5521ca-8f0629c8b17a732350fd",
               "file": "jsonplaceholder/api/put-partial-update.spec.ts",
-              "line": 6,
+              "line": 7,
               "column": 3
             }
           ]
@@ -762,8 +1268,28 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 82,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all users",
+                          "duration": 69
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:46.807Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "31dca8ded8547bb60745-c54e03f17ee45032219e",
@@ -782,13 +1308,49 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 133,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get user by ID",
+                          "duration": 70
+                        },
+                        {
+                          "title": "Verify user basic info",
+                          "duration": 27
+                        },
+                        {
+                          "title": "Verify user address",
+                          "duration": 14
+                        },
+                        {
+                          "title": "Verify user geo coordinates",
+                          "duration": 4
+                        },
+                        {
+                          "title": "Verify user company",
+                          "duration": 8
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:46.855Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "31dca8ded8547bb60745-57590ed7324c292c5a2d",
               "file": "jsonplaceholder/api/users.spec.ts",
-              "line": 16,
+              "line": 13,
               "column": 3
             },
             {
@@ -802,13 +1364,37 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 136,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all users",
+                          "duration": 81
+                        },
+                        {
+                          "title": "Verify users have valid geo coordinates",
+                          "duration": 33
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:46.918Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "31dca8ded8547bb60745-db81b73ffa6d52797d0a",
               "file": "jsonplaceholder/api/users.spec.ts",
-              "line": 58,
+              "line": 53,
               "column": 3
             },
             {
@@ -822,13 +1408,41 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 153,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get all users",
+                          "duration": 72
+                        },
+                        {
+                          "title": "Get user by ID",
+                          "duration": 59
+                        },
+                        {
+                          "title": "Verify users match",
+                          "duration": 3
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:46.912Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "31dca8ded8547bb60745-ed5e85e019bb12dcfdd0",
               "file": "jsonplaceholder/api/users.spec.ts",
-              "line": 74,
+              "line": 69,
               "column": 3
             },
             {
@@ -842,14 +1456,1312 @@
                   "expectedStatus": "passed",
                   "projectId": "jsonplaceholder-api",
                   "projectName": "jsonplaceholder-api",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 147,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get user by ID",
+                          "duration": 67
+                        },
+                        {
+                          "title": "Verify user basic info",
+                          "duration": 3
+                        },
+                        {
+                          "title": "Get posts by user ID",
+                          "duration": 60
+                        },
+                        {
+                          "title": "Verify all posts belong to user",
+                          "duration": 1
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:47.118Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "31dca8ded8547bb60745-d7beb1c2585badfde98a",
               "file": "jsonplaceholder/api/users.spec.ts",
-              "line": 96,
+              "line": 91,
               "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "usersapi\\api\\get-all-users.spec.ts",
+      "file": "usersapi/api/get-all-users.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "GET /api/users - Get All Users",
+          "file": "usersapi/api/get-all-users.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should return 200 status with valid response time",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "usersapi",
+                  "projectName": "usersapi",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 107,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Measure response time",
+                          "duration": 68,
+                          "steps": [
+                            {
+                              "title": "API: Get all users",
+                              "duration": 65
+                            }
+                          ]
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:48.618Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2828908958866bbd3fbc-683804fc693417586ea8",
+              "file": "usersapi/api/get-all-users.spec.ts",
+              "line": 7,
+              "column": 3
+            },
+            {
+              "title": "should return all users with valid schema",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "usersapi",
+                  "projectName": "usersapi",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 91,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "API: Get all users",
+                          "duration": 63
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:48.644Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2828908958866bbd3fbc-12ff2f75861e445dd0f0",
+              "file": "usersapi/api/get-all-users.spec.ts",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "should have valid data types for all fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "usersapi",
+                  "projectName": "usersapi",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 184,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "API: Verify all users have valid data types",
+                          "duration": 149
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:48.699Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2828908958866bbd3fbc-8b0dd7442c2ec2df297b",
+              "file": "usersapi/api/get-all-users.spec.ts",
+              "line": 30,
+              "column": 3
+            },
+            {
+              "title": "FAIL: all user IDs should be unique @bug",
+              "ok": false,
+              "tags": [
+                "bug"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "usersapi",
+                  "projectName": "usersapi",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 145,
+                      "error": {
+                        "message": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m",
+                        "stack": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts:38:22",
+                        "location": {
+                          "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts",
+                          "column": 22,
+                          "line": 38
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 36 |\u001b[39m   test(\u001b[32m\"FAIL: all user IDs should be unique @bug\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n \u001b[90m 37 |\u001b[39m     \u001b[90m// This test will FAIL because there are duplicate user IDs in the response\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoDuplicateIds()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 39 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   test(\u001b[32m\"should identify users without age field\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts",
+                            "column": 22,
+                            "line": 38
+                          },
+                          "message": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m\n\n\u001b[0m \u001b[90m 36 |\u001b[39m   test(\u001b[32m\"FAIL: all user IDs should be unique @bug\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n \u001b[90m 37 |\u001b[39m     \u001b[90m// This test will FAIL because there are duplicate user IDs in the response\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoDuplicateIds()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 39 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   test(\u001b[32m\"should identify users without age field\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts:38:22\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "API: Verify users list has no duplicates",
+                          "duration": 106,
+                          "error": {
+                            "message": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m",
+                            "stack": "Error: Expected all user IDs to be unique, but found 1 duplicate ID(s): 5. Total users: 8, Unique IDs: 7\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m7\u001b[39m\nReceived: \u001b[31m8\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts:38:22",
+                            "location": {
+                              "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts",
+                              "column": 22,
+                              "line": 38
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 36 |\u001b[39m   test(\u001b[32m\"FAIL: all user IDs should be unique @bug\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n \u001b[90m 37 |\u001b[39m     \u001b[90m// This test will FAIL because there are duplicate user IDs in the response\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoDuplicateIds()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 39 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   test(\u001b[32m\"should identify users without age field\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:48.925Z",
+                      "annotations": [],
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-all-users.spec.ts",
+                        "column": 22,
+                        "line": 38
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2828908958866bbd3fbc-7daadd13d23e5822fc57",
+              "file": "usersapi/api/get-all-users.spec.ts",
+              "line": 36,
+              "column": 3
+            },
+            {
+              "title": "should identify users without age field",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "usersapi",
+                  "projectName": "usersapi",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 33,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Users missing age field: [\n  { id: \u001b[33m3\u001b[39m, name: \u001b[32m'Michael'\u001b[39m },\n  { id: \u001b[33m5\u001b[39m, name: \u001b[32m'Jack'\u001b[39m },\n  { id: \u001b[33m5\u001b[39m, name: \u001b[32m'Timmy'\u001b[39m }\n]\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "API: Identify users without age field",
+                          "duration": 18
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:48.772Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2828908958866bbd3fbc-74414f367ad68fe57a82",
+              "file": "usersapi/api/get-all-users.spec.ts",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "should successfully return users without age field without errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "usersapi",
+                  "projectName": "usersapi",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 48,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "API: Verify users without age field are valid",
+                          "duration": 39
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:48.802Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2828908958866bbd3fbc-498f1309e681f04ef2a6",
+              "file": "usersapi/api/get-all-users.spec.ts",
+              "line": 45,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "usersapi\\api\\get-user-by-id.spec.ts",
+      "file": "usersapi/api/get-user-by-id.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "GET /api/users/:id - Get User By ID",
+          "file": "usersapi/api/get-user-by-id.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "FAIL: should not return internal errors for any valid user ID @bug",
+              "ok": false,
+              "tags": [
+                "bug"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "usersapi",
+                  "projectName": "usersapi",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 161,
+                      "error": {
+                        "message": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m",
+                        "stack": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:42:22",
+                        "location": {
+                          "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts",
+                          "column": 22,
+                          "line": 42
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 40 |\u001b[39m     \u001b[90m// Test that no valid user ID returns an internal server error\u001b[39m\n \u001b[90m 41 |\u001b[39m     \u001b[90m// This will fail and report which IDs are problematic (currently IDs 3 and 5)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoInternalServerErrors()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 43 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 44 |\u001b[39m\n \u001b[90m 45 |\u001b[39m   test(\u001b[32m\"should return same user data on multiple requests\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts",
+                            "column": 22,
+                            "line": 42
+                          },
+                          "message": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m\n\n\u001b[0m \u001b[90m 40 |\u001b[39m     \u001b[90m// Test that no valid user ID returns an internal server error\u001b[39m\n \u001b[90m 41 |\u001b[39m     \u001b[90m// This will fail and report which IDs are problematic (currently IDs 3 and 5)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoInternalServerErrors()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 43 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 44 |\u001b[39m\n \u001b[90m 45 |\u001b[39m   test(\u001b[32m\"should return same user data on multiple requests\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({\u001b[0m\n\u001b[2m    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:42:22\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "API: Verify no internal server errors for any user",
+                          "duration": 154,
+                          "error": {
+                            "message": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m",
+                            "stack": "Error: Expected no internal server errors, but found 3 user(s) returning internal errors: ID 3, ID 5, ID 5\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m0\u001b[39m\nReceived length: \u001b[31m3\u001b[39m\nReceived array:  \u001b[31m[{\"error\": \"Internal error\", \"id\": 3}, {\"error\": \"Internal error\", \"id\": 5}, {\"error\": \"Internal error\", \"id\": 5}]\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts:42:22",
+                            "location": {
+                              "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts",
+                              "column": 22,
+                              "line": 42
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 40 |\u001b[39m     \u001b[90m// Test that no valid user ID returns an internal server error\u001b[39m\n \u001b[90m 41 |\u001b[39m     \u001b[90m// This will fail and report which IDs are problematic (currently IDs 3 and 5)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 |\u001b[39m     \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifyNoInternalServerErrors()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 43 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 44 |\u001b[39m\n \u001b[90m 45 |\u001b[39m   test(\u001b[32m\"should return same user data on multiple requests\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:49.169Z",
+                      "annotations": [],
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\get-user-by-id.spec.ts",
+                        "column": 22,
+                        "line": 42
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "085e86fd6745a303ec04-57d7b44fae408a4e57dc",
+              "file": "usersapi/api/get-user-by-id.spec.ts",
+              "line": 37,
+              "column": 3
+            },
+            {
+              "title": "should return same user data on multiple requests",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "usersapi",
+                  "projectName": "usersapi",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 109,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "API: Get user by ID",
+                          "duration": 63
+                        },
+                        {
+                          "title": "API: Get user by ID",
+                          "duration": 13
+                        }
+                      ],
+                      "startTime": "2026-01-27T12:51:51.063Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "085e86fd6745a303ec04-fe50c324d77e36da2fef",
+              "file": "usersapi/api/get-user-by-id.spec.ts",
+              "line": 45,
+              "column": 3
+            }
+          ],
+          "suites": [
+            {
+              "title": "Valid User IDs",
+              "file": "usersapi/api/get-user-by-id.spec.ts",
+              "line": 8,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should return valid response for all valid IDs",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 179,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify all valid user IDs return proper responses",
+                              "duration": 160
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:48.891Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "085e86fd6745a303ec04-f79bffda9c80aa0b1ab6",
+                  "file": "usersapi/api/get-user-by-id.spec.ts",
+                  "line": 9,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Invalid User IDs",
+              "file": "usersapi/api/get-user-by-id.spec.ts",
+              "line": 19,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should return 404 for non-existent user",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 5,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 39,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Get a guaranteed non-existent user ID",
+                              "duration": 11
+                            },
+                            {
+                              "title": "API: Get user by ID",
+                              "duration": 12
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:48.921Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "085e86fd6745a303ec04-1f08edac8d8c784b5816",
+                  "file": "usersapi/api/get-user-by-id.spec.ts",
+                  "line": 20,
+                  "column": 5
+                },
+                {
+                  "title": "should handle invalid ID formats",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 136,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify invalid ID formats return errors",
+                              "duration": 124
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:48.983Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "085e86fd6745a303ec04-af6627fa3725fe62eb74",
+                  "file": "usersapi/api/get-user-by-id.spec.ts",
+                  "line": 32,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "usersapi\\api\\negative-scenarios.spec.ts",
+      "file": "usersapi/api/negative-scenarios.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Negative Scenarios - Edge Cases",
+          "file": "usersapi/api/negative-scenarios.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "Security Tests",
+              "file": "usersapi/api/negative-scenarios.spec.ts",
+              "line": 5,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should reject SQL injection attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 44,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 37
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.281Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-2add731219b4abef7b70",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 6,
+                  "column": 5
+                },
+                {
+                  "title": "should reject XSS attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 35,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 22
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.312Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-8580265a440c039e7864",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 12,
+                  "column": 5
+                },
+                {
+                  "title": "should reject path traversal attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 26,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 19
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.399Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-b07389a444758c28324e",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 18,
+                  "column": 5
+                },
+                {
+                  "title": "should reject null byte injection",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 9,
+                          "parallelIndex": 3,
+                          "status": "failed",
+                          "duration": 74,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:25:24",
+                            "location": {
+                              "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                              "column": 24,
+                              "line": 25
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 23 |\u001b[39m\n \u001b[90m 24 |\u001b[39m     test(\u001b[32m\"should reject null byte injection\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifySecurityPayloadRejected(\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[33mSecurityTestPayloads\u001b[39m\u001b[33m.\u001b[39m\u001b[33mNULL_BYTE\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 27 |\u001b[39m       )\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                                "column": 24,
+                                "line": 25
+                              },
+                              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m\n\n\u001b[0m \u001b[90m 23 |\u001b[39m\n \u001b[90m 24 |\u001b[39m     test(\u001b[32m\"should reject null byte injection\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifySecurityPayloadRejected(\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[33mSecurityTestPayloads\u001b[39m\u001b[33m.\u001b[39m\u001b[33mNULL_BYTE\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 27 |\u001b[39m       )\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:25:24\u001b[22m"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 52,
+                              "error": {
+                                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m",
+                                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m400\u001b[39m\nReceived:    \u001b[31m200\u001b[39m\n    at C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts:25:24",
+                                "location": {
+                                  "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                                  "column": 24,
+                                  "line": 25
+                                },
+                                "snippet": "\u001b[0m \u001b[90m 23 |\u001b[39m\n \u001b[90m 24 |\u001b[39m     test(\u001b[32m\"should reject null byte injection\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ usersSteps }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m       \u001b[36mawait\u001b[39m usersSteps\u001b[33m.\u001b[39mverifySecurityPayloadRejected(\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[33mSecurityTestPayloads\u001b[39m\u001b[33m.\u001b[39m\u001b[33mNULL_BYTE\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 27 |\u001b[39m       )\u001b[33m;\u001b[39m\n \u001b[90m 28 |\u001b[39m     })\u001b[33m;\u001b[39m\u001b[0m"
+                              }
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:51.309Z",
+                          "annotations": [],
+                          "attachments": [],
+                          "errorLocation": {
+                            "file": "C:\\Users\\l.meladze\\Desktop\\Automation_Website_Task_2\\tests\\usersapi\\api\\negative-scenarios.spec.ts",
+                            "column": 24,
+                            "line": 25
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-fb16997efddfba8e21e9",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 24,
+                  "column": 5
+                },
+                {
+                  "title": "should reject unicode overflow attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 41,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify security payload is rejected",
+                              "duration": 35
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.547Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-c7b91aaad0eaac19756a",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 30,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Edge Case IDs",
+              "file": "usersapi/api/negative-scenarios.spec.ts",
+              "line": 37,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should handle extremely large ID numbers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 28,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify edge case ID is handled properly",
+                              "duration": 21
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.598Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-f5d94625e80dbf433bc1",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 38,
+                  "column": 5
+                },
+                {
+                  "title": "should handle float ID values",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 22,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify edge case ID is handled properly",
+                              "duration": 16
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.702Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-44873c3f5ebec18d4186",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 44,
+                  "column": 5
+                },
+                {
+                  "title": "should handle large negative ID values",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 24,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify edge case ID is handled properly",
+                              "duration": 18
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.756Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-5a72da7024d3beac6509",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 50,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Response Structure Validation",
+              "file": "usersapi/api/negative-scenarios.spec.ts",
+              "line": 57,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should return array for get all users endpoint",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 19,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify response has array format for get all users",
+                              "duration": 13
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.843Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-405464593362ec324640",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 58,
+                  "column": 5
+                },
+                {
+                  "title": "should return object not array for get user by ID",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 23,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify user by ID returns object not array",
+                              "duration": 14
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.887Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-b288ad8de5c73b908daf",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 64,
+                  "column": 5
+                },
+                {
+                  "title": "should not return malformed data structure",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 82,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify response is valid array structure",
+                              "duration": 73
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:49.984Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-33bcf8573cf566b2bb3e",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 72,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Data Integrity",
+              "file": "usersapi/api/negative-scenarios.spec.ts",
+              "line": 79,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should have all user IDs as positive integers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 42,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify all user IDs are positive integers",
+                              "duration": 32
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:50.050Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-b8b650c02b2f741270fd",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 80,
+                  "column": 5
+                },
+                {
+                  "title": "should have all names as valid strings with content",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 51,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify all names are valid strings with content",
+                              "duration": 44
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:50.131Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-4ff5b5402f6bf56e2cd7",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 86,
+                  "column": 5
+                },
+                {
+                  "title": "should not have null or undefined values for required fields",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 55,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify no null or undefined values in required fields",
+                              "duration": 48
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:50.156Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-00ebd23bf9fc43acd4f5",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 92,
+                  "column": 5
+                },
+                {
+                  "title": "should not have empty strings for name field",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "usersapi",
+                      "projectName": "usersapi",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 30,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "steps": [
+                            {
+                              "title": "API: Verify no empty name fields",
+                              "duration": 22
+                            }
+                          ],
+                          "startTime": "2026-01-27T12:51:50.206Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "f644491e85ca4af2b130-1493dab146a82734ae4d",
+                  "file": "usersapi/api/negative-scenarios.spec.ts",
+                  "line": 98,
+                  "column": 5
+                }
+              ]
             }
           ]
         }
@@ -858,11 +2770,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-01-22T15:39:38.995Z",
-    "duration": 486.41099999999983,
-    "expected": 0,
-    "skipped": 29,
-    "unexpected": 0,
+    "startTime": "2026-01-27T12:51:41.889Z",
+    "duration": 9591.810000000001,
+    "expected": 51,
+    "skipped": 0,
+    "unexpected": 3,
     "flaky": 0
   }
 }
