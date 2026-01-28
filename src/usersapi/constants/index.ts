@@ -1,2 +1,2 @@
 export * from "./routes";
-export * from "./test-data";
+export * from "./api-config";

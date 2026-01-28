@@ -39,6 +39,14 @@
       "@usersapi/steps/*": ["src/usersapi/steps/*"],
       "@usersapi/utils/*": ["src/usersapi/utils/*"],
 
+      // Test Data
+      "@test-data/jsonplaceholder": ["test-data/jsonplaceholder"],
+      "@test-data/jsonplaceholder/*": ["test-data/jsonplaceholder/*"],
+      "@test-data/usersapi": ["test-data/usersapi"],
+      "@test-data/usersapi/*": ["test-data/usersapi/*"],
+      "@test-data/automationexercise": ["test-data/automationexercise"],
+      "@test-data/automationexercise/*": ["test-data/automationexercise/*"],
+
       // Legacy aliases for backward compatibility (can be removed after migration)
       "@api/*": ["src/automationexercise/api/*"],
       "@components/*": ["src/automationexercise/components/*"],

@@ -1,16 +1,8 @@
 import { expect, APIResponse } from "@playwright/test";
 import { z } from "zod";
 import { UsersApiService } from "../api/services";
-import {
-  User,
-  UsersList,
-  UsersListSchema,
-  StrictUsersListSchema,
-  UniqueUsersListSchema,
-  ErrorResponse,
-  ErrorResponseSchema,
-} from "../models/schemas";
-import { UsersApiTestData } from "../constants";
+import * as UserSchemas from "../models/schemas";
+import { UsersApiConfig } from "../constants";
 import { step } from "../utils";
 
 /**
@@ -20,60 +12,40 @@ import { step } from "../utils";
 export class UsersSteps {
   constructor(private readonly usersApiService: UsersApiService) {}
 
-  async getAllUsers(): Promise<UsersList>;
-  async getAllUsers<T>(schema: z.ZodSchema<T>): Promise<T>;
-  async getAllUsers(schema: null): Promise<APIResponse>;
   @step("API: Get all users")
-  async getAllUsers<T>(
-    schema?: z.ZodSchema<T> | null,
-  ): Promise<UsersList | T | APIResponse> {
-    if (schema === undefined) {
-      return this.usersApiService.getAllUsers();
-    }
-
-    if (schema === null) {
-      return this.usersApiService.getAllUsers(null);
-    }
-
-    return (await this.usersApiService.getAllUsers(
-      schema as z.ZodSchema<UsersList>,
-    )) as T;
+  async getAllUsers(
+    schema?: z.ZodSchema<UserSchemas.UsersList> | null,
+  ): Promise<UserSchemas.UsersList | APIResponse> {
+    return this.usersApiService.getAllUsers(schema);
   }
 
-  async getUserById(id: number): Promise<User>;
-  async getUserById<T>(id: number | string, schema: z.ZodSchema<T>): Promise<T>;
-  async getUserById(id: number | string, schema: null): Promise<APIResponse>;
   @step("API: Get user by ID")
-  async getUserById<T>(
+  async getUserById(
     id: number | string,
-    schema?: z.ZodSchema<T> | null,
-  ): Promise<User | T | APIResponse> {
-    if (schema === undefined) {
-      return this.usersApiService.getUserById(id as number);
-    }
-
-    if (schema === null) {
-      return this.usersApiService.getUserById(id, null);
-    }
-
-    return (await this.usersApiService.getUserById(
-      id,
-      schema as z.ZodSchema<User>,
-    )) as T;
+    schema?: z.ZodSchema<UserSchemas.User> | null,
+  ): Promise<UserSchemas.User | APIResponse> {
+    return this.usersApiService.getUserById(id, schema);
   }
 
   @step("API: Verify user not found error")
-  async verifyUserNotFoundError(id: number | string): Promise<ErrorResponse> {
-    const response = await this.usersApiService.getUserById(id, null);
+  async verifyUserNotFoundError(
+    id: number | string,
+  ): Promise<UserSchemas.ErrorResponse> {
+    const response = (await this.usersApiService.getUserById(
+      id,
+      null,
+    )) as APIResponse;
     const body = await response.json();
-    const errorResponse = ErrorResponseSchema.parse(body);
+    const errorResponse = UserSchemas.ErrorResponseSchema.parse(body);
     expect(errorResponse.message).toBeDefined();
     return errorResponse;
   }
 
   @step("API: Verify all users have required fields")
-  async verifyAllUsersHaveRequiredFields(): Promise<UsersList> {
-    const users = await this.usersApiService.getAllUsers();
+  async verifyAllUsersHaveRequiredFields(): Promise<UserSchemas.UsersList> {
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
 
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
@@ -92,8 +64,10 @@ export class UsersSteps {
   }
 
   @step("API: Verify all users have valid data types")
-  async verifyAllUsersHaveValidDataTypes(): Promise<UsersList> {
-    const users = await this.usersApiService.getAllUsers();
+  async verifyAllUsersHaveValidDataTypes(): Promise<UserSchemas.UsersList> {
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
 
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
@@ -134,16 +108,22 @@ export class UsersSteps {
   ): Promise<void> {
     for (const userId of validIds) {
       const startTime = Date.now();
-      const response = await this.usersApiService.getUserById(userId, null);
+      const response = (await this.usersApiService.getUserById(
+        userId,
+        null,
+      )) as APIResponse;
       const responseTime = Date.now() - startTime;
 
       expect(response.status()).toBe(200);
       expect(response.headers()["content-type"]).toBe(
-        UsersApiTestData.CONTENT_TYPES.JSON,
+        UsersApiConfig.CONTENT_TYPES.JSON,
       );
       expect(responseTime).toBeLessThanOrEqual(maxResponseTime);
 
-      const user = await this.usersApiService.getUserById(userId);
+      const user = (await this.usersApiService.getUserById(
+        userId,
+        UserSchemas.UserSchema,
+      )) as UserSchemas.User;
       expect(user.id).toBe(userId);
       expect(user.name).toBeDefined();
     }
@@ -154,16 +134,21 @@ export class UsersSteps {
     invalidFormats: readonly string[],
   ): Promise<void> {
     for (const invalidId of invalidFormats) {
-      const response = await this.usersApiService.getUserById(invalidId, null);
+      const response = (await this.usersApiService.getUserById(
+        invalidId,
+        null,
+      )) as APIResponse;
       const body = await response.json();
       expect(body).toHaveProperty("message");
-      expect(body.message).toBe(UsersApiTestData.ERROR_MESSAGES.USER_NOT_FOUND);
+      expect(body.message).toBe(UsersApiConfig.ERROR_MESSAGES.USER_NOT_FOUND);
     }
   }
 
   @step("API: Verify users list has no duplicates")
   async verifyNoDuplicateIds(): Promise<void> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
     const ids = users.map((user) => user.id);
     const uniqueIds = new Set(ids);
 
@@ -177,10 +162,12 @@ export class UsersSteps {
   }
 
   @step("API: Verify all users have age field")
-  async verifyAllUsersHaveAge(): Promise<UsersList> {
-    const users = await this.usersApiService.getAllUsers(StrictUsersListSchema);
+  async verifyAllUsersHaveAge(): Promise<UserSchemas.UsersList> {
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
 
-    users.forEach((user, index) => {
+    users.forEach((user: UserSchemas.User, index: number) => {
       expect(
         user.age,
         `User at index ${index} missing age field`,
@@ -200,7 +187,9 @@ export class UsersSteps {
 
   @step("API: Identify users without age field")
   async identifyUsersWithoutAge(): Promise<void> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
     const usersWithoutAge = users.filter((user) => user.age === undefined);
 
     expect(
@@ -216,7 +205,9 @@ export class UsersSteps {
 
   @step("API: Verify users without age field are valid")
   async verifyUsersWithoutAgeAreValid(): Promise<void> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
     const usersWithoutAge = users.filter((user) => user.age === undefined);
 
     for (const user of usersWithoutAge) {
@@ -227,40 +218,31 @@ export class UsersSteps {
     }
   }
 
-  @step("API: Verify user exists by ID")
-  async verifyUserExists(id: number): Promise<User> {
-    const user = await this.getUserById(id);
-    expect(user).toBeDefined();
-    expect(user.id).toBe(id);
-    return user;
-  }
-
-  @step("API: Verify user has all expected properties")
-  async verifyUserProperties(user: User) {
-    expect(user).toHaveProperty("id");
-    expect(user).toHaveProperty("name");
-    expect(user.id).toBeGreaterThan(0);
-    expect(user.name).toBeTruthy();
-  }
-
   @step("API: Get a guaranteed non-existent user ID")
   async getNonExistentUserId(): Promise<number> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
+    // what if IDs are random and they are not incremented by 1
     const maxId = Math.max(...users.map((user) => user.id));
     return maxId + 1;
   }
 
   @step("API: Verify response is valid array structure")
   async verifyValidArrayStructure(): Promise<void> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
 
     expect(Array.isArray(users)).toBeTruthy();
 
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
-      expect(user, `User at index ${index} should be an object`).toBeTypeOf(
-        "object",
-      );
+      expect(user, `User at index ${index} should be an object`).toBeTruthy();
+      expect(
+        typeof user,
+        `User at index ${index} should be of type 'object'`,
+      ).toBe("object");
       expect(user, `User at index ${index} should not be null`).not.toBeNull();
       expect(
         user,
@@ -271,7 +253,9 @@ export class UsersSteps {
 
   @step("API: Verify no null or undefined values in required fields")
   async verifyNoNullOrUndefinedFields(): Promise<void> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
 
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
@@ -296,7 +280,9 @@ export class UsersSteps {
 
   @step("API: Verify no empty name fields")
   async verifyNoEmptyNames(): Promise<void> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
 
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
@@ -309,7 +295,10 @@ export class UsersSteps {
 
   @step("API: Verify security payload is rejected")
   async verifySecurityPayloadRejected(payload: string): Promise<void> {
-    const response = await this.usersApiService.getUserById(payload, null);
+    const response = (await this.usersApiService.getUserById(
+      payload,
+      null,
+    )) as APIResponse;
 
     expect(response.status()).toBeGreaterThanOrEqual(400);
 
@@ -319,7 +308,10 @@ export class UsersSteps {
 
   @step("API: Verify edge case ID is handled properly")
   async verifyEdgeCaseIdHandled(edgeCaseId: number | string): Promise<void> {
-    const response = await this.usersApiService.getUserById(edgeCaseId, null);
+    const response = (await this.usersApiService.getUserById(
+      edgeCaseId,
+      null,
+    )) as APIResponse;
 
     expect(response.status()).toBeGreaterThanOrEqual(400);
 
@@ -329,7 +321,9 @@ export class UsersSteps {
 
   @step("API: Verify all user IDs are positive integers")
   async verifyAllIdsArePositiveIntegers(): Promise<void> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
 
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
@@ -346,7 +340,9 @@ export class UsersSteps {
 
   @step("API: Verify all names are valid strings with content")
   async verifyAllNamesAreValidStrings(): Promise<void> {
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
 
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
@@ -367,7 +363,9 @@ export class UsersSteps {
 
   @step("API: Verify response has array format for get all users")
   async verifyGetAllUsersReturnsArray(): Promise<void> {
-    const response = await this.usersApiService.getAllUsers(null);
+    const response = (await this.usersApiService.getAllUsers(
+      null,
+    )) as APIResponse;
     const body = await response.json();
 
     expect(Array.isArray(body), "Response should be an array").toBeTruthy();
@@ -375,7 +373,10 @@ export class UsersSteps {
 
   @step("API: Verify user by ID returns object not array")
   async verifyGetUserByIdReturnsObject(userId: number): Promise<void> {
-    const response = await this.usersApiService.getUserById(userId, null);
+    const response = (await this.usersApiService.getUserById(
+      userId,
+      null,
+    )) as APIResponse;
     const body = await response.json();
 
     expect(typeof body, "Response should be an object").toBe("object");
@@ -385,16 +386,21 @@ export class UsersSteps {
   @step("API: Verify no internal server errors for any user")
   async verifyNoInternalServerErrors(): Promise<void> {
     // First, get all users to know what valid IDs exist
-    const users = await this.usersApiService.getAllUsers();
+    const users = (await this.usersApiService.getAllUsers(
+      UserSchemas.UsersListSchema,
+    )) as UserSchemas.UsersList;
     const failedUsers: Array<{ id: number; error: string }> = [];
 
     // Test each user ID to ensure none return internal errors
     for (const user of users) {
-      const response = await this.usersApiService.getUserById(user.id, null);
+      const response = (await this.usersApiService.getUserById(
+        user.id,
+        null,
+      )) as APIResponse;
       const body = await response.json();
 
       // If we get an internal error, collect it for reporting
-      if (body.message === UsersApiTestData.ERROR_MESSAGES.INTERNAL_ERROR) {
+      if (body.message === UsersApiConfig.ERROR_MESSAGES.INTERNAL_ERROR) {
         failedUsers.push({ id: user.id, error: body.message });
       }
     }

@@ -1,104 +1,94 @@
-import { test } from "../../../src/usersapi/fixtures";
-import { UsersApiTestData } from "../../../src/usersapi/constants";
+import { test, expect } from "@usersapi/fixtures/index";
+import { type APIResponse } from "@playwright/test";
+import { UsersApiConfig } from "@usersapi/constants/index";
+import { UserIdsTestData, SecurityTestPayloads } from "@test-data/usersapi";
 
-test.describe("Negative Scenarios - Edge Cases", () => {
+test.describe("Negative Scenarios", () => {
+  test.describe("Invalid User IDs", () => {
+    test("should return 404 for non-existent user @negative", async ({
+      usersSteps,
+    }) => {
+      // Dynamically find a guaranteed non-existent user ID
+      const nonExistentId = await usersSteps.getNonExistentUserId();
+
+      const result = await usersSteps.getUserById(nonExistentId, null);
+      const response = result as APIResponse;
+      expect(response.status()).toBe(404);
+
+      const body = await response.json();
+      expect(body.message).toBe(UsersApiConfig.ERROR_MESSAGES.USER_NOT_FOUND);
+    });
+
+    test("should handle invalid ID formats @negative", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyInvalidIdFormats(UserIdsTestData.INVALID_FORMATS);
+    });
+
+    test("should handle extremely large ID numbers @negative", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyEdgeCaseIdHandled(
+        UserIdsTestData.EDGE_CASES.VERY_LARGE,
+      );
+    });
+
+    test("should handle float ID values @negative", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyEdgeCaseIdHandled(
+        UserIdsTestData.EDGE_CASES.FLOAT,
+      );
+    });
+
+    test("should handle large negative ID values @negative", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyEdgeCaseIdHandled(
+        UserIdsTestData.EDGE_CASES.NEGATIVE_LARGE,
+      );
+    });
+  });
+
   test.describe("Security Tests", () => {
-    test("should reject SQL injection attempts", async ({ usersSteps }) => {
+    test("should reject SQL injection attempts @negative @security", async ({
+      usersSteps,
+    }) => {
       await usersSteps.verifySecurityPayloadRejected(
-        UsersApiTestData.SECURITY_TEST_PAYLOADS.SQL_INJECTION,
+        SecurityTestPayloads.SQL_INJECTION,
       );
     });
 
-    test("should reject XSS attempts", async ({ usersSteps }) => {
+    test("should reject XSS attempts @negative @security", async ({
+      usersSteps,
+    }) => {
       await usersSteps.verifySecurityPayloadRejected(
-        UsersApiTestData.SECURITY_TEST_PAYLOADS.XSS_ATTEMPT,
+        SecurityTestPayloads.XSS_ATTEMPT,
       );
     });
 
-    test("should reject path traversal attempts", async ({ usersSteps }) => {
+    test("should reject path traversal attempts @negative @security", async ({
+      usersSteps,
+    }) => {
       await usersSteps.verifySecurityPayloadRejected(
-        UsersApiTestData.SECURITY_TEST_PAYLOADS.PATH_TRAVERSAL,
+        SecurityTestPayloads.PATH_TRAVERSAL,
       );
     });
 
-    test("should reject null byte injection", async ({ usersSteps }) => {
+    test("should reject null byte injection @negative @security", async ({
+      usersSteps,
+    }) => {
       await usersSteps.verifySecurityPayloadRejected(
-        UsersApiTestData.SECURITY_TEST_PAYLOADS.NULL_BYTE,
+        SecurityTestPayloads.NULL_BYTE,
       );
     });
 
-    test("should reject unicode overflow attempts", async ({ usersSteps }) => {
+    test("should reject unicode overflow attempts @negative @security", async ({
+      usersSteps,
+    }) => {
       await usersSteps.verifySecurityPayloadRejected(
-        UsersApiTestData.SECURITY_TEST_PAYLOADS.UNICODE_OVERFLOW,
+        SecurityTestPayloads.UNICODE_OVERFLOW,
       );
-    });
-  });
-
-  test.describe("Edge Case IDs", () => {
-    test("should handle extremely large ID numbers", async ({ usersSteps }) => {
-      await usersSteps.verifyEdgeCaseIdHandled(
-        UsersApiTestData.EDGE_CASE_IDS.VERY_LARGE,
-      );
-    });
-
-    test("should handle float ID values", async ({ usersSteps }) => {
-      await usersSteps.verifyEdgeCaseIdHandled(
-        UsersApiTestData.EDGE_CASE_IDS.FLOAT,
-      );
-    });
-
-    test("should handle large negative ID values", async ({ usersSteps }) => {
-      await usersSteps.verifyEdgeCaseIdHandled(
-        UsersApiTestData.EDGE_CASE_IDS.NEGATIVE_LARGE,
-      );
-    });
-  });
-
-  test.describe("Response Structure Validation", () => {
-    test("should return array for get all users endpoint", async ({
-      usersSteps,
-    }) => {
-      await usersSteps.verifyGetAllUsersReturnsArray();
-    });
-
-    test("should return object not array for get user by ID", async ({
-      usersSteps,
-    }) => {
-      await usersSteps.verifyGetUserByIdReturnsObject(
-        UsersApiTestData.TEST_USER_ID,
-      );
-    });
-
-    test("should not return malformed data structure", async ({
-      usersSteps,
-    }) => {
-      await usersSteps.verifyValidArrayStructure();
-    });
-  });
-
-  test.describe("Data Integrity", () => {
-    test("should have all user IDs as positive integers", async ({
-      usersSteps,
-    }) => {
-      await usersSteps.verifyAllIdsArePositiveIntegers();
-    });
-
-    test("should have all names as valid strings with content", async ({
-      usersSteps,
-    }) => {
-      await usersSteps.verifyAllNamesAreValidStrings();
-    });
-
-    test("should not have null or undefined values for required fields", async ({
-      usersSteps,
-    }) => {
-      await usersSteps.verifyNoNullOrUndefinedFields();
-    });
-
-    test("should not have empty strings for name field", async ({
-      usersSteps,
-    }) => {
-      await usersSteps.verifyNoEmptyNames();
     });
   });
 });

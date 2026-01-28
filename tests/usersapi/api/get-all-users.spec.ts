@@ -1,6 +1,7 @@
-import { test } from "../../../src/usersapi/fixtures";
-// import { UniqueUsersListSchema } from "../../../src/usersapi/models/schemas";
-import { UsersApiTestData } from "../../../src/usersapi/constants";
+import { test, expect } from "@usersapi/fixtures/index";
+import { type APIResponse } from "@playwright/test";
+import { UsersApiConfig } from "@usersapi/constants/index";
+import * as UserSchemas from "@usersapi/models/schemas";
 
 test.describe("GET /api/users - Get All Users", () => {
   test("should return 200 status with valid response time", async ({
@@ -8,19 +9,22 @@ test.describe("GET /api/users - Get All Users", () => {
     responseSteps,
   }) => {
     const { response, responseTime } = await responseSteps.measureResponseTime(
-      () => usersSteps.getAllUsers(null),
+      async () => {
+        const result = await usersSteps.getAllUsers(null);
+        return result as APIResponse;
+      },
     );
 
-    await responseSteps.verifyStatusCode(response, 200);
-    await responseSteps.verifyJsonContentType(response);
-    await responseSteps.verifyResponseTime(
-      responseTime,
-      UsersApiTestData.EXPECTED_RESPONSE_TIME.GET_ALL_USERS,
+    expect(response.status()).toBe(200);
+    const contentType = response.headers()["content-type"];
+    expect(contentType).toContain("application/json");
+    expect(responseTime).toBeLessThanOrEqual(
+      UsersApiConfig.RESPONSE_TIME_THRESHOLDS.GET_ALL_USERS,
     );
   });
 
   test("should return all users with valid schema", async ({ usersSteps }) => {
-    await usersSteps.getAllUsers();
+    await usersSteps.getAllUsers(UserSchemas.UsersListSchema);
   });
 
   test("should have valid data types for all fields", async ({
@@ -42,5 +46,45 @@ test.describe("GET /api/users - Get All Users", () => {
     usersSteps,
   }) => {
     await usersSteps.verifyUsersWithoutAgeAreValid();
+  });
+
+  test.describe("Response Structure Validation", () => {
+    test("should return array for get all users endpoint", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyGetAllUsersReturnsArray();
+    });
+
+    test("should not return malformed data structure", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyValidArrayStructure();
+    });
+  });
+
+  test.describe("Data Integrity", () => {
+    test("should have all user IDs as positive integers", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyAllIdsArePositiveIntegers();
+    });
+
+    test("should have all names as valid strings with content", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyAllNamesAreValidStrings();
+    });
+
+    test("should not have null or undefined values for required fields", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyNoNullOrUndefinedFields();
+    });
+
+    test("should not have empty strings for name field", async ({
+      usersSteps,
+    }) => {
+      await usersSteps.verifyNoEmptyNames();
+    });
   });
 });

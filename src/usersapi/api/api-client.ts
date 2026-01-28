@@ -1,12 +1,11 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
+import { HttpConfig } from "../../config/http-config";
 
 /**
  * Base API client for making HTTP requests
  * Provides protected methods for common HTTP operations
  */
 export class ApiClient {
-  private readonly defaultTimeout = 30000;
-
   constructor(protected readonly request: APIRequestContext) {}
 
   /**
@@ -17,7 +16,7 @@ export class ApiClient {
     options?: { timeout?: number },
   ): Promise<APIResponse> {
     return this.request.get(url, {
-      timeout: options?.timeout ?? this.defaultTimeout,
+      timeout: options?.timeout ?? HttpConfig.DEFAULT_TIMEOUT,
     });
   }
 
@@ -31,7 +30,7 @@ export class ApiClient {
   ): Promise<APIResponse> {
     return this.request.post(url, {
       data,
-      timeout: options?.timeout ?? this.defaultTimeout,
+      timeout: options?.timeout ?? HttpConfig.DEFAULT_TIMEOUT,
     });
   }
 
@@ -45,7 +44,7 @@ export class ApiClient {
   ): Promise<APIResponse> {
     return this.request.put(url, {
       data,
-      timeout: options?.timeout ?? this.defaultTimeout,
+      timeout: options?.timeout ?? HttpConfig.DEFAULT_TIMEOUT,
     });
   }
 
@@ -57,7 +56,7 @@ export class ApiClient {
     options?: { timeout?: number },
   ): Promise<APIResponse> {
     return this.request.delete(url, {
-      timeout: options?.timeout ?? this.defaultTimeout,
+      timeout: options?.timeout ?? HttpConfig.DEFAULT_TIMEOUT,
     });
   }
 }

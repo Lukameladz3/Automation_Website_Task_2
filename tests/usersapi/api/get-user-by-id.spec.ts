@@ -1,38 +1,17 @@
-import { test, expect } from "../../../src/usersapi/fixtures";
-import { UsersApiTestData } from "../../../src/usersapi/constants";
+import { test, expect } from "@usersapi/fixtures/index";
+import { type APIResponse } from "@playwright/test";
+import { UsersApiConfig } from "@usersapi/constants/index";
+import { UserIdsTestData } from "@test-data/usersapi";
+import * as UserSchemas from "@usersapi/models/schemas";
 
 test.describe("GET /api/users/:id - Get User By ID", () => {
-  test.describe("Valid User IDs", () => {
-    test("should return valid response for all valid IDs", async ({
-      usersSteps,
-    }) => {
-      await usersSteps.verifyAllValidUserIds(
-        UsersApiTestData.VALID_USER_IDS,
-        UsersApiTestData.EXPECTED_RESPONSE_TIME.GET_USER_BY_ID,
-      );
-    });
-  });
-
-  test.describe("Invalid User IDs", () => {
-    test("should return 404 for non-existent user", async ({
-      usersSteps,
-      responseSteps,
-    }) => {
-      // Dynamically find a guaranteed non-existent user ID
-      const nonExistentId = await usersSteps.getNonExistentUserId();
-
-      const response = await usersSteps.getUserById(nonExistentId, null);
-      await responseSteps.verifyStatusCode(response, 404);
-
-      const body = await response.json();
-      expect(body.message).toBe(UsersApiTestData.ERROR_MESSAGES.USER_NOT_FOUND);
-    });
-
-    test("should handle invalid ID formats", async ({ usersSteps }) => {
-      await usersSteps.verifyInvalidIdFormats(
-        UsersApiTestData.INVALID_ID_FORMATS,
-      );
-    });
+  test("should return valid response for all valid IDs", async ({
+    usersSteps,
+  }) => {
+    await usersSteps.verifyAllValidUserIds(
+      UserIdsTestData.VALID,
+      UsersApiConfig.RESPONSE_TIME_THRESHOLDS.GET_USER_BY_ID,
+    );
   });
 
   test("FAIL: should not return internal errors for any valid user ID @bug", async ({
@@ -46,9 +25,25 @@ test.describe("GET /api/users/:id - Get User By ID", () => {
   test("should return same user data on multiple requests", async ({
     usersSteps,
   }) => {
-    const user1 = await usersSteps.getUserById(UsersApiTestData.TEST_USER_ID);
-    const user2 = await usersSteps.getUserById(UsersApiTestData.TEST_USER_ID);
+    const result1 = await usersSteps.getUserById(
+      UserIdsTestData.CONSISTENT_TEST_USER,
+    );
+    const result2 = await usersSteps.getUserById(
+      UserIdsTestData.CONSISTENT_TEST_USER,
+    );
+    const user1 = result1 as UserSchemas.User;
+    const user2 = result2 as UserSchemas.User;
 
-    expect(user1).toEqual(user2);
+    expect(user1.id).toBe(user2.id);
+    expect(user1.name).toBe(user2.name);
+    expect(user1.age).toBe(user2.age);
+  });
+
+  test("should return object not array for get user by ID", async ({
+    usersSteps,
+  }) => {
+    await usersSteps.verifyGetUserByIdReturnsObject(
+      UserIdsTestData.CONSISTENT_TEST_USER,
+    );
   });
 });
