@@ -5,6 +5,7 @@ import * as PostTypes from "@jsonplaceholder/models/schemas/post.schemas";
 import * as UserTypes from "@jsonplaceholder/models/schemas/user.schemas";
 import { ApiClient } from "@jsonplaceholder/api/api-client";
 import { ResponseValidator } from "../../../utils/response-validator";
+import { StatusCode } from "@automationexercise/constants/StatusCode";
 
 export class JsonPlaceholderService extends ApiClient {
   private readonly baseUrl: string;
@@ -172,7 +173,7 @@ export class JsonPlaceholderService extends ApiClient {
 
   async getAllUsers(): Promise<UserTypes.User[]> {
     const response = await this.get(`${this.baseUrl}${Routes.USERS}`);
-    expect(response).toHaveStatusCode(200);
+    expect(response).toHaveStatusCode(StatusCode.OK);
     return ResponseValidator.validate(
       response,
       UserTypes.UserArraySchema,

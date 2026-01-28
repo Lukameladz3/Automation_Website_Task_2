@@ -15,9 +15,9 @@ test.describe("GET /api/users - Get All Users", () => {
       },
     );
 
-    expect(response.status()).toBe(200);
+    expect(response.status()).toBe(UsersApiConfig.STATUS_CODES.OK);
     const contentType = response.headers()["content-type"];
-    expect(contentType).toContain("application/json");
+    expect(contentType).toContain(UsersApiConfig.CONTENT_TYPES.JSON_BASE);
     expect(responseTime).toBeLessThanOrEqual(
       UsersApiConfig.RESPONSE_TIME_THRESHOLDS.GET_ALL_USERS,
     );

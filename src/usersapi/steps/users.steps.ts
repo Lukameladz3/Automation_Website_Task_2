@@ -114,7 +114,7 @@ export class UsersSteps {
       )) as APIResponse;
       const responseTime = Date.now() - startTime;
 
-      expect(response.status()).toBe(200);
+      expect(response.status()).toBe(UsersApiConfig.STATUS_CODES.OK);
       expect(response.headers()["content-type"]).toBe(
         UsersApiConfig.CONTENT_TYPES.JSON,
       );
@@ -300,7 +300,9 @@ export class UsersSteps {
       null,
     )) as APIResponse;
 
-    expect(response.status()).toBeGreaterThanOrEqual(400);
+    expect(response.status()).toBeGreaterThanOrEqual(
+      UsersApiConfig.STATUS_CODES.BAD_REQUEST,
+    );
 
     const body = await response.json();
     expect(body).toHaveProperty("message");
@@ -313,7 +315,9 @@ export class UsersSteps {
       null,
     )) as APIResponse;
 
-    expect(response.status()).toBeGreaterThanOrEqual(400);
+    expect(response.status()).toBeGreaterThanOrEqual(
+      UsersApiConfig.STATUS_CODES.BAD_REQUEST,
+    );
 
     const body = await response.json();
     expect(body).toHaveProperty("message");

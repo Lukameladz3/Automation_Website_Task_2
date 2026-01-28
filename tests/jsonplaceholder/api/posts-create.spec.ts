@@ -1,9 +1,8 @@
 ﻿import { test, expect } from "@jsonplaceholder/fixtures/index";
 import { type APIResponse } from "@playwright/test";
-import {
-  buildCreatePostRequest,
-} from "@jsonplaceholder/models/builders";
+import { buildCreatePostRequest } from "@jsonplaceholder/models/builders";
 import { PostTestData } from "@test-data/jsonplaceholder";
+import { StatusCode } from "@automationexercise/constants/StatusCode";
 
 test.describe("JSONPlaceholder API - POST Create Post", () => {
   test("TC 3.1: Create Post - Status 201, echo check, id=101", async ({
@@ -17,7 +16,7 @@ test.describe("JSONPlaceholder API - POST Create Post", () => {
       schema: null,
     });
     const response = result as APIResponse;
-    expect(response.status()).toBe(201);
+    expect(response).toHaveStatusCode(StatusCode.CREATED);
 
     // Now create with validated method
     const post = await postSteps.createPost(request);
@@ -36,7 +35,7 @@ test.describe("JSONPlaceholder API - POST Create Post", () => {
       schema: null,
     });
     const response = result as APIResponse;
-    expect(response.status()).toBe(201);
+    expect(response).toHaveStatusCode(StatusCode.CREATED);
 
     // Use partial validation method
     const post = await postSteps.createPostWithPartialValidation(request);
@@ -54,7 +53,7 @@ test.describe("JSONPlaceholder API - POST Create Post", () => {
       schema: null,
     });
     const response = result as APIResponse;
-    expect(response.status()).toBe(201);
+    expect(response).toHaveStatusCode(StatusCode.CREATED);
 
     // Use passthrough method for validation
     const post = await postSteps.createPostWithPassthrough(request);

@@ -4,6 +4,7 @@ import { RandomDataGenerator } from "@jsonplaceholder/utils/random-data-generato
 import { PostTestData, NegativeTestData } from "@test-data/jsonplaceholder";
 import { buildCreatePostRequest } from "@jsonplaceholder/models/builders";
 import * as PostTypes from "@jsonplaceholder/models/schemas/post.schemas";
+import { StatusCode } from "@automationexercise/constants/StatusCode";
 
 test.describe("JSONPlaceholder API - Negative Tests", () => {
   test.describe("POST Create - Negative Scenarios", () => {
@@ -29,7 +30,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       );
       const response = result as APIResponse;
 
-      expect(response.status()).toBe(201);
+      expect(response).toHaveStatusCode(StatusCode.CREATED);
 
       const request = buildCreatePostRequest({
         title: longTitle,
@@ -127,7 +128,9 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         { schema: null },
       );
       const nonExistentResponse = nonExistentResult as APIResponse;
-      expect(nonExistentResponse.status()).toBe(500);
+      expect(nonExistentResponse).toHaveStatusCode(
+        StatusCode.INTERNAL_SERVER_ERROR,
+      );
 
       // Negative ID returns 500
       const negativeResult = await jsonPlaceholderService.updatePost(
@@ -136,7 +139,9 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         { schema: null },
       );
       const negativeResponse = negativeResult as APIResponse;
-      expect(negativeResponse.status()).toBe(500);
+      expect(negativeResponse).toHaveStatusCode(
+        StatusCode.INTERNAL_SERVER_ERROR,
+      );
     });
 
     test("TC 6.6: Boundary - Handle partial update with empty payload", async ({
@@ -151,7 +156,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
       );
       const response = result as APIResponse;
 
-      expect(response.status()).toBe(200);
+      expect(response.status()).toBe(StatusCode.OK);
     });
   });
 
@@ -167,17 +172,20 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         { schema: null },
       );
       const deleteResponse = deleteResult as APIResponse;
-      await responseSteps.verifyStatusCodeIsOneOf(deleteResponse, [200, 204]);
+      await responseSteps.verifyStatusCodeIsOneOf(deleteResponse, [
+        StatusCode.OK,
+        StatusCode.NO_CONTENT,
+      ]);
 
       const secondDeleteResult = await jsonPlaceholderService.deletePost(
         nonExistentId,
         { schema: null },
       );
       const secondDeleteResponse = secondDeleteResult as APIResponse;
-      await responseSteps.verifyStatusCodeIsOneOf(
-        secondDeleteResponse,
-        [200, 204],
-      );
+      await responseSteps.verifyStatusCodeIsOneOf(secondDeleteResponse, [
+        StatusCode.OK,
+        StatusCode.NO_CONTENT,
+      ]);
     });
   });
 
@@ -192,7 +200,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         { schema: null },
       );
       const largeIdResponse = largeIdResult as APIResponse;
-      expect(largeIdResponse.status()).toBe(404);
+      expect(largeIdResponse).toHaveStatusCode(StatusCode.NOT_FOUND);
       const body = await largeIdResponse.json();
       expect(Object.keys(body).length).toBe(0);
 
@@ -202,7 +210,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         { schema: null },
       );
       const zeroIdResponse = zeroIdResult as APIResponse;
-      expect(zeroIdResponse.status()).toBe(404);
+      expect(zeroIdResponse).toHaveStatusCode(StatusCode.NOT_FOUND);
 
       const stringIdResponse = await jsonPlaceholderService.getPostByStringId(
         PostTestData.GET_POSTS.INVALID_POST_ID,
@@ -245,7 +253,7 @@ test.describe("JSONPlaceholder API - Negative Tests", () => {
         { headers: { "Content-Type": "text/plain" }, schema: null },
       );
       const wrongHeaderResponse = wrongHeaderResult as APIResponse;
-      expect(wrongHeaderResponse.status()).toBe(201);
+      expect(wrongHeaderResponse).toHaveStatusCode(StatusCode.CREATED);
     });
   });
 

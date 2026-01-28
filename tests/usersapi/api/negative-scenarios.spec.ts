@@ -13,7 +13,7 @@ test.describe("Negative Scenarios", () => {
 
       const result = await usersSteps.getUserById(nonExistentId, null);
       const response = result as APIResponse;
-      expect(response.status()).toBe(404);
+      expect(response.status()).toBe(UsersApiConfig.STATUS_CODES.NOT_FOUND);
 
       const body = await response.json();
       expect(body.message).toBe(UsersApiConfig.ERROR_MESSAGES.USER_NOT_FOUND);
@@ -33,9 +33,7 @@ test.describe("Negative Scenarios", () => {
       );
     });
 
-    test("should handle float ID values @negative", async ({
-      usersSteps,
-    }) => {
+    test("should handle float ID values @negative", async ({ usersSteps }) => {
       await usersSteps.verifyEdgeCaseIdHandled(
         UserIdsTestData.EDGE_CASES.FLOAT,
       );

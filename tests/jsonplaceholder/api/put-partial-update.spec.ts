@@ -2,6 +2,7 @@ import { test, expect } from "@jsonplaceholder/fixtures/index";
 import { type APIResponse } from "@playwright/test";
 import { RandomDataGenerator } from "@jsonplaceholder/utils/random-data-generator";
 import { PostTestData } from "@test-data/jsonplaceholder";
+import { StatusCode } from "@automationexercise/constants/StatusCode";
 
 test.describe("JSONPlaceholder API - PUT Partial Update", () => {
   test("should update only provided fields (title) using PUT", async ({
@@ -21,7 +22,7 @@ test.describe("JSONPlaceholder API - PUT Partial Update", () => {
       { schema: null },
     );
     const response = result as APIResponse;
-    expect(response.status()).toBe(200);
+    expect(response).toHaveStatusCode(StatusCode.OK);
 
     // Use validated method
     const validated = await postSteps.updatePost(

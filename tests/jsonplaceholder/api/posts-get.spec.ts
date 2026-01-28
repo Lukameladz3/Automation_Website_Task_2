@@ -1,3 +1,4 @@
+import { StatusCode } from "@automationexercise/constants/StatusCode";
 import { test, expect } from "@jsonplaceholder/fixtures/index";
 import { type APIResponse } from "@playwright/test";
 import { PostTestData } from "@test-data/jsonplaceholder";
@@ -11,7 +12,7 @@ test.describe("JSONPlaceholder API - GET Posts", () => {
     const responseTime = performance.now() - startTime;
     const response = result as APIResponse;
 
-    expect(response.status()).toBe(200);
+    expect(response.status()).toBe(StatusCode.OK);
     const contentType = response.headers()["content-type"];
     expect(contentType).toContain("application/json");
     expect
@@ -76,7 +77,7 @@ test.describe("JSONPlaceholder API - GET Posts", () => {
       schema: null,
     });
     const response = result as APIResponse;
-    expect(response.status()).toBe(404);
+    expect(response).toHaveStatusCode(StatusCode.NOT_FOUND);
     const body = await response.json();
     expect(Object.keys(body).length).toBe(0);
   });

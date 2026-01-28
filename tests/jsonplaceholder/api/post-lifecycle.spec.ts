@@ -3,6 +3,7 @@ import { type APIResponse } from "@playwright/test";
 import { RandomDataGenerator } from "@jsonplaceholder/utils/random-data-generator";
 import { PostTestData } from "@test-data/jsonplaceholder";
 import { buildCreatePostRequest } from "@jsonplaceholder/models/builders";
+import { StatusCode } from "@automationexercise/constants/StatusCode";
 
 test.describe("JSONPlaceholder API - CRUD Operations Demo", () => {
   test("Create, Read, Update, Delete operations on existing post", async ({
@@ -42,7 +43,7 @@ test.describe("JSONPlaceholder API - CRUD Operations Demo", () => {
       { schema: null },
     );
     const updateResponse = updateResult as APIResponse;
-    expect(updateResponse.status()).toBe(200);
+    expect(updateResponse.status()).toBe(StatusCode.OK);
 
     // Update with validated method
     const updatedPost = await postSteps.updatePost(
