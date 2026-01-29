@@ -1,31 +1,11 @@
-import { APIRequestContext, APIResponse } from "@playwright/test";
+import { APIRequestContext, APIResponse, expect } from "@playwright/test";
 import { z } from "zod";
-import { Routes } from "../../constants/routes";
-import {
-  CreatePostRequest,
-  CreatePostResponse,
-  CreatePostResponseSchema,
-  CreatePostResponsePassthrough,
-  CreatePostResponsePassthroughSchema,
-  CreatePostResponsePartial,
-  CreatePostResponsePartialSchema,
-  UpdatePostRequest,
-  UpdatePostResponse,
-  UpdatePostResponseSchema,
-  UpdatePostResponsePartial,
-  UpdatePostResponsePartialSchema,
-  UpdatePostResponseUnionSchema,
-  DeletePostResponseSchema,
-  Post,
-  PostSchema,
-  PostArraySchema,
-} from "../../models/schemas/post.schemas";
-import {
-  User,
-  UserSchema,
-  UserArraySchema,
-} from "../../models/schemas/user.schemas";
-import { ApiClient } from "../api-client";
+import { Routes } from "@jsonplaceholder/constants/routes";
+import * as PostTypes from "@jsonplaceholder/models/schemas/post.schemas";
+import * as UserTypes from "@jsonplaceholder/models/schemas/user.schemas";
+import { ApiClient } from "@jsonplaceholder/api/api-client";
+import { ResponseValidator } from "../../../utils/response-validator";
+import { StatusCode } from "@automationexercise/constants/StatusCode";
 
 export class JsonPlaceholderService extends ApiClient {
   private readonly baseUrl: string;
@@ -35,90 +15,44 @@ export class JsonPlaceholderService extends ApiClient {
     this.baseUrl = Routes.BASE_URL;
   }
 
-  // ==================== Generic Validation Helper ====================
-
-  /**
-   * Generic method to validate API response with Zod schema
-   * @param response - The API response to validate
-   * @param schema - Zod schema for validation. Pass null to return raw APIResponse
-   * @returns Validated data of type T, or raw APIResponse if schema is null
-   *
-   * @example
-   * // Validated response
-   * const post = await validateResponse(response, PostSchema);
-   *
-   * // Raw response (for error testing)
-   * const rawResponse = await validateResponse(response, null);
-   */
-  private async validateResponse<T>(
-    response: APIResponse,
-    schema: z.ZodSchema<T>,
-  ): Promise<T>;
-  private async validateResponse(
-    response: APIResponse,
-    schema: null,
-  ): Promise<APIResponse>;
-  private async validateResponse<T>(
-    response: APIResponse,
-    schema: z.ZodSchema<T> | null,
-  ): Promise<T | APIResponse> {
-    if (schema === null) {
-      return response;
-    }
-    const body = await response.json();
-    return schema.parse(body);
-  }
-
   // ==================== GET Methods ====================
 
-  async getAllPosts(schema: z.ZodSchema<Post[]>): Promise<Post[]>;
-  async getAllPosts(schema: null): Promise<APIResponse>;
-  async getAllPosts(): Promise<Post[]>;
-  async getAllPosts(
-    schema?: z.ZodSchema<Post[]> | null,
-  ): Promise<Post[] | APIResponse> {
-    const response = await this.get(`${this.baseUrl}${Routes.POSTS}`);
+  async getAllPosts(options?: {
+    params?: Record<string, string | number>;
+    schema?: z.ZodSchema<PostTypes.Post[]> | null;
+  }): Promise<PostTypes.Post[] | APIResponse> {
+    const response = await this.get(`${this.baseUrl}${Routes.POSTS}`, {
+      params: options?.params,
+    });
 
-    if (schema === undefined) {
-      return this.validateResponse(response, PostArraySchema);
+    if (options?.schema === null) {
+      return ResponseValidator.validate(response, null);
     }
-
-    if (schema === null) {
-      return this.validateResponse(response, null);
-    }
-
-    return this.validateResponse(response, schema);
+    return ResponseValidator.validate(
+      response,
+      options?.schema ?? PostTypes.PostArraySchema,
+    );
   }
 
-  async getPostById(id: number, schema: z.ZodSchema<Post>): Promise<Post>;
-  async getPostById(id: number, schema: null): Promise<APIResponse>;
-  async getPostById(id: number): Promise<Post>;
   async getPostById(
     id: number,
-    schema?: z.ZodSchema<Post> | null,
-  ): Promise<Post | APIResponse> {
+    options?: {
+      schema?: z.ZodSchema<PostTypes.Post> | null;
+    },
+  ): Promise<PostTypes.Post | APIResponse> {
     const response = await this.get(`${this.baseUrl}${Routes.POSTS}/${id}`);
 
-    if (schema === undefined) {
-      return this.validateResponse(response, PostSchema);
+    if (options?.schema === null) {
+      return ResponseValidator.validate(response, null);
     }
-
-    if (schema === null) {
-      return this.validateResponse(response, null);
-    }
-
-    return this.validateResponse(response, schema);
+    return ResponseValidator.validate(
+      response,
+      options?.schema ?? PostTypes.PostSchema,
+    );
   }
 
   async getPostByStringId(id: string): Promise<APIResponse> {
     return this.get(`${this.baseUrl}${Routes.POSTS}/${id}`);
-  }
-
-  async getPostsByUserId(userId: number): Promise<Post[]> {
-    const response = await this.get(`${this.baseUrl}${Routes.POSTS}`, {
-      params: { userId: userId.toString() },
-    });
-    return this.validateResponse(response, PostArraySchema) as Promise<Post[]>;
   }
 
   // ==================== POST Methods ====================
@@ -126,43 +60,46 @@ export class JsonPlaceholderService extends ApiClient {
   /**
    * Create a new post
    * @param payload - Post data to create
-   * @param schema - Validation schema (default: CreatePostResponseSchema). Pass null for raw response
+   * @param options - Optional configuration (headers, schema)
    * @returns Validated post data or raw APIResponse
    *
    * @example
-   * // Standard validation
+   * // Standard validation (with default Content-Type: application/json)
    * const post = await createPost({ title, body, userId });
    *
-   * // Custom partial schema
-   * const post = await createPost(payload, CreatePostResponsePartialSchema);
-   *
-   * // Passthrough schema (extra fields)
-   * const post = await createPost(payload, CreatePostResponsePassthroughSchema);
+   * // Custom schema
+   * const post = await createPost(payload, { schema: CreatePostResponsePartialSchema });
    *
    * // No validation (for error testing)
-   * const response = await createPost(invalidPayload, null);
+   * const response = await createPost(invalidPayload, { schema: null });
+   *
+   * // Custom headers (e.g., wrong content type)
+   * const response = await createPost(payload, { headers: { "Content-Type": "text/plain" }, schema: null });
+   *
+   * // No Content-Type header
+   * const response = await createPost(payload, { headers: {}, schema: null });
    */
-  async createPost<T>(payload: unknown, schema: z.ZodSchema<T>): Promise<T>;
-  async createPost(payload: unknown, schema: null): Promise<APIResponse>;
-  async createPost(payload: CreatePostRequest): Promise<CreatePostResponse>;
-  async createPost<T>(
+  async createPost<T = PostTypes.CreatePostResponse>(
     payload: unknown,
-    schema?: z.ZodSchema<T> | null,
-  ): Promise<T | CreatePostResponse | APIResponse> {
+    options?: {
+      headers?: Record<string, string>;
+      schema?: z.ZodSchema<T> | null;
+    },
+  ): Promise<T | PostTypes.CreatePostResponse | APIResponse> {
+    const headers = options?.headers ?? { "Content-Type": "application/json" };
     const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
       data: payload,
-      headers: { "Content-Type": "application/json" },
+      headers,
     });
 
-    if (schema === undefined) {
-      return this.validateResponse(response, CreatePostResponseSchema);
+    if (options?.schema === null) {
+      return ResponseValidator.validate(response, null);
     }
-
-    if (schema === null) {
-      return this.validateResponse(response, null);
-    }
-
-    return this.validateResponse(response, schema);
+    return ResponseValidator.validate(
+      response,
+      options?.schema ??
+        (PostTypes.CreatePostResponseSchema as unknown as z.ZodSchema<T>),
+    );
   }
 
   // ==================== PUT Methods ====================
@@ -171,7 +108,7 @@ export class JsonPlaceholderService extends ApiClient {
    * Update an existing post
    * @param id - Post ID to update
    * @param payload - Updated post data
-   * @param schema - Validation schema (default: auto-detect). Pass null for raw response
+   * @param options - Optional configuration (schema)
    * @returns Validated post data or raw APIResponse
    *
    * @example
@@ -179,107 +116,75 @@ export class JsonPlaceholderService extends ApiClient {
    * const post = await updatePost(1, { title, body, userId });
    *
    * // Custom schema
-   * const post = await updatePost(1, payload, UpdatePostResponsePartialSchema);
+   * const post = await updatePost(1, payload, { schema: UpdatePostResponsePartialSchema });
    *
    * // No validation (for error testing)
-   * const response = await updatePost(1, invalidPayload, null);
+   * const response = await updatePost(1, invalidPayload, { schema: null });
    */
-  async updatePost<T>(
+  async updatePost<
+    T = PostTypes.UpdatePostResponse | PostTypes.UpdatePostResponsePartial,
+  >(
     id: number,
     payload: unknown,
-    schema: z.ZodSchema<T>,
-  ): Promise<T>;
-  async updatePost(
-    id: number,
-    payload: unknown,
-    schema: null,
-  ): Promise<APIResponse>;
-  async updatePost(
-    id: number,
-    payload: UpdatePostRequest,
-  ): Promise<UpdatePostResponse | UpdatePostResponsePartial>;
-  async updatePost<T>(
-    id: number,
-    payload: unknown,
-    schema?: z.ZodSchema<T> | null,
-  ): Promise<T | UpdatePostResponse | UpdatePostResponsePartial | APIResponse> {
+    options?: {
+      schema?: z.ZodSchema<T> | null;
+    },
+  ): Promise<
+    | T
+    | PostTypes.UpdatePostResponse
+    | PostTypes.UpdatePostResponsePartial
+    | APIResponse
+  > {
     const response = await this.put(`${this.baseUrl}${Routes.POSTS}/${id}`, {
       data: payload,
       headers: { "Content-Type": "application/json" },
     });
 
-    if (schema === null) {
+    if (options?.schema === null) {
       return response;
     }
-
-    if (schema === undefined) {
-      return this.validateResponse(response, UpdatePostResponseUnionSchema);
-    }
-
-    return this.validateResponse(response, schema);
+    return ResponseValidator.validate(
+      response,
+      options?.schema ??
+        (PostTypes.UpdatePostResponseUnionSchema as z.ZodSchema<T>),
+    );
   }
 
   // ==================== DELETE Methods ====================
 
-  async deletePost<T>(id: number, schema: z.ZodSchema<T>): Promise<T>;
-  async deletePost(id: number, schema: null): Promise<APIResponse>;
-  async deletePost(id: number): Promise<Record<string, never>>;
-  async deletePost<T>(
+  async deletePost<T = Record<string, never>>(
     id: number,
-    schema?: z.ZodSchema<T> | null,
+    options?: {
+      schema?: z.ZodSchema<T> | null;
+    },
   ): Promise<T | Record<string, never> | APIResponse> {
     const response = await this.delete(`${this.baseUrl}${Routes.POSTS}/${id}`);
 
-    if (schema === undefined) {
-      return this.validateResponse(response, DeletePostResponseSchema);
+    if (options?.schema === null) {
+      return ResponseValidator.validate(response, null);
     }
-
-    if (schema === null) {
-      return this.validateResponse(response, null);
-    }
-
-    return this.validateResponse(response, schema);
+    return ResponseValidator.validate(
+      response,
+      options?.schema ?? (PostTypes.DeletePostResponseSchema as z.ZodSchema<T>),
+    );
   }
 
   // ==================== User Methods ====================
 
-  async getAllUsers(): Promise<User[]> {
+  async getAllUsers(): Promise<UserTypes.User[]> {
     const response = await this.get(`${this.baseUrl}${Routes.USERS}`);
-    return this.validateResponse(response, UserArraySchema) as Promise<User[]>;
-  }
-
-  async getUserById(id: number): Promise<User> {
-    const response = await this.get(`${this.baseUrl}${Routes.USERS}/${id}`);
-    return this.validateResponse(response, UserSchema) as Promise<User>;
-  }
-
-  // ==================== Special Test Methods ====================
-
-  async getPostsWithInvalidQuery(): Promise<Post[]> {
-    const response = await this.get(`${this.baseUrl}${Routes.POSTS}`, {
-      params: { userId: "abc" },
-    });
-    return this.validateResponse(response, PostArraySchema) as Promise<Post[]>;
-  }
-
-  async createPostWithoutContentType(
-    payload: CreatePostRequest,
-  ): Promise<CreatePostResponse> {
-    const response = await this.post(`${this.baseUrl}${Routes.POSTS}`, {
-      data: payload,
-    });
-    return this.validateResponse(
+    expect(response).toHaveStatusCode(StatusCode.OK);
+    return ResponseValidator.validate(
       response,
-      CreatePostResponseSchema,
-    ) as Promise<CreatePostResponse>;
+      UserTypes.UserArraySchema,
+    ) as Promise<UserTypes.User[]>;
   }
 
-  async createPostWithWrongContentType(
-    payload: CreatePostRequest,
-  ): Promise<APIResponse> {
-    return this.post(`${this.baseUrl}${Routes.POSTS}`, {
-      data: payload,
-      headers: { "Content-Type": "text/plain" },
-    });
+  async getUserById(id: number): Promise<UserTypes.User> {
+    const response = await this.get(`${this.baseUrl}${Routes.USERS}/${id}`);
+    return ResponseValidator.validate(
+      response,
+      UserTypes.UserSchema,
+    ) as Promise<UserTypes.User>;
   }
 }

@@ -19,15 +19,9 @@ export type Post = z.infer<typeof PostSchema>;
 
 export const PostArraySchema = z.array(PostSchema);
 
-// ==================== GET Operations ====================
-
-export const GetPostResponseSchema = PostSchema;
-export const GetPostsResponseSchema = PostArraySchema;
-export const GetPostsByUserIdResponseSchema = PostArraySchema;
-
 // ==================== POST (Create) Operations ====================
 
-export const CreatePostRequestSchema = z
+const CreatePostRequestSchema = z
   .object({
     body: z.string(),
     title: z.string(),
@@ -76,7 +70,7 @@ export type CreatePostResponsePartial = z.infer<
 
 // ==================== PUT (Update) Operations ====================
 
-export const UpdatePostRequestSchema = z
+const UpdatePostRequestSchema = z
   .object({
     body: z.string().optional(),
     id: z.number().optional(),
@@ -87,11 +81,11 @@ export const UpdatePostRequestSchema = z
 
 export type UpdatePostRequest = z.infer<typeof UpdatePostRequestSchema>;
 
-export const UpdatePostResponseSchema = PostSchema;
+const UpdatePostResponseSchema = PostSchema;
 
 export type UpdatePostResponse = z.infer<typeof UpdatePostResponseSchema>;
 
-export const UpdatePostResponsePartialSchema = PostSchema.partial().loose();
+const UpdatePostResponsePartialSchema = PostSchema.partial().loose();
 
 export type UpdatePostResponsePartial = z.infer<
   typeof UpdatePostResponsePartialSchema

@@ -1,26 +1,28 @@
 import { test, expect } from "@jsonplaceholder/fixtures/index";
+import { type APIResponse } from "@playwright/test";
 import { RandomDataGenerator } from "@jsonplaceholder/utils/random-data-generator";
-import { JsonPlaceholderTestData } from "@jsonplaceholder/constants/json-placeholder.constants";
+import { PostTestData } from "@test-data/jsonplaceholder";
+import { StatusCode } from "@automationexercise/constants/StatusCode";
 
 test.describe("JSONPlaceholder API - PUT Partial Update", () => {
   test("should update only provided fields (title) using PUT", async ({
     postSteps,
     jsonPlaceholderService,
-    responseSteps,
   }) => {
-    const postId = JsonPlaceholderTestData.POST.EXISTING_POST_ID;
+    const postId = PostTestData.EXISTING_POST_ID;
     const newTitle = `Partial PUT Title ${RandomDataGenerator.postTitle()}`;
     const partialPayload = {
       title: newTitle,
     };
 
     // Use raw response to check status code
-    const response = await jsonPlaceholderService.updatePost(
+    const result = await jsonPlaceholderService.updatePost(
       postId,
       partialPayload,
-      null,
+      { schema: null },
     );
-    await responseSteps.verifyStatusCode(response, 200);
+    const response = result as APIResponse;
+    expect(response).toHaveStatusCode(StatusCode.OK);
 
     // Use validated method
     const validated = await postSteps.updatePost(

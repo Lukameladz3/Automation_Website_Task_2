@@ -1,8 +1,5 @@
 import { RandomDataGenerator } from "../../utils/random-data-generator";
-import {
-  CreatePostRequest,
-  UpdatePostRequest,
-} from "../schemas/post.schemas";
+import * as PostTypes from "../schemas/post.schemas";
 
 /**
  * Builder functions for Post request bodies
@@ -30,8 +27,8 @@ import {
  * });
  */
 export function buildCreatePostRequest(
-  overrides: Partial<CreatePostRequest> = {},
-): CreatePostRequest {
+  overrides: Partial<PostTypes.CreatePostRequest> = {},
+): PostTypes.CreatePostRequest {
   return {
     title: overrides.title ?? RandomDataGenerator.postTitle(),
     body: overrides.body ?? RandomDataGenerator.postBody(),
@@ -53,72 +50,12 @@ export function buildCreatePostRequest(
  * const request = buildUpdatePostRequest({ userId: 5 });
  */
 export function buildUpdatePostRequest(
-  overrides: Partial<UpdatePostRequest> = {},
-): UpdatePostRequest {
+  overrides: Partial<PostTypes.UpdatePostRequest> = {},
+): PostTypes.UpdatePostRequest {
   return {
     title: overrides.title ?? RandomDataGenerator.postTitle(),
     body: overrides.body ?? RandomDataGenerator.postBody(),
     userId: overrides.userId ?? RandomDataGenerator.userId(),
     id: overrides.id,
-  };
-}
-
-/**
- * Build a minimal CreatePostRequest (useful for edge case testing)
- * @returns CreatePostRequest with minimal valid data
- *
- * @example
- * const request = buildMinimalPostRequest();
- * // { title: "a", body: "a", userId: 1 }
- */
-export function buildMinimalPostRequest(): CreatePostRequest {
-  return {
-    title: "a",
-    body: "a",
-    userId: 1,
-  };
-}
-
-/**
- * Build an empty partial post request (useful for testing API strictness)
- * @returns Empty object cast as Partial<CreatePostRequest>
- *
- * @example
- * const request = buildEmptyPostRequest();
- * // {}
- */
-export function buildEmptyPostRequest(): Partial<CreatePostRequest> {
-  return {};
-}
-
-/**
- * Build a post request with extremely long values (useful for boundary testing)
- * @param length - Length of the long strings (default: 10000)
- * @returns CreatePostRequest with very long title and body
- *
- * @example
- * const request = buildLongPostRequest();
- * const request = buildLongPostRequest(5000); // Custom length
- */
-export function buildLongPostRequest(length = 10000): CreatePostRequest {
-  return {
-    title: "x".repeat(length),
-    body: "y".repeat(length),
-    userId: RandomDataGenerator.userId(),
-  };
-}
-
-/**
- * Build a post request with special characters (useful for security testing)
- * @returns CreatePostRequest with special characters
- *
- * @example
- * const request = buildSpecialCharPostRequest();
- */
-export function buildSpecialCharPostRequest(): CreatePostRequest {
-  return {
-    title: "<script>alert('xss')</script>",
-    body: "'; DROP TABLE posts; --",
-    userId: RandomDataGenerator.userId(),
   };
 }
